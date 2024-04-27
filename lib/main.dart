@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:zapx/zapx.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
-
-import 'utils/routes.dart';
+import 'package:graduationproject/pages/login_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,9 +16,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return XMaterialApp(
-      routes: routes,
-      initialRoute: Routes.welcome_back,
+    return const MaterialApp(
+      title: 'Graduation Project App',
+      debugShowCheckedModeBanner: false,
+      home: LoginPage(),
     );
   }
 }

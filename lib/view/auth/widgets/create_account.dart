@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../utils/images_paths.dart';
-import '../../component/custom_button.dart';
-import '../../component/custom_field.dart';
+import '../../../components/custom_button.dart';
+import '../../../components/custom_field.dart';
 
 class CreateAcount extends StatefulWidget {
   const CreateAcount({super.key});
@@ -51,22 +51,28 @@ class _CreateAcountState extends State<CreateAcount> {
                 CustomField(
                     text: "Create account",
                     hiinttext: "User name",
-                    prefex: Icons.person),
+                    prefex: Icons.person,
+                    onChanged: (value) => {},
+                ),
                 CustomField(
                   text: "Email",
                   hiinttext: "ys198@mail.com",
                   prefex: Icons.email,
+                  onChanged: (value) => {},
                 ),
                 CustomField(
                     text: "Password",
                     hiinttext: "Password",
                     prefex: Icons.lock_person,
-                    suffex: Icons.visibility_off),
+                    suffex: Icons.visibility_off,
+                    onChanged: (value) => {},
+                ),
                 CustomField(
                   text: "Confirm Password",
                   hiinttext: "Confirm Password",
                   prefex: Icons.lock_person,
                   suffex: Icons.visibility_off,
+                  onChanged: (value) => {},
                 ),
                 Row(
                   children: [

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../utils/images_paths.dart';
-import '../../component/custom_button.dart';
-import '../../component/custom_field.dart';
+import '../../../components/custom_button.dart';
+import '../../../components/custom_field.dart';
 
 class ChangePassword extends StatelessWidget {
   const ChangePassword({super.key});
@@ -54,12 +54,14 @@ class ChangePassword extends StatelessWidget {
               hiinttext: "Pasword",
               prefex: Icons.lock_person,
               suffex: Icons.visibility_off,
+              onChanged: (value) => {},
             ),
             CustomField(
               text: "Confirm New Pasword",
               hiinttext: "Pasword",
               prefex: Icons.lock_person,
               suffex: Icons.visibility_off,
+              onChanged: (value) => {},
             ),
             const SizedBox(
               height: 40,

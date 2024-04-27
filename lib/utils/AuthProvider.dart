@@ -46,12 +46,11 @@ class _AuthProviderState extends State<AuthProvider> {
     });
   }
 
-  Future<void> customerLogin(String email, String password) async {
+  Future<void> login(String email, String password) async {
     final res = await firestore
         .collection('users')
         .where('email', isEqualTo: email)
         .where('password', isEqualTo: password)
-        .where('role', isEqualTo: "customer")
         .get();
     if (res.size == 0) {
       throw "Invalid Email or Password";
@@ -63,7 +62,7 @@ class _AuthProviderState extends State<AuthProvider> {
     updateFcmToken();
   }
 
-  Future<void> customerSignup(userData) async {
+  Future<void> signup(userData) async {
     final res = await firestore
         .collection('users')
         .where('email', isEqualTo: userData["email"])

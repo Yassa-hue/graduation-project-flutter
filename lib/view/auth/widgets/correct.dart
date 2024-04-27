@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../utils/images_paths.dart';
-import '../../component/custom_button.dart';
+import '../../../components/custom_button.dart';
 
 class Correct extends StatelessWidget {
   const Correct({super.key});

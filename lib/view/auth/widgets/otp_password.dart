@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graduationproject/utils/images_paths.dart';
-import 'package:graduationproject/view/component/custom_button.dart';
-import 'package:graduationproject/view/component/custom_otp.dart';
+import 'package:graduationproject/components/custom_button.dart';
+import 'package:graduationproject/components/custom_otp.dart';
 
 class OtpPassword extends StatelessWidget {
   static const primarycolor = Color(0xff644AE5);

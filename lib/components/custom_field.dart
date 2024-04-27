@@ -7,6 +7,7 @@ class CustomField extends StatelessWidget {
   final IconData? suffex;
   final String? text;
   final String? hiinttext;
+  final Function(String) onChanged;
   IconData? prefex;
 
   // ignore: prefer_const_constructors_in_immutables
@@ -14,6 +15,7 @@ class CustomField extends StatelessWidget {
       {required this.text,
       Key? key,
       required this.hiinttext,
+      required this.onChanged,
       this.prefex,
       this.suffex})
       : super(key: key);
@@ -51,6 +53,7 @@ class CustomField extends StatelessWidget {
                 borderSide: const BorderSide(color: Colors.grey),
                 borderRadius: BorderRadius.circular(15)),
           ),
+          onChanged: (val) => onChanged(val),
         ),
         const SizedBox(
           height: 15,
