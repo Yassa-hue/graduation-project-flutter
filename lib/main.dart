@@ -17,7 +17,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  runApp(AuthProvider(child: const MyApp()));
+  runApp(const AuthProvider(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
