@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:graduationproject/utils/images_paths.dart';
-import 'package:graduationproject/view/component/custom_appar.dart';
-import 'package:graduationproject/view/component/custom_button.dart';
-import 'package:graduationproject/view/component/custom_complaint.dart';
-import 'package:graduationproject/view/component/custom_field.dart';
+import 'package:graduationproject/components/custom_appar.dart';
+import 'package:graduationproject/components/custom_button.dart';
+import 'package:graduationproject/components/custom_complaint.dart';
+import 'package:graduationproject/components/custom_field.dart';
 
 class FeedBack extends StatelessWidget {
   static const primarycolor = Color(0xff644AE5);
@@ -77,6 +77,7 @@ class FeedBack extends StatelessWidget {
                 CustomField(
                   text: "Event Name",
                   hiinttext: "Please Enter Event Name",
+                  onChanged: (value) => {},
                 ),
                 const SizedBox(
                   height: 10,

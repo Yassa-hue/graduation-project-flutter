@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:graduationproject/view/component/custom_appar.dart';
-import 'package:graduationproject/view/component/custom_setting.dart';
+import 'package:graduationproject/components/custom_appar.dart';
+import 'package:graduationproject/components/custom_setting.dart';
 
 class Setting extends StatelessWidget {
   static const primarycolor = Color(0xff644AE5);

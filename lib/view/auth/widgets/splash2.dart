@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graduationproject/utils/images_paths.dart';
-import 'package:graduationproject/view/component/custom_smooth_indicator.dart';
+import 'package:graduationproject/components/custom_smooth_indicator.dart';
 
 class Splash2 extends StatelessWidget {
   static const primarycolor = Color(0xff644AE5);

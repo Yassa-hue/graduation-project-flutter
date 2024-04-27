@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graduationproject/utils/images_paths.dart';
-import 'package:graduationproject/view/component/custom_button.dart';
+import 'package:graduationproject/components/custom_button.dart';
 
 // ignore: must_be_immutable
 class Options extends StatelessWidget {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../utils/images_paths.dart';
-import '../../component/custom_button.dart';
-import '../../component/custom_field.dart';
+import '../../../components/custom_button.dart';
+import '../../../components/custom_field.dart';
 
 class ForgetPassword extends StatelessWidget {
   const ForgetPassword({super.key});
@@ -54,6 +54,7 @@ class ForgetPassword extends StatelessWidget {
               text: "Forget Passord",
               hiinttext: "Email",
               prefex: Icons.email,
+              onChanged: (value) => {},
             ),
             const SizedBox(
               height: 60,
