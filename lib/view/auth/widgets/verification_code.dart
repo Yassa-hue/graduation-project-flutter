@@ -43,19 +43,19 @@ class Code extends StatelessWidget {
                   const SizedBox(
                     height: 30,
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       OTP(),
-                      const SizedBox(
+                      SizedBox(
                         width: 9,
                       ),
                       OTP(),
-                      const SizedBox(
+                      SizedBox(
                         width: 9,
                       ),
                       OTP(),
-                      const SizedBox(
+                      SizedBox(
                         width: 9,
                       ),
                       OTP(),

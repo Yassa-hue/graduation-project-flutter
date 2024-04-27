@@ -18,12 +18,12 @@ class ChangePassword extends StatelessWidget {
             Center(
               child: Container(
                 padding: const EdgeInsets.only(top: 40),
+                height: 250,
                 child: Image.asset(
                   AssetModel.forget,
                   width: 320,
                   fit: BoxFit.cover,
                 ),
-                height: 250,
               ),
             ),
             const SizedBox(

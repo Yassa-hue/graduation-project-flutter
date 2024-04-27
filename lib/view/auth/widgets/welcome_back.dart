@@ -22,12 +22,12 @@ class WelcomeBack extends StatelessWidget {
                     Center(
                         child: Container(
                       padding: const EdgeInsets.only(top: 40),
+                      height: 250,
                       child: Image.asset(
                         AssetModel.undraw,
                         width: 210,
                         fit: BoxFit.cover,
                       ),
-                      height: 250,
                     )),
                     const SizedBox(
                       height: 30,
@@ -58,7 +58,7 @@ class WelcomeBack extends StatelessWidget {
                         Checkbox(
                           value: status,
                           onChanged: (val) {},
-                          side: BorderSide(
+                          side: const BorderSide(
                               color: primarycolor,
                               style: BorderStyle.solid,
                               width: 2),
@@ -76,7 +76,7 @@ class WelcomeBack extends StatelessWidget {
                         const SizedBox(
                         ),   TextButton(
                           onPressed: () => Zap.toNamed(Routes.forget_password),
-                          child: Text(
+                          child: const Text(
                             'Forget Password?',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,

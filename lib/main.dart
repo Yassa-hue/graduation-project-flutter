@@ -5,14 +5,6 @@ import 'package:graduationproject/utils/AuthProvider.dart';
 
 import 'model/routes.dart';
 
-import 'view/auth/widgets/change_password.dart';
-import 'view/auth/widgets/correct.dart';
-import 'view/auth/widgets/create_account.dart';
-import 'view/auth/widgets/forget_password.dart';
-import 'view/auth/widgets/logo.dart';
-import 'view/auth/widgets/welcome_back.dart';
-import 'view/auth/widgets/otp_password.dart';
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

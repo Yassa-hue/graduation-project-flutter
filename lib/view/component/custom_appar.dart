@@ -8,7 +8,7 @@ class CustomAppar extends StatelessWidget {
     return Stack(
       clipBehavior: Clip.none,
       children: [
-        Icon(
+        const Icon(
           Icons.notifications_none,
           color: primarycolor,
           size: 35,
@@ -16,11 +16,11 @@ class CustomAppar extends StatelessWidget {
         Container(
           width: 11,
           height: 11,
-          margin: EdgeInsets.fromLTRB(17, 7, 0, 0),
+          margin: const EdgeInsets.fromLTRB(17, 7, 0, 0),
           alignment: Alignment.centerRight,
           decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Color(0xffc32c37),
+              color: const Color(0xffc32c37),
               border: Border.all(color: Colors.white, width: 1)),
         ),
       ],

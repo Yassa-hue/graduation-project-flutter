@@ -19,12 +19,12 @@ class ForgetPassword extends StatelessWidget {
             Center(
               child: Container(
                 padding: const EdgeInsets.only(top: 40),
+                height: 250,
                 child: Image.asset(
                   AssetModel.forgetpass,
                   width: 320,
                   fit: BoxFit.cover,
                 ),
-                height: 250,
               ),
             ),
             const SizedBox(

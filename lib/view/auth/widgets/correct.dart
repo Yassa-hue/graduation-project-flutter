@@ -19,14 +19,14 @@ class Correct extends StatelessWidget {
                   Center(
                     child: Container(
                       padding: const EdgeInsets.only(top: 40),
+                      height: 360,
+                      width: 320,
                       child: Image.asset(
                         AssetModel.correctp,
                         width: 400,
                         height: double.infinity,
                         fit: BoxFit.cover,
                       ),
-                      height: 360,
-                      width: 320,
                     ),
                   ),
                   const SizedBox(

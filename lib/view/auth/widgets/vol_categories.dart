@@ -14,7 +14,7 @@ class Categories extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.white,
         onTap: (value) {},
-        items: [
+        items: const [
           BottomNavigationBarItem(
               backgroundColor: Colors.black,
               icon: Icon(
@@ -73,7 +73,7 @@ class Categories extends StatelessWidget {
                   GridView(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: 10,
                       mainAxisExtent: 170,

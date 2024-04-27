@@ -12,7 +12,7 @@ class AboutUs extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.white,
         onTap: (value) {},
-        items: [
+        items: const [
           BottomNavigationBarItem(
               backgroundColor: Colors.black,
               icon: Icon(

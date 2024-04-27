@@ -11,7 +11,7 @@ class ProfileVol extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.white,
         onTap: (value) {},
-        items: [
+        items: const [
           BottomNavigationBarItem(
               backgroundColor: Colors.black,
               icon: Icon(
@@ -77,7 +77,7 @@ class ProfileVol extends StatelessWidget {
                       ),
                     )),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
             ],

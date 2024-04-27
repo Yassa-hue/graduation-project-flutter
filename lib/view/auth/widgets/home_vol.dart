@@ -25,7 +25,7 @@ class HomeVol extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.white,
         onTap: (value) {},
-        items: [
+        items: const [
           BottomNavigationBarItem(
               backgroundColor: Colors.black,
               icon: Icon(
@@ -76,7 +76,7 @@ class HomeVol extends StatelessWidget {
             children: [
               Center(
                 child: Container(
-                    padding: EdgeInsets.fromLTRB(0, 5, 15, 0),
+                    padding: const EdgeInsets.fromLTRB(0, 5, 15, 0),
                     height: 130,
                     width: 360,
                     child: ClipRRect(
@@ -89,14 +89,14 @@ class HomeVol extends StatelessWidget {
                       ),
                     )),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              Text(
+              const Text(
                 "The Foundation helps at least 100 families and 500 individuals daily and works to pay attention to the educational and medical aspects. It also works to provide food and clothing for them and provide suitable housing for them. It works to raise the number and increase the number of people it intends to help .",
                 style: TextStyle(fontSize: 16, color: Colors.black),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               Text(
@@ -106,45 +106,43 @@ class HomeVol extends StatelessWidget {
                     color: Colors.grey[700],
                     fontSize: 15),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
-              Container(
+              SizedBox(
                   height: 110,
                   child: ListView.builder(
                     itemCount: categories.length,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, i) {
-                      return Container(
-                        child: Column(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(80),
-                                child: Image.asset(
-                                  categories[i]["image"],
-                                  width: 60,
-                                  height: 60,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              padding: EdgeInsets.all(10),
+                      return Column(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
                             ),
-                            Text(
-                              categories[i]["title"],
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey[600]),
+                            padding: const EdgeInsets.all(10),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(80),
+                              child: Image.asset(
+                                categories[i]["image"],
+                                width: 60,
+                                height: 60,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ],
-                        ),
+                          ),
+                          Text(
+                            categories[i]["title"],
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey[600]),
+                          ),
+                        ],
                       );
                     },
                   )),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Text(
@@ -154,10 +152,10 @@ class HomeVol extends StatelessWidget {
                     color: Colors.grey[700],
                     fontSize: 15),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 3,
               ),
-              Container(
+              SizedBox(
                 height: 200,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -166,6 +164,7 @@ class HomeVol extends StatelessWidget {
                     return Container(
                         width: 300,
                         height: 120,
+                        padding: const EdgeInsets.fromLTRB(0, 8, 10, 10),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.asset(
@@ -174,28 +173,27 @@ class HomeVol extends StatelessWidget {
                             height: 120,
                             fit: BoxFit.cover,
                           ),
-                        ),
-                        padding: EdgeInsets.fromLTRB(0, 8, 10, 10));
+                        ));
                   },
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
-                padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+                padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
                 height: 100,
                 width: double.infinity,
                 child: MaterialButton(
                   onPressed: () {},
-                  child: Text(
+                  color: Colors.black,
+                  child: const Text(
                     "Donate Now  >",
                     style: TextStyle(color: Colors.white, fontSize: 22),
                   ),
-                  color: Colors.black,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               )
             ],
