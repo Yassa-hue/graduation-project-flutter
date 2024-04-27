@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:graduationproject/model/model_pic.dart';
+import 'package:graduationproject/utils/images_paths.dart';
 import 'package:graduationproject/view/component/custom_appar.dart';
 
 class AboutUs extends StatelessWidget {
@@ -12,7 +12,7 @@ class AboutUs extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.white,
         onTap: (value) {},
-        items: [
+        items: const [
           BottomNavigationBarItem(
               backgroundColor: Colors.black,
               icon: Icon(
@@ -74,7 +74,7 @@ class AboutUs extends StatelessWidget {
               height: 180,
               width: 330,
               child: Image.asset(
-                AssetModel.about,
+                ImagesPaths.about,
                 fit: BoxFit.cover,
               ),
             ),

@@ -3,21 +3,13 @@ import 'package:zapx/zapx.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
 
-import 'model/routes.dart';
-
-import 'view/auth/widgets/change_password.dart';
-import 'view/auth/widgets/correct.dart';
-import 'view/auth/widgets/create_account.dart';
-import 'view/auth/widgets/forget_password.dart';
-import 'view/auth/widgets/logo.dart';
-import 'view/auth/widgets/welcome_back.dart';
-import 'view/auth/widgets/otp_password.dart';
+import 'utils/routes.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  runApp(AuthProvider(child: const MyApp()));
+  runApp(const AuthProvider(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

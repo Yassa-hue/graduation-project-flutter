@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:graduationproject/model/model_pic.dart';
+import 'package:graduationproject/utils/images_paths.dart';
 import 'package:graduationproject/view/component/custom_appar.dart';
 import 'package:graduationproject/view/component/custom_button.dart';
 import 'package:graduationproject/view/component/custom_complaint.dart';
@@ -16,7 +16,7 @@ class FeedBack extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.white,
         onTap: (value) {},
-        items: [
+        items: const [
           BottomNavigationBarItem(
               backgroundColor: Colors.black,
               icon: Icon(
@@ -66,19 +66,19 @@ class FeedBack extends StatelessWidget {
                     height: 130,
                     width: 130,
                     child: Image.asset(
-                      AssetModel.feedback,
+                      ImagesPaths.feedback,
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 CustomField(
                   text: "Event Name",
                   hiinttext: "Please Enter Event Name",
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(
@@ -88,7 +88,7 @@ class FeedBack extends StatelessWidget {
                       fontSize: 17,
                       color: Colors.grey[800]),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 SingleChildScrollView(
@@ -96,18 +96,18 @@ class FeedBack extends StatelessWidget {
                   child: Row(
                     children: [
                       CustomComplaints(title: "Suggestions"),
-                      SizedBox(
+                      const SizedBox(
                         width: 15,
                       ),
                       CustomComplaints(title: "Complaints"),
-                      SizedBox(
+                      const SizedBox(
                         width: 15,
                       ),
                       CustomComplaints(title: " Message  "),
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text("Details",
@@ -115,25 +115,25 @@ class FeedBack extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         fontSize: 17,
                         color: Colors.grey[800])),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      borderRadius: const BorderRadius.all(Radius.circular(8)),
                       border: Border.all(color: Colors.grey)),
                   height: 200,
                   width: double.infinity,
-                  child: TextField(
+                  child: const TextField(
                     decoration: InputDecoration(
                       hintText: "Please Write More Details",
-                      hintStyle: const TextStyle(
+                      hintStyle: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.grey),
                       border: OutlineInputBorder(borderSide: BorderSide.none),
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 CustomButton(title: "Add"),

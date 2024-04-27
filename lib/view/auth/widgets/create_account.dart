@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../model/model_pic.dart';
+import '../../../utils/images_paths.dart';
 import '../../component/custom_button.dart';
 import '../../component/custom_field.dart';
 
@@ -27,12 +27,12 @@ class _CreateAcountState extends State<CreateAcount> {
                 Center(
                   child: Container(
                     padding: const EdgeInsets.only(top: 40),
+                    height: 250,
                     child: Image.asset(
-                      AssetModel.undraw,
+                      ImagesPaths.undraw,
                       width: 210,
                       fit: BoxFit.cover,
                     ),
-                    height: 250,
                   ),
                 ),
                 const SizedBox(
@@ -77,7 +77,7 @@ class _CreateAcountState extends State<CreateAcount> {
                           status = val!;
                         });
                       },
-                      side: BorderSide(
+                      side: const BorderSide(
                           color: primarycolor,
                           style: BorderStyle.solid,
                           width: 2),

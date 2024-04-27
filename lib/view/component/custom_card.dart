@@ -12,7 +12,7 @@ class CustomCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
       child: Column(children: [
         Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             height: 130,
             width: 200,
             child: Image.asset(
@@ -21,7 +21,7 @@ class CustomCard extends StatelessWidget {
             )),
         Text(
           "$text",
-          style: TextStyle(
+          style: const TextStyle(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 22),
         ),
       ]),

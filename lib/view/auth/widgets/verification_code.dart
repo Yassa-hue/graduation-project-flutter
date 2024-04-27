@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:graduationproject/model/model_pic.dart';
+import 'package:graduationproject/utils/images_paths.dart';
 import 'package:graduationproject/view/component/custom_button.dart';
 import 'package:graduationproject/view/component/custom_otp.dart';
 
@@ -16,7 +16,7 @@ class Code extends StatelessWidget {
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset(AssetModel.code),
+                  Image.asset(ImagesPaths.code),
                   const Text(
                     'Verfication Code',
                     style: TextStyle(
@@ -43,19 +43,19 @@ class Code extends StatelessWidget {
                   const SizedBox(
                     height: 30,
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       OTP(),
-                      const SizedBox(
+                      SizedBox(
                         width: 9,
                       ),
                       OTP(),
-                      const SizedBox(
+                      SizedBox(
                         width: 9,
                       ),
                       OTP(),
-                      const SizedBox(
+                      SizedBox(
                         width: 9,
                       ),
                       OTP(),

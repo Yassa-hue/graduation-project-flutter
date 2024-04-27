@@ -5,13 +5,15 @@ import 'package:graduationproject/view/component/custom_setting.dart';
 class Setting extends StatelessWidget {
   static const primarycolor = Color(0xff644AE5);
 
+  const Setting({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.white,
         onTap: (value) {},
-        items: [
+        items: const [
           BottomNavigationBarItem(
               backgroundColor: Colors.black,
               icon: Icon(
@@ -71,13 +73,13 @@ class Setting extends StatelessWidget {
                 height: 20,
               ),
               SingleChildScrollView(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 child: Card(
                   elevation: 6,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
                   child: Column(children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 25,
                     ),
                     CustomSetting(
@@ -85,7 +87,7 @@ class Setting extends StatelessWidget {
                       text: "Edit Profile         ",
                       next: Icons.navigate_next_sharp,
                     ),
-                    Divider(
+                    const Divider(
                       endIndent: 15,
                       indent: 15,
                       color: Colors.grey,
@@ -96,7 +98,7 @@ class Setting extends StatelessWidget {
                       text: "Notification        ",
                       next: Icons.navigate_next_sharp,
                     ),
-                    Divider(
+                    const Divider(
                       endIndent: 15,
                       indent: 15,
                       color: Colors.grey,
@@ -107,7 +109,7 @@ class Setting extends StatelessWidget {
                       text: "Security              ",
                       next: Icons.navigate_next_sharp,
                     ),
-                    Divider(
+                    const Divider(
                       endIndent: 15,
                       indent: 15,
                       color: Colors.grey,
@@ -118,7 +120,7 @@ class Setting extends StatelessWidget {
                       text: "Language           ",
                       next: Icons.navigate_next_sharp,
                     ),
-                    Divider(
+                    const Divider(
                       endIndent: 15,
                       indent: 15,
                       color: Colors.grey,
@@ -129,7 +131,7 @@ class Setting extends StatelessWidget {
                       text: "Feedback           ",
                       next: Icons.navigate_next_sharp,
                     ),
-                    Divider(
+                    const Divider(
                       endIndent: 15,
                       indent: 15,
                       color: Colors.grey,
@@ -140,7 +142,7 @@ class Setting extends StatelessWidget {
                       text: "Support              ",
                       next: Icons.navigate_next_sharp,
                     ),
-                    Divider(
+                    const Divider(
                       endIndent: 15,
                       indent: 15,
                       color: Colors.grey,
@@ -151,7 +153,7 @@ class Setting extends StatelessWidget {
                       text: "Privacy & Policy",
                       next: Icons.navigate_next_sharp,
                     ),
-                    Divider(
+                    const Divider(
                       endIndent: 15,
                       indent: 15,
                       color: Colors.grey,
@@ -161,7 +163,7 @@ class Setting extends StatelessWidget {
                       colr: Colors.red,
                       text: "Logout     ",
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     )
                   ]),

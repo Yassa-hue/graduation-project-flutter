@@ -12,7 +12,7 @@ class CustomSetting extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
+        const SizedBox(
           height: 15,
         ),
         Row(

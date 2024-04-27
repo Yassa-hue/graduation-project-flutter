@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../model/model_pic.dart';
+import '../../../utils/images_paths.dart';
 import '../../component/custom_button.dart';
 import '../../component/custom_field.dart';
 
@@ -19,12 +19,12 @@ class ForgetPassword extends StatelessWidget {
             Center(
               child: Container(
                 padding: const EdgeInsets.only(top: 40),
+                height: 250,
                 child: Image.asset(
-                  AssetModel.forgetpass,
+                  ImagesPaths.forgetpass,
                   width: 320,
                   fit: BoxFit.cover,
                 ),
-                height: 250,
               ),
             ),
             const SizedBox(
