@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../model/model_pic.dart';
+import '../../../utils/images_paths.dart';
 import '../../component/custom_button.dart';
 import '../../component/custom_field.dart';
 
@@ -20,7 +20,7 @@ class ChangePassword extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 40),
                 height: 250,
                 child: Image.asset(
-                  AssetModel.forget,
+                  ImagesPaths.forget,
                   width: 320,
                   fit: BoxFit.cover,
                 ),

@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:graduationproject/model/model_pic.dart';
+import 'package:graduationproject/utils/images_paths.dart';
 import 'package:graduationproject/view/component/custom_appar.dart';
 
 // ignore: must_be_immutable
 class HomeVol extends StatelessWidget {
   static const primarycolor = Color(0xff644AE5);
   List categories = [
-    {"image": AssetModel.education, "title": "Education"},
-    {"image": AssetModel.food, "title": "Food"},
-    {"image": AssetModel.clothes, "title": "Clothes"},
-    {"image": AssetModel.medicine, "title": "Medicine"},
-    {"image": AssetModel.house, "title": "House"},
-    {"image": AssetModel.build, "title": "Build"},
+    {"image": ImagesPaths.education, "title": "Education"},
+    {"image": ImagesPaths.food, "title": "Food"},
+    {"image": ImagesPaths.clothes, "title": "Clothes"},
+    {"image": ImagesPaths.medicine, "title": "Medicine"},
+    {"image": ImagesPaths.house, "title": "House"},
+    {"image": ImagesPaths.build, "title": "Build"},
   ];
   List pictures = [
-    {"image": AssetModel.camp1},
-    {"image": AssetModel.camp2},
-    {"image": AssetModel.camp3},
+    {"image": ImagesPaths.camp1},
+    {"image": ImagesPaths.camp2},
+    {"image": ImagesPaths.camp3},
   ];
   HomeVol({super.key});
   @override
@@ -82,7 +82,7 @@ class HomeVol extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: Image.asset(
-                        AssetModel.homing,
+                        ImagesPaths.homing,
                         width: 360,
                         height: 130,
                         fit: BoxFit.cover,

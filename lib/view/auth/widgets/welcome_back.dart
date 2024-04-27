@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:graduationproject/model/routes.dart';
+import 'package:graduationproject/utils/routes.dart';
 import 'package:zapx/zapx.dart';
-import '../../../model/model_pic.dart';
+import '../../../utils/images_paths.dart';
 import '../../component/custom_button.dart';
 import '../../component/custom_field.dart';
 
@@ -24,7 +24,7 @@ class WelcomeBack extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 40),
                       height: 250,
                       child: Image.asset(
-                        AssetModel.undraw,
+                        ImagesPaths.undraw,
                         width: 210,
                         fit: BoxFit.cover,
                       ),
@@ -72,9 +72,8 @@ class WelcomeBack extends StatelessWidget {
                               color: Colors.black,
                               fontSize: 17),
                         ),
-
-                        const SizedBox(
-                        ),   TextButton(
+                        const SizedBox(),
+                        TextButton(
                           onPressed: () => Zap.toNamed(Routes.forget_password),
                           child: const Text(
                             'Forget Password?',
@@ -90,7 +89,7 @@ class WelcomeBack extends StatelessWidget {
                       height: 30,
                     ),
                     CustomButton(
-                      onTap: ()=> Zap.toNamed(Routes.home_vol),
+                      onTap: () => Zap.toNamed(Routes.home_vol),
                       title: "Login",
                     )
                   ]),

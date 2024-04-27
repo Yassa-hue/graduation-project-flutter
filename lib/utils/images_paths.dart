@@ -1,6 +1,6 @@
 const String path = 'assets/images';
 
-class AssetModel {
+class ImagesPaths {
   static const String undraw = '$path/signin.png.png';
   static const String logo = '$path/pngwing.com.png';
   static const String forget = '$path/forget.png';

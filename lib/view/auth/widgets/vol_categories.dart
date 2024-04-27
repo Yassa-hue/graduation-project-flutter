@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:graduationproject/model/model_pic.dart';
+import 'package:graduationproject/utils/images_paths.dart';
 import 'package:graduationproject/view/component/custom_appar.dart';
 import 'package:graduationproject/view/component/custom_card.dart';
 
@@ -73,18 +73,19 @@ class Categories extends StatelessWidget {
                   GridView(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: 10,
                       mainAxisExtent: 170,
                     ),
                     children: [
-                      CustomCard(text: "Clothes", img: AssetModel.clothes),
-                      CustomCard(text: "Food", img: AssetModel.food),
-                      CustomCard(text: "House", img: AssetModel.house),
-                      CustomCard(text: "Medicine", img: AssetModel.medicine),
-                      CustomCard(text: "Education", img: AssetModel.education),
-                      CustomCard(text: "Build", img: AssetModel.build),
+                      CustomCard(text: "Clothes", img: ImagesPaths.clothes),
+                      CustomCard(text: "Food", img: ImagesPaths.food),
+                      CustomCard(text: "House", img: ImagesPaths.house),
+                      CustomCard(text: "Medicine", img: ImagesPaths.medicine),
+                      CustomCard(text: "Education", img: ImagesPaths.education),
+                      CustomCard(text: "Build", img: ImagesPaths.build),
                     ],
                   )
                 ]),

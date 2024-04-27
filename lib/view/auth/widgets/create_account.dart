@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../model/model_pic.dart';
+import '../../../utils/images_paths.dart';
 import '../../component/custom_button.dart';
 import '../../component/custom_field.dart';
 
@@ -29,7 +29,7 @@ class _CreateAcountState extends State<CreateAcount> {
                     padding: const EdgeInsets.only(top: 40),
                     height: 250,
                     child: Image.asset(
-                      AssetModel.undraw,
+                      ImagesPaths.undraw,
                       width: 210,
                       fit: BoxFit.cover,
                     ),

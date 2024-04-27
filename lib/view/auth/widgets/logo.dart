@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../model/model_pic.dart';
+import '../../../utils/images_paths.dart';
 
 class Logo extends StatelessWidget {
   const Logo({super.key});
@@ -16,7 +16,7 @@ class Logo extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(15, 30, 15, 15),
           child: Center(
               child: Image.asset(
-            AssetModel.logo,
+            ImagesPaths.logo,
             fit: BoxFit.cover,
           )),
         ),

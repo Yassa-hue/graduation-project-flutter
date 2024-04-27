@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:graduationproject/model/model_pic.dart';
+import 'package:graduationproject/utils/images_paths.dart';
 import 'package:graduationproject/view/component/custom_button.dart';
 import 'package:graduationproject/view/component/custom_otp.dart';
 
@@ -16,7 +16,7 @@ class OtpPassword extends StatelessWidget {
           child: SingleChildScrollView(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Image.asset(AssetModel.otpsecurity),
+              Image.asset(ImagesPaths.otpsecurity),
               const Text(
                 'Forget Password',
                 style: TextStyle(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:graduationproject/model/model_pic.dart';
+import 'package:graduationproject/utils/images_paths.dart';
 import 'package:graduationproject/view/component/custom_smooth_indicator.dart';
 
 class Splash2 extends StatelessWidget {
@@ -17,7 +17,7 @@ class Splash2 extends StatelessWidget {
             width: double.infinity,
             color: primarycolor,
             height: 400,
-            child: Image.asset(AssetModel.introo),
+            child: Image.asset(ImagesPaths.introo),
           ),
           const SizedBox(
             height: 30,

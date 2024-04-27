@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:graduationproject/model/model_pic.dart';
+import 'package:graduationproject/utils/images_paths.dart';
 import 'package:graduationproject/view/component/custom_appar.dart';
 import 'package:graduationproject/view/component/custom_button.dart';
 import 'package:graduationproject/view/component/custom_complaint.dart';
@@ -66,7 +66,7 @@ class FeedBack extends StatelessWidget {
                     height: 130,
                     width: 130,
                     child: Image.asset(
-                      AssetModel.feedback,
+                      ImagesPaths.feedback,
                       fit: BoxFit.cover,
                     ),
                   ),

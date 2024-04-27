@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:graduationproject/model/model_pic.dart';
+import 'package:graduationproject/utils/images_paths.dart';
 import 'package:graduationproject/view/component/custom_button.dart';
 
 // ignore: must_be_immutable
@@ -24,7 +24,7 @@ class Options extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 40),
                 child: Center(
                   child: Image.asset(
-                    AssetModel.undraw,
+                    ImagesPaths.undraw,
                     width: 210,
                     fit: BoxFit.cover,
                   ),

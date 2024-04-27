@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:graduationproject/model/model_pic.dart';
+import 'package:graduationproject/utils/images_paths.dart';
 import 'package:graduationproject/view/component/custom_appar.dart';
 
 class ProfileVol extends StatelessWidget {
@@ -70,7 +70,7 @@ class ProfileVol extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(150),
                       child: Image.asset(
-                        AssetModel.profile,
+                        ImagesPaths.profile,
                         width: 100,
                         height: 100,
                         fit: BoxFit.cover,

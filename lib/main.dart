@@ -3,7 +3,7 @@ import 'package:zapx/zapx.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
 
-import 'model/routes.dart';
+import 'utils/routes.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
