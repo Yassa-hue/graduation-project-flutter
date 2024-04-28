@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'package:graduationproject/pages/donation_page.dart';
+
 import 'package:graduationproject/utils/images_paths.dart';
-import 'package:graduationproject/components/custom_appar.dart';
+import 'package:graduationproject/components/custom_app_bar.dart';
+import 'package:graduationproject/components/custom_bottom_bar.dart';
 
 import 'package:graduationproject/utils/color_palette.dart';
 import 'package:graduationproject/utils/constants.dart';
@@ -20,51 +23,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        unselectedItemColor: Colors.white,
-        onTap: (value) {},
-        items: const [
-          BottomNavigationBarItem(
-              backgroundColor: Colors.black,
-              icon: Icon(
-                Icons.person,
-                size: 35,
-              ),
-              label: " "),
-          BottomNavigationBarItem(
-              backgroundColor: Colors.black,
-              icon: Icon(
-                Icons.campaign,
-                size: 35,
-              ),
-              label: " "),
-          BottomNavigationBarItem(
-              backgroundColor: Colors.black,
-              icon: Icon(
-                Icons.home,
-                size: 35,
-                color: PRIMARY_COLOR,
-              ),
-              label: " "),
-          BottomNavigationBarItem(
-              backgroundColor: Colors.black,
-              icon: Icon(
-                Icons.stars_rounded,
-                size: 35,
-              ),
-              label: " "),
-          BottomNavigationBarItem(
-              backgroundColor: Colors.black,
-              icon: Icon(
-                Icons.settings,
-                size: 35,
-              ),
-              label: " "),
-        ],
-        backgroundColor: Colors.black,
-      ),
-      appBar: AppBar(backgroundColor: Colors.white70, elevation: 0.0, actions: [
-        CustomAppar(),
+      bottomNavigationBar: CustomBottomBar(currentPage: homePage),
+      appBar: AppBar(backgroundColor: Colors.white70, elevation: 0.0, actions: const [
+        CustomAppBar(),
       ]),
       body: Container(
         padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
@@ -179,18 +140,19 @@ class _HomePageState extends State<HomePage> {
                         itemCount: campaigns.length,
                         itemBuilder: (context, index) {
                           return Container(
-                              width: 300,
-                              height: 120,
-                              padding: const EdgeInsets.fromLTRB(0, 8, 10, 10),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.network(
-                                  campaigns[index].coverImageLink,
-                                  width: 300,
-                                  height: 120,
-                                  fit: BoxFit.cover,
-                                ),),
-                              );
+                            width: 300,
+                            height: 120,
+                            padding: const EdgeInsets.fromLTRB(0, 8, 10, 10),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.network(
+                                campaigns[index].coverImageLink,
+                                width: 300,
+                                height: 120,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          );
                         },
                       );
                     } catch (e) {
@@ -209,7 +171,12 @@ class _HomePageState extends State<HomePage> {
                 height: 100,
                 width: double.infinity,
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const DonationPage()));
+                  },
                   color: Colors.black,
                   child: const Text(
                     "Donate Now  >",

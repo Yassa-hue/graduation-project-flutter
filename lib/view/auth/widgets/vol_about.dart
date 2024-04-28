@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graduationproject/utils/images_paths.dart';
-import 'package:graduationproject/components/custom_appar.dart';
+import 'package:graduationproject/components/custom_app_bar.dart';
 
 class AboutUs extends StatelessWidget {
   static const primarycolor = Color(0xff644AE5);
@@ -53,7 +53,7 @@ class AboutUs extends StatelessWidget {
         backgroundColor: Colors.white70,
         elevation: 0.0,
         actions: [
-          CustomAppar(),
+          CustomAppBar(),
         ],
       ),
       body: Container(
