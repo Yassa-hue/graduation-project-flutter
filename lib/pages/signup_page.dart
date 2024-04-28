@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:graduationproject/pages/home_page.dart';
+import 'package:graduationproject/utils/AuthProvider.dart';
 
-import '../../../utils/images_paths.dart';
-import '../utils/color_palette.dart';
+import 'package:graduationproject/utils/images_paths.dart';
+import 'package:graduationproject/utils/color_palette.dart';
 
-import '../../../components/custom_button.dart';
-import '../../../components/custom_field.dart';
+import 'package:graduationproject/components/custom_button.dart';
+import 'package:graduationproject/components/custom_field.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -13,8 +15,41 @@ class SignupPage extends StatefulWidget {
   State<SignupPage> createState() => _SignupPageState();
 }
 
+// TODO: Add loading animation and error messages
 class _SignupPageState extends State<SignupPage> {
-  bool status = false;
+  bool agreeToTermsAndConditions = false;
+  bool loading = false;
+  String error = "";
+  String username = "",
+      email = "",
+      password = "",
+      confirmPassword = "";
+  
+  Future<void> signup() async {
+    final auth = AuthProvider.of(context)!;
+    setState(() {
+      loading = true;
+      error = "";
+    });
+
+    try {
+      if (password != confirmPassword) {
+        throw "Passwords do not match";
+      }
+
+      await auth.signup({
+        "name": username,
+        "email": email,
+        "password": password,
+      });
+      final route = MaterialPageRoute(builder: (context) => const HomePage());
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pushReplacement(route);
+    } catch (e) {
+      setState(() => error = e.toString());
+    }
+    setState(() => loading = false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,35 +89,51 @@ class _SignupPageState extends State<SignupPage> {
                     text: "Create account",
                     hiinttext: "User name",
                     prefex: Icons.person,
-                    onChanged: (value) => {},
+                    onChanged: (value) => {
+                      setState(() {
+                        username = value;
+                      })
+                    },
                 ),
                 CustomField(
                   text: "Email",
                   hiinttext: "ys198@mail.com",
                   prefex: Icons.email,
-                  onChanged: (value) => {},
+                  onChanged: (value) => {
+                    setState(() {
+                      email = value;
+                    })
+                  },
                 ),
                 CustomField(
                     text: "Password",
                     hiinttext: "Password",
                     prefex: Icons.lock_person,
                     suffex: Icons.visibility_off,
-                    onChanged: (value) => {},
+                    onChanged: (value) => {
+                      setState(() {
+                        password = value;
+                      })
+                    },
                 ),
                 CustomField(
                   text: "Confirm Password",
                   hiinttext: "Confirm Password",
                   prefex: Icons.lock_person,
                   suffex: Icons.visibility_off,
-                  onChanged: (value) => {},
+                  onChanged: (value) => {
+                    setState(() {
+                      confirmPassword = value;
+                    })
+                  },
                 ),
                 Row(
                   children: [
                     Checkbox(
-                      value: status,
+                      value: agreeToTermsAndConditions,
                       onChanged: (val) {
                         setState(() {
-                          status = val!;
+                          agreeToTermsAndConditions = val!;
                         });
                       },
                       side: const BorderSide(
@@ -107,8 +158,9 @@ class _SignupPageState extends State<SignupPage> {
                 const SizedBox(
                   height: 15,
                 ),
-                CustomButton(
+                CustomButton( // TODO: Add disabled behavior
                   title: "Sign in",
+                  onTap: () => signup(),
                 )
               ]),
         ),
