@@ -18,6 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   bool rememberMe = false;
   String email = "";
   String password = "";
+  // TODO: https://github.com/Yassa-hue/graduation-project-flutter/issues/4
   bool loading = false;
   String error = "";
 
@@ -30,6 +31,7 @@ class _LoginPageState extends State<LoginPage> {
       final route = MaterialPageRoute(builder: (context) => const HomePage());
       Navigator.of(context).pushReplacement(route);
     } catch (e) {
+      // TODO: https://github.com/Yassa-hue/graduation-project-flutter/issues/5
       print("########################################");
       print(e);
       print("########################################");
