@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:graduationproject/components/custom_appar.dart';
+import 'package:graduationproject/components/custom_app_bar.dart';
 import 'package:graduationproject/components/custom_setting.dart';
 
 class Setting extends StatelessWidget {
@@ -54,7 +54,7 @@ class Setting extends StatelessWidget {
         backgroundColor: Colors.black,
       ),
       appBar: AppBar(backgroundColor: Colors.white70, elevation: 0.0, actions: [
-        CustomAppar(),
+        CustomAppBar(),
       ]),
       body: Container(
         padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),

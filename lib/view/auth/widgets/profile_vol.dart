@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graduationproject/utils/images_paths.dart';
-import 'package:graduationproject/components/custom_appar.dart';
+import 'package:graduationproject/components/custom_app_bar.dart';
 
 class ProfileVol extends StatelessWidget {
   static const primarycolor = Color(0xff644AE5);
@@ -52,7 +52,7 @@ class ProfileVol extends StatelessWidget {
         backgroundColor: Colors.black,
       ),
       appBar: AppBar(backgroundColor: Colors.white70, elevation: 0.0, actions: [
-        CustomAppar(),
+        CustomAppBar(),
       ]),
       body: Container(
         padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
