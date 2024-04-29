@@ -19,15 +19,11 @@ class CustomBottomBar extends StatelessWidget {
     return BottomNavigationBar(
       unselectedItemColor: Colors.white,
       onTap: (value) {
-        print("#############################################");
-        print("Current value: $value");
-        print("#############################################");
-        // var route = MaterialPageRoute(builder: (context) => const HomePage());
+        var route = MaterialPageRoute(builder: (context) => const HomePage());
         switch (value) {
           case profilePage:
-            var route =
+            route =
                 MaterialPageRoute(builder: (context) => const ProfilePage());
-            Navigator.of(context).pushReplacement(route);
             break;
           // TODO:
           // case campainPage:
@@ -37,13 +33,12 @@ class CustomBottomBar extends StatelessWidget {
           //   route = MaterialPageRoute(builder: (context) => const ());
           //   break;
           case settingsPage:
-            var route =
+            route =
                 MaterialPageRoute(builder: (context) => const SettingPage());
-            Navigator.of(context).pushReplacement(route);
             break;
         }
 
-        // Navigator.of(context).pushReplacement(route);
+        Navigator.of(context).pushReplacement(route);
       },
       currentIndex: currentPage, // Set the currentIndex to currentPage
       items: [

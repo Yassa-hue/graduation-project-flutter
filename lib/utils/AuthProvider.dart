@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:graduationproject/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends StatefulWidget {
@@ -16,7 +17,7 @@ class AuthProvider extends StatefulWidget {
 }
 
 class _AuthProviderState extends State<AuthProvider> {
-  Map? currentUser;
+  UserModel? currentUser;
   bool initialized = false;
   late final SharedPreferences prefs;
   late final FirebaseFirestore firestore;
@@ -36,7 +37,7 @@ class _AuthProviderState extends State<AuthProvider> {
             .doc(prefs.getString('user_id'))
             .get();
         if (userDoc.exists) {
-          currentUser = userDoc.data()!;
+          currentUser = UserModel.fromJson(userDoc.data()!);
         }
       }
       updateFcmToken();
@@ -57,7 +58,7 @@ class _AuthProviderState extends State<AuthProvider> {
     }
     await prefs.setString('user_id', res.docs[0].id);
     setState(() {
-      currentUser = res.docs[0].data();
+      currentUser = UserModel.fromJson(res.docs[0].data());
     });
     updateFcmToken();
   }
@@ -79,15 +80,15 @@ class _AuthProviderState extends State<AuthProvider> {
     await userRef.set(userData);
     await prefs.setString('user_id', userRef.id);
     setState(() {
-      currentUser = userData;
+      currentUser = UserModel.fromJson(userData);
     });
     updateFcmToken();
   }
 
   Future<void> updateUser(Map<String, dynamic> updates) async {
-    final userDoc = firestore.collection('users').doc(currentUser!['id']);
+    final userDoc = firestore.collection('users').doc(currentUser!.id);
     await userDoc.update(updates);
-    currentUser = (await userDoc.get()).data();
+    currentUser = UserModel.fromJson((await userDoc.get()).data()!);
     setState(() {});
   }
 
@@ -100,7 +101,7 @@ class _AuthProviderState extends State<AuthProvider> {
         return;
       }
       await firestore.collection('fcm_tokens').doc(token).set({
-        'user_id': currentUser?['id'],
+        'user_id': currentUser?.id,
         'updated_at': FieldValue.serverTimestamp(),
       });
     } catch (e) {
