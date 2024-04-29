@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:graduationproject/utils/images_paths.dart';
+import 'package:graduationproject/components/custom_bottom_bar.dart';
+import 'package:graduationproject/utils/AuthProvider.dart';
+import 'package:graduationproject/utils/constants.dart';
 import 'package:graduationproject/components/custom_app_bar.dart';
-
-import 'package:graduationproject/utils/color_palette.dart';
+import 'package:graduationproject/models/user_model.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -12,55 +13,27 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  UserModel? currentUser;
+  
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      currentUser = AuthProvider.of(context)!.currentUser;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        unselectedItemColor: Colors.white,
-        onTap: (value) {},
-        items: const [
-          BottomNavigationBarItem(
-              backgroundColor: Colors.black,
-              icon: Icon(
-                Icons.person,
-                size: 35,
-                color: PRIMARY_COLOR,
-              ),
-              label: " "),
-          BottomNavigationBarItem(
-              backgroundColor: Colors.black,
-              icon: Icon(
-                Icons.campaign,
-                size: 35,
-              ),
-              label: " "),
-          BottomNavigationBarItem(
-              backgroundColor: Colors.black,
-              icon: Icon(
-                Icons.home,
-                size: 35,
-              ),
-              label: " "),
-          BottomNavigationBarItem(
-              backgroundColor: Colors.black,
-              icon: Icon(
-                Icons.stars_rounded,
-                size: 35,
-              ),
-              label: " "),
-          BottomNavigationBarItem(
-              backgroundColor: Colors.black,
-              icon: Icon(
-                Icons.settings,
-                size: 35,
-              ),
-              label: " "),
-        ],
-        backgroundColor: Colors.black,
+      bottomNavigationBar: CustomBottomBar(currentPage: profilePage),
+      appBar: AppBar(
+          backgroundColor: Colors.white70,
+          elevation: 0.0,
+          actions: const [
+            CustomAppBar(),
+          ]
       ),
-      appBar: AppBar(backgroundColor: Colors.white70, elevation: 0.0, actions: [
-        CustomAppBar(),
-      ]),
       body: Container(
         padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
         child: SingleChildScrollView(
@@ -70,20 +43,24 @@ class _ProfilePageState extends State<ProfilePage> {
               Center(
                 child: Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(150)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(150)),
                         border: Border.all(color: Colors.grey)),
                     height: 150,
                     width: 150,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(150),
-                      child: Image.asset(
-                        ImagesPaths.profile,
-                        width: 100,
-                        height: 100,
-                        fit: BoxFit.cover,
-                      ),
-                    )),
-              ),
+                    child: currentUser != null
+                      ? ClipRRect(
+                        borderRadius: BorderRadius.circular(150),
+                        child: Image.network(
+                          currentUser!.profileImageUrl,
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        ),
+                        )
+                      : const CircularProgressIndicator(),
+                    )
+                  ),
               const SizedBox(
                 height: 15,
               ),
