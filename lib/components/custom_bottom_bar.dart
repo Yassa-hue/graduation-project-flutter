@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:graduationproject/pages/home_page.dart';
+import 'package:graduationproject/pages/profile_page.dart';
+import 'package:graduationproject/pages/settings_page.dart';
 import 'package:graduationproject/utils/color_palette.dart';
 import 'package:graduationproject/utils/constants.dart';
 
@@ -15,7 +18,28 @@ class CustomBottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       unselectedItemColor: Colors.white,
-      onTap: (value) {},
+      onTap: (value) {
+        var route = MaterialPageRoute(builder: (context) => const HomePage());
+        switch (value) {
+          case profilePage:
+            route =
+                MaterialPageRoute(builder: (context) => const ProfilePage());
+            break;
+          // TODO:
+          // case campainPage:
+          //   route = MaterialPageRoute(builder: (context) => const ());
+          //   break;
+          // case donationPage:
+          //   route = MaterialPageRoute(builder: (context) => const ());
+          //   break;
+          case settingsPage:
+            route =
+                MaterialPageRoute(builder: (context) => const SettingPage());
+            break;
+        }
+
+        Navigator.of(context).pushReplacement(route);
+      },
       currentIndex: currentPage, // Set the currentIndex to currentPage
       items: [
         BottomNavigationBarItem(

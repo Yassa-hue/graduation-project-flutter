@@ -9,8 +9,8 @@ const List donationCategories = [
     {"image": ImagesPaths.build, "title": "Build"},
 ];
 
+const int profilePage = 0;
 const int campainPage = 1;
-const int donationPage = 2;
-const int homePage = 3;
-const int profilePage = 4;
-const int settingsPage = 5;
+const int homePage = 2;
+const int donationPage = 3;
+const int settingsPage = 4;
