@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:graduationproject/pages/donation_page.dart';
 
-import 'package:graduationproject/utils/images_paths.dart';
 import 'package:graduationproject/components/custom_app_bar.dart';
 import 'package:graduationproject/components/custom_bottom_bar.dart';
 
 import 'package:graduationproject/utils/color_palette.dart';
 import 'package:graduationproject/utils/constants.dart';
+import 'package:graduationproject/utils/images_paths.dart';
 
 import 'package:graduationproject/models/campaign_model.dart';
+import 'package:graduationproject/services/campaign_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -114,55 +114,42 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 3,
               ),
-              SizedBox(
-                height: 200,
-                child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                  stream: FirebaseFirestore.instance
-                      .collection("campaigns")
-                      .orderBy('createdAt', descending: true)
-                      .limit(3)
-                      .snapshots(),
-                  builder: (context,
-                      AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
-                          snapshot) {
-                    try {
-                      if (!snapshot.hasData || snapshot.hasError) {
-                        throw "No data found";
-                      }
+                SizedBox(
+                  height: 200,
+                  child: FutureBuilder<List<Campaign>>(
+                    future: CampaignService().getLatestCampaigns(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        List<Campaign> campaigns = snapshot.data!;
 
-                      List<Campaign> campaigns = snapshot.data?.docs
-                              .map((doc) => Campaign.fromJson(doc.data()))
-                              .toList() ??
-                          [];
-
-                      return ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: campaigns.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            width: 300,
-                            height: 120,
-                            padding: const EdgeInsets.fromLTRB(0, 8, 10, 10),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.network(
-                                campaigns[index].coverImageLink,
-                                width: 300,
-                                height: 120,
-                                fit: BoxFit.cover,
+                        return ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: campaigns.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              width: 300,
+                              height: 120,
+                              padding: const EdgeInsets.fromLTRB(0, 8, 10, 10),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.network(
+                                  campaigns[index].coverImageLink,
+                                  width: 300,
+                                  height: 120,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      );
-                    } catch (e) {
-                      return const Center(
-                          child:
-                              CircularProgressIndicator(color: PRIMARY_COLOR));
-                    }
-                  },
+                            );
+                          },
+                        );
+                      } else {
+                        return const Center(
+                          child: CircularProgressIndicator(color: PRIMARY_COLOR),
+                        );
+                      }
+                    },
+                  ),
                 ),
-              ),
               const SizedBox(
                 height: 20,
               ),
