@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduationproject/models/user_model.dart';
 import 'package:graduationproject/pages/apply_for_volunteering_page.dart';
 
 import 'package:graduationproject/pages/dashboard_page.dart';
@@ -14,105 +15,117 @@ import 'package:graduationproject/utils/AuthProvider.dart';
 import 'package:graduationproject/utils/color_palette.dart';
 import 'package:graduationproject/utils/constants.dart';
 
+class BarIconConfig {
+  final String name;
+  final IconData icon;
+  final Function page;
+
+  BarIconConfig({
+    required this.name,
+    required this.icon,
+    required this.page,
+  });
+}
+
 var volunteerConfigs = [
-  {
-    "name": "Profile",
-    "icon": Icons.person,
-    "page": (BuildContext context) => Navigator.of(context).pushReplacement(
+  BarIconConfig(
+    name: "Profile",
+    icon: Icons.person,
+    page: (BuildContext context) => Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const ProfilePage())),
-  },
-  {
-    "name": "Volunteering Categories",
-    "icon": Icons.campaign,
-    "page": (BuildContext context) => Navigator.of(context).pushReplacement(
+  ),
+  BarIconConfig(
+    name: "Volunteering Categories",
+    icon: Icons.campaign,
+    page: (BuildContext context) => Navigator.of(context).pushReplacement(
         MaterialPageRoute(
             builder: (context) => const VolunteeringCategoriesPage())),
-  },
-  {
-    "name": "Home",
-    "icon": Icons.home,
-    "page": (BuildContext context) => Navigator.of(context).pushReplacement(
+  ),
+  BarIconConfig(
+    name: "Home",
+    icon: Icons.home,
+    page: (BuildContext context) => Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const HomePage())),
-  },
-  {
-    "name": "Apply for Volunteering",
-    "icon": Icons.stars_rounded,
-    "page": (BuildContext context) => Navigator.of(context).pushReplacement(
+  ),
+  BarIconConfig(
+    name: "Apply for Volunteering",
+    icon: Icons.stars_rounded,
+    page: (BuildContext context) => Navigator.of(context).pushReplacement(
         MaterialPageRoute(
             builder: (context) => const ApplyForVolunteeringPage())),
-  },
-  {
-    "name": "Settings",
-    "icon": Icons.settings,
-    "page": (BuildContext context) => Navigator.of(context).pushReplacement(
+  ),
+  BarIconConfig(
+    name: "Settings",
+    icon: Icons.settings,
+    page: (BuildContext context) => Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const SettingPage())),
-  },
+  ),
 ];
 
 var donorConfigs = [
-  {
-    "name": "Profile",
-    "icon": Icons.person,
-    "page": (BuildContext context) => Navigator.of(context).pushReplacement(
+  BarIconConfig(
+    name: "Profile",
+    icon: Icons.person,
+    page: (BuildContext context) => Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const ProfilePage())),
-  },
-  {
-    "name": "Donation Categories",
-    "icon": Icons.campaign,
-    "page": (BuildContext context) => Navigator.of(context).pushReplacement(
+  ),
+  BarIconConfig(
+    name: "Donation Categories",
+    icon: Icons.campaign,
+    page: (BuildContext context) => Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const DonationCategories())),
-  },
-  {
-    "name": "Home",
-    "icon": Icons.home,
-    "page": (BuildContext context) => Navigator.of(context).pushReplacement(
+  ),
+  BarIconConfig(
+    name: "Home",
+    icon: Icons.home,
+    page: (BuildContext context) => Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const HomePage())),
-  },
-  {
-    "name": "Make Donation",
-    "icon": Icons.money_rounded,
-    "page": (BuildContext context) => Navigator.of(context).pushReplacement(
+  ),
+  BarIconConfig(
+    name: "Make Donation",
+    icon: Icons.money_rounded,
+    page: (BuildContext context) => Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const MakeDonationPage())),
-  },
-  {
-    "name": "Settings",
-    "icon": Icons.settings,
-    "page": (BuildContext context) => Navigator.of(context).pushReplacement(
+  ),
+  BarIconConfig(
+    name: "Settings",
+    icon: Icons.settings,
+    page: (BuildContext context) => Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const SettingPage())),
-  },
+  ),
 ];
 
 var organizationConfigs = [
-  {
-    "name": "Profile",
-    "icon": Icons.person,
-    "page": (BuildContext context) => Navigator.of(context).pushReplacement(
+  BarIconConfig(
+    name: "Profile",
+    icon: Icons.person,
+    page: (BuildContext context) => Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const ProfilePage())),
-  },
-  {
-    "name": "New Campaign",
-    "icon": Icons.campaign,
-    "page": (BuildContext context) => Navigator.of(context).pushReplacement(
+  ),
+  BarIconConfig(
+    name: "New Campaign",
+    icon: Icons.campaign,
+    page: (BuildContext context) => Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const NewCampaign())),
-  },
-  {
-    "name": "Home",
-    "icon": Icons.home,
-    "page": (BuildContext context) => Navigator.of(context).pushReplacement(
+  ),
+  BarIconConfig(
+    name: "Home",
+    icon: Icons.home,
+    page: (BuildContext context) => Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const HomePage())),
-  },
-  {
-    "name": "Dashboard",
-    "icon": Icons.stars_rounded,
-    "page": (BuildContext context) => Navigator.of(context).pushReplacement(
+  ),
+  BarIconConfig(
+    name: "Dashboard",
+    icon: Icons.stars_rounded,
+    page: (BuildContext context) => Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const DashboardPage())),
-  },
-  {
-    "name": "Settings",
-    "icon": Icons.settings,
-    "page": (BuildContext context) => Navigator.of(context).pushReplacement(
+  ),
+  BarIconConfig(
+    name: "Settings",
+    icon: Icons.settings,
+    page: (BuildContext context) => Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const SettingPage())),
-  },
+  ),
 ];
 
 // ignore: must_be_immutable
@@ -129,22 +142,25 @@ class CustomBottomBar extends StatefulWidget {
 }
 
 class _CustomBottomBarState extends State<CustomBottomBar> {
-  List<Map<String, Object>> configs = volunteerConfigs;
+  List<BarIconConfig> configs = volunteerConfigs;
 
   @override
   void initState() {
     super.initState();
 
-    String? currentUserType = AuthProvider.of(context)!.currentUser?.role;
+    UserRole? currentUserType = AuthProvider.of(context)!.currentUser?.role;
     switch (currentUserType) {
-      case "volunteer":
+      case UserRole.volunteer:
         configs = volunteerConfigs;
         break;
-      case "donor":
+      case UserRole.donor:
         configs = donorConfigs;
         break;
-      case "organization":
+      case UserRole.organization:
         configs = organizationConfigs;
+        break;
+      default:
+        configs = volunteerConfigs;
         break;
     }
   }
@@ -154,7 +170,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
     return BottomNavigationBar(
       unselectedItemColor: Colors.white,
       onTap: (value) {
-        (configs[value]["page"] as Function)(context);
+        configs[value].page(context);
       },
       currentIndex: widget.currentPage, // Set the currentIndex to currentPage
       items: List.generate(
@@ -162,7 +178,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
         (index) => BottomNavigationBarItem(
           backgroundColor: Colors.black,
           icon: Icon(
-            (configs[index]["icon"] as IconData),
+            configs[index].icon,
             size: 35,
             color: (widget.currentPage == index ? PRIMARY_COLOR : Colors.white),
           ),
