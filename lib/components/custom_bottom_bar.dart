@@ -70,7 +70,7 @@ var donorConfigs = [
   },
   {
     "name": "Make Donation",
-    "icon": Icons.stars_rounded,
+    "icon": Icons.money_rounded,
     "page": (BuildContext context) => Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const MakeDonationPage())),
   },
