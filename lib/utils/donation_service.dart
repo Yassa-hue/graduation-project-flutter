@@ -24,6 +24,17 @@ class DonationService {
       return Donation.fromJson(doc.data() as Map<String, dynamic>);
   }
 
+  Future<void> updateDonation(Donation donation) async {
+    await _firestore
+        .collection('donations')
+        .doc(donation.id)
+        .update(donation.toJson());
+  }
+
+  Future<void> deleteDonation(String donationId) async {
+    await _firestore.collection('donations').doc(donationId).delete();
+  }
+
   Future<List<Donation>> getDonationsByDonor(String donorId) async {
     final QuerySnapshot snapshot = await _firestore
         .collection('donations')
