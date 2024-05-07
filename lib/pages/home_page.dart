@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:graduationproject/pages/donation_page.dart';
-
 import 'package:graduationproject/components/custom_app_bar.dart';
 import 'package:graduationproject/components/custom_bottom_bar.dart';
+import 'package:graduationproject/pages/make_donation_page.dart';
 
 import 'package:graduationproject/utils/color_palette.dart';
 import 'package:graduationproject/utils/constants.dart';
@@ -24,9 +23,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CustomBottomBar(currentPage: homePage),
-      appBar: AppBar(backgroundColor: Colors.white70, elevation: 0.0, actions: const [
-        CustomAppBar(),
-      ]),
+      appBar: AppBar(
+          backgroundColor: Colors.white70,
+          elevation: 0.0,
+          actions: const [
+            CustomAppBar(),
+          ]),
       body: Container(
         padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
         child: SingleChildScrollView(
@@ -114,42 +116,42 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 3,
               ),
-                SizedBox(
-                  height: 200,
-                  child: FutureBuilder<List<Campaign>>(
-                    future: CampaignService().getLatestCampaigns(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        List<Campaign> campaigns = snapshot.data!;
+              SizedBox(
+                height: 200,
+                child: FutureBuilder<List<Campaign>>(
+                  future: CampaignService().getLatestCampaigns(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      List<Campaign> campaigns = snapshot.data!;
 
-                        return ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: campaigns.length,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              width: 300,
-                              height: 120,
-                              padding: const EdgeInsets.fromLTRB(0, 8, 10, 10),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.network(
-                                  campaigns[index].coverImageLink,
-                                  width: 300,
-                                  height: 120,
-                                  fit: BoxFit.cover,
-                                ),
+                      return ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: campaigns.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            width: 300,
+                            height: 120,
+                            padding: const EdgeInsets.fromLTRB(0, 8, 10, 10),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.network(
+                                campaigns[index].coverImageLink,
+                                width: 300,
+                                height: 120,
+                                fit: BoxFit.cover,
                               ),
-                            );
-                          },
-                        );
-                      } else {
-                        return const Center(
-                          child: CircularProgressIndicator(color: PRIMARY_COLOR),
-                        );
-                      }
-                    },
-                  ),
+                            ),
+                          );
+                        },
+                      );
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator(color: PRIMARY_COLOR),
+                      );
+                    }
+                  },
                 ),
+              ),
               const SizedBox(
                 height: 20,
               ),
@@ -162,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const DonationPage()));
+                            builder: (context) => const MakeDonationPage()));
                   },
                   color: Colors.black,
                   child: const Text(
