@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:graduationproject/components/custom_app_bar.dart';
 import 'package:graduationproject/components/custom_bottom_bar.dart';
 import 'package:graduationproject/components/custom_button.dart';
+import 'package:graduationproject/models/campaign_model.dart';
 
 import 'package:graduationproject/utils/constants.dart';
 import 'package:graduationproject/utils/color_palette.dart';
@@ -22,6 +24,19 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
 
   final List<int> donationAmounts = [10, 30, 50, 100, 200];
   final List<String> periodicityOptions = ["Weekly", "Monthly", "Annually"];
+
+  Campaign? _selectedCampaign;
+  List<Campaign> _campaigns = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCampaigns().then((data) {
+      setState(() {
+        _campaigns = data;
+      });
+    });
+  }
 
   @override
   void dispose() {
@@ -83,11 +98,11 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
                       "Donate Now ",
                       style: TextStyle(
                           color: PRIMARY_COLOR,
-                          fontSize: 25,
+                          fontSize: 32,
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 60),
                   GridView.count(
                     shrinkWrap: true,
                     crossAxisCount: 5,
@@ -117,6 +132,8 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
                           border: OutlineInputBorder()),
                     ),
                   ),
+                  const SizedBox(height: 30),
+                  buildDropdownMenu(),
                   const SizedBox(height: 30),
                   const Text(
                     "Is this donation periodic?",
@@ -148,6 +165,33 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
               ),
             )),
       ),
+    );
+  }
+
+  Future<List<Campaign>> fetchCampaigns() async {
+    var snapshot =
+        await FirebaseFirestore.instance.collection('campaigns').get();
+    return snapshot.docs.map((doc) => Campaign.fromJson(doc.data())).toList();
+  }
+
+  Widget buildDropdownMenu() {
+    return DropdownButtonFormField<Campaign>(
+      decoration: const InputDecoration(
+        labelText: 'Choose the event to donate to',
+        border: OutlineInputBorder(),
+      ),
+      value: _selectedCampaign,
+      onChanged: (Campaign? newValue) {
+        setState(() {
+          _selectedCampaign = newValue;
+        });
+      },
+      items: _campaigns.map<DropdownMenuItem<Campaign>>((Campaign campaign) {
+        return DropdownMenuItem<Campaign>(
+          value: campaign,
+          child: Text(campaign.title),
+        );
+      }).toList(),
     );
   }
 }
