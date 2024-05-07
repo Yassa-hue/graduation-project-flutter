@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:graduationproject/components/custom_app_bar.dart';
 import 'package:graduationproject/components/custom_bottom_bar.dart';
@@ -127,9 +128,14 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
                       controller: _amountController,
                       keyboardType: TextInputType.number,
                       decoration: const InputDecoration(
-                          labelText: "Other Amount: ",
-                          prefixText: "\$ ",
-                          border: OutlineInputBorder()),
+                        labelText: "Other Amount: ",
+                        prefixText: "\$ ",
+                        border: OutlineInputBorder(),
+                      ),
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter
+                            .digitsOnly // Allows only digits to be entered
+                      ],
                     ),
                   ),
                   const SizedBox(height: 30),
