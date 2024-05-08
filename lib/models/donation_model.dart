@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 enum Periodicity {
   weekly,
   monthly,
@@ -9,6 +11,7 @@ class Donation {
   final double amount;
   final String receivingOrganizationId;
   final Periodicity periodicity;
+  final DateTime createdAt;
 
   Donation({
     this.id,
@@ -16,6 +19,7 @@ class Donation {
     required this.amount,
     required this.receivingOrganizationId,
     required this.periodicity,
+    required this.createdAt,
   });
 
   factory Donation.fromJson(Map<String, dynamic> json) {
@@ -24,7 +28,8 @@ class Donation {
       donorId: json['donorId'],
       amount: json['amount'],
       receivingOrganizationId: json['receivingOrganizationId'],
-      periodicity: Periodicity.values.firstWhere((e) => e.toString() == 'Periodicity.${json['periodicity']}'),
+      periodicity: Periodicity.values.firstWhere((e) => e.toString() == '${json['periodicity']}'),
+      createdAt: DateTime.parse(json['created_at']),
     );
   }
 
@@ -35,6 +40,7 @@ class Donation {
       'amount': amount,
       'receivingOrganizationId': receivingOrganizationId,
       'periodicity': periodicity.toString().split('.').last,
+      'createdAt': Timestamp.fromDate(DateTime.now()),
     };
   }
 }

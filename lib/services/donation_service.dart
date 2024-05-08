@@ -4,18 +4,12 @@ import 'package:graduationproject/models/donation_model.dart';
 class DonationService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<void> createDonation(
-      String donorId, String organizationId, double amount) async {
+  Future<void> createDonation(Donation donation) async {
     final DocumentReference docRef =
-        await _firestore.collection('donations').add({
-      'donorId': donorId,
-      'organizationId': organizationId,
-      'amount': amount,
-      'timestamp': DateTime.now(),
-    });
+        await _firestore.collection('donations').add(donation.toJson());
 
     final String donationId = docRef.id;
-    await docRef.update({'donationId': donationId});
+    await docRef.update({'id': donationId});
   }
 
   Future<Donation?> getDonationById(String donationId) async {

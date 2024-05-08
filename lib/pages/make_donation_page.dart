@@ -1,4 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -6,9 +7,14 @@ import 'package:graduationproject/components/custom_app_bar.dart';
 import 'package:graduationproject/components/custom_bottom_bar.dart';
 import 'package:graduationproject/components/custom_button.dart';
 import 'package:graduationproject/models/campaign_model.dart';
+import 'package:graduationproject/models/donation_model.dart';
+import 'package:graduationproject/pages/profile_page.dart';
+import 'package:graduationproject/services/campaign_service.dart';
+import 'package:graduationproject/services/donation_service.dart';
 
 import 'package:graduationproject/utils/constants.dart';
 import 'package:graduationproject/utils/color_palette.dart';
+import 'package:graduationproject/utils/AuthProvider.dart';
 import 'package:graduationproject/components/dismiss_keyboard_on_tap.dart';
 
 class MakeDonationPage extends StatefulWidget {
@@ -21,10 +27,9 @@ class MakeDonationPage extends StatefulWidget {
 class _MakeDonationPageState extends State<MakeDonationPage> {
   final TextEditingController _amountController = TextEditingController();
   int? _selectedAmount = 10;
-  String? _periodicity = "Weekly";
+  Periodicity _periodicity = Periodicity.weekly;
 
   final List<int> donationAmounts = [10, 30, 50, 100, 200];
-  final List<String> periodicityOptions = ["Weekly", "Monthly", "Annually"];
 
   Campaign? _selectedCampaign;
   List<Campaign> _campaigns = [];
@@ -32,17 +37,47 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
   @override
   void initState() {
     super.initState();
-    fetchCampaigns().then((data) {
-      setState(() {
-        _campaigns = data;
+    try {
+      CampaignService().getLatestCampaigns().then((data) {
+        setState(() {
+          _campaigns = data;
+        });
       });
-    });
+    } catch (e) {
+      // Handle the error here
+      print('Error fetching campaigns: $e');
+    }
   }
 
   @override
   void dispose() {
     _amountController.dispose();
     super.dispose();
+  }
+
+  Future<void> makeDonation() async {
+    var currentUser = AuthProvider.of(context)!.currentUser;
+
+    Donation newDonation = Donation(
+      donorId: currentUser!.id,
+      amount: _selectedAmount!.toDouble(),
+      receivingOrganizationId: _selectedCampaign!.id,
+      periodicity: _periodicity,
+      createdAt: DateTime.now(),
+    );
+
+    try {
+      await DonationService().createDonation(newDonation);
+
+      Navigator.push(
+        // ignore: use_build_context_synchronously
+        context,
+        MaterialPageRoute(
+            builder: (context) => const ProfilePage()));
+    } catch (e) {
+      // Handle the error here
+      print('Error creating donation: $e');
+    }
   }
 
   Widget selectableCard<T>(
@@ -126,6 +161,9 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
                   Center(
                     child: TextField(
                       controller: _amountController,
+                      onChanged: (value) => setState(() {
+                        _selectedAmount = int.tryParse(value);
+                      }),
                       keyboardType: TextInputType.number,
                       decoration: const InputDecoration(
                         labelText: "Other Amount: ",
@@ -151,33 +189,30 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
                     crossAxisCount: 4,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
-                    children: periodicityOptions
-                        .map((option) => selectableCard<String>(
-                              value: option,
-                              groupValue: _periodicity!,
-                              label: option,
-                              onChanged: (newValue) {
-                                setState(() {
-                                  _periodicity = newValue;
-                                });
-                              },
-                            ))
-                        .toList(),
+                    children: Periodicity.values
+                      .map((option) => selectableCard<Periodicity>(
+                        value: option,
+                        groupValue: _periodicity,
+                        label: option.toString().split('.').last,
+                        onChanged: (newValue) {
+                        setState(() {
+                          _periodicity = newValue;
+                        });
+                        },
+                      ))
+                      .toList(),
                   ),
                   const SizedBox(height: 50),
-                  CustomButton(title: "Confirm"),
+                  CustomButton(
+                    title: "Confirm",
+                    onTap: () => makeDonation(),
+                  ),
                   const SizedBox(height: 50),
                 ],
               ),
             )),
       ),
     );
-  }
-
-  Future<List<Campaign>> fetchCampaigns() async {
-    var snapshot =
-        await FirebaseFirestore.instance.collection('campaigns').get();
-    return snapshot.docs.map((doc) => Campaign.fromJson(doc.data())).toList();
   }
 
   Widget buildDropdownMenu() {
