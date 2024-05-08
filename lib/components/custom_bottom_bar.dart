@@ -6,7 +6,7 @@ import 'package:graduationproject/pages/dashboard_page.dart';
 import 'package:graduationproject/pages/donation_categories.dart';
 import 'package:graduationproject/pages/home_page.dart';
 import 'package:graduationproject/pages/make_donation_page.dart';
-import 'package:graduationproject/pages/new_campaign.dart';
+import 'package:graduationproject/pages/campaign_form_page.dart';
 import 'package:graduationproject/pages/profile_page.dart';
 import 'package:graduationproject/pages/settings_page.dart';
 import 'package:graduationproject/pages/volunteering_categories_page.dart';
@@ -106,7 +106,7 @@ var organizationConfigs = [
     name: "New Campaign",
     icon: Icons.add,
     page: (BuildContext context) => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const NewCampaign())),
+        MaterialPageRoute(builder: (context) => const CampaignFormPage())),
   ),
   BarIconConfig(
     name: "Home",

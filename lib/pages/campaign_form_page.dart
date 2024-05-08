@@ -13,14 +13,16 @@ import 'package:graduationproject/components/custom_app_bar.dart';
 import 'package:graduationproject/components/custom_bottom_bar.dart';
 import 'package:graduationproject/components/custom_button.dart';
 
-class NewCampaign extends StatefulWidget {
-  const NewCampaign({super.key});
+class CampaignFormPage extends StatefulWidget {
+  final Campaign? campaign;
+
+  const CampaignFormPage({Key? key, this.campaign}) : super(key: key);
 
   @override
-  State<NewCampaign> createState() => _NewCampaignState();
+  State<CampaignFormPage> createState() => _CampaignFormPageState();
 }
 
-class _NewCampaignState extends State<NewCampaign> {
+class _CampaignFormPageState extends State<CampaignFormPage> {
   String campaignName = '',
       campaignDetails = '',
       // TODO: Add Image Picker
@@ -29,14 +31,26 @@ class _NewCampaignState extends State<NewCampaign> {
   
   // TODO: Add DateTime Picker
   DateTime campaignDate = DateTime.now();
+    
+  @override
+  void initState() {
+    super.initState();
+    if (widget.campaign != null) {
+      setState(() {
+        campaignName = widget.campaign?.title ?? '';
+        campaignDetails = widget.campaign?.description ?? '';
+        campaignImage = widget.campaign?.coverImageLink ?? '';
+      });
+    }
+  }
 
-  Future<void> addCampaign() async {
+  Future<void> saveCampaign() async {
     // Add Campaign
     UserModel currentUser = AuthProvider.of(context)!.currentUser!;
 
     try {
       Campaign campaign = Campaign(
-        id: "",
+        id: widget.campaign?.title ?? '',
         organizationId: currentUser.id,
         title: campaignName,
         description: campaignDetails,
@@ -44,7 +58,11 @@ class _NewCampaignState extends State<NewCampaign> {
         createdAt: DateTime.now(),
       );
 
-      await CampaignService().createCampaign(campaign);
+      if (widget.campaign != null) {
+        await CampaignService().updateCampaign(campaign);
+      } else {
+        await CampaignService().createCampaign(campaign);
+      }
 
       Navigator.push(
           // ignore: use_build_context_synchronously
@@ -182,8 +200,8 @@ class _NewCampaignState extends State<NewCampaign> {
                   height: 15,
                 ),
                 CustomButton(
-                    title: "Add",
-                    onTap: () => addCampaign(),
+                    title: "Save",
+                    onTap: () => saveCampaign(),
                 ),
                 const SizedBox(
                   height: 20,
