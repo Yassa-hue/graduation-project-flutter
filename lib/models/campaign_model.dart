@@ -6,6 +6,7 @@ class Campaign {
   final String title;
   final String description;
   final DateTime createdAt;
+  final String organizationId; // New property
 
   Campaign({
     required String id,
@@ -13,6 +14,7 @@ class Campaign {
     required this.title,
     required this.description,
     required this.createdAt,
+    required this.organizationId,
   }) : _id = id;
 
   set id(String value) {
@@ -30,6 +32,7 @@ class Campaign {
       title: json['title'],
       description: json['description'],
       createdAt: (json["createdAt"] as Timestamp).toDate(),
+      organizationId: json['organizationId'],
     );
   }
 
@@ -40,6 +43,7 @@ class Campaign {
       'title': title,
       'description': description,
       'createdAt': DateTime.now().toIso8601String(),
+      'organizationId': organizationId,
     };
   }
 }

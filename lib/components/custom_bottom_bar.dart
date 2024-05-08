@@ -104,7 +104,7 @@ var organizationConfigs = [
   ),
   BarIconConfig(
     name: "New Campaign",
-    icon: Icons.campaign,
+    icon: Icons.add,
     page: (BuildContext context) => Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const NewCampaign())),
   ),

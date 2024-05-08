@@ -8,6 +8,7 @@ class ImagesPaths {
   static const String correctp = '$path/Correct.png';
   static const String otpsecurity = '$path/OTP security.png';
   static const String code = '$path/code.png';
+  static const String fourth = '$path/code.png';
   static const String splash3 = '$path/splash3.png';
   static const String splash1 = '$path/splash1.png';
   static const String introo = '$path/introo.png';
