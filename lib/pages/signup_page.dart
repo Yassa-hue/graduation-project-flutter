@@ -7,7 +7,7 @@ import 'package:graduationproject/utils/color_palette.dart';
 
 import 'package:graduationproject/components/custom_button.dart';
 import 'package:graduationproject/components/custom_field.dart';
-import 'package:graduationproject/utils/dismiss_keyboard_on_tap.dart';
+import 'package:graduationproject/components/dismiss_keyboard_on_tap.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
 import 'package:graduationproject/pages/home_page.dart';
 import 'package:graduationproject/pages/reset_password_page.dart';
-import 'package:graduationproject/utils/dismiss_keyboard_on_tap.dart';
+import 'package:graduationproject/components/dismiss_keyboard_on_tap.dart';
 import '../../../utils/images_paths.dart';
 import '../components/custom_button.dart';
 import '../components/custom_field.dart';

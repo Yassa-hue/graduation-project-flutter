@@ -9,7 +9,7 @@ import 'package:graduationproject/models/campaign_model.dart';
 
 import 'package:graduationproject/utils/constants.dart';
 import 'package:graduationproject/utils/color_palette.dart';
-import 'package:graduationproject/utils/dismiss_keyboard_on_tap.dart';
+import 'package:graduationproject/components/dismiss_keyboard_on_tap.dart';
 
 class MakeDonationPage extends StatefulWidget {
   const MakeDonationPage({super.key});
