@@ -23,6 +23,18 @@ class _LoginPageState extends State<LoginPage> {
   bool loading = false;
   String error = "";
 
+  @override
+  void initState() {
+    super.initState();
+    final auth = AuthProvider.of(context)!;
+    if (auth.currentUser != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const HomePage()));
+      });
+    }
+  }
+
   Future<void> login() async {
     final auth = AuthProvider.of(context)!;
 
