@@ -8,9 +8,14 @@ class CustomButton extends StatelessWidget {
   CustomButton({
     Key? key,
     required this.title,
-    this.onTap
+    this.onTap,
+    this.disabled = false,
+    this.isLoading = false, // Add isLoading option
   }) : super(key: key);
-final void Function() ?onTap;
+  final void Function()? onTap;
+  final bool disabled;
+  final bool isLoading; // Declare isLoading variable
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -18,14 +23,20 @@ final void Function() ?onTap;
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(13),
-        color: primarycolor,
+        color: disabled ? Colors.grey : primarycolor,
       ),
       width: double.infinity,
       height: 50,
       child: MaterialButton(
-        onPressed:onTap?? () {},
-        child:
-            Text('$title', style: const TextStyle(color: Colors.white, fontSize: 18)),
+        onPressed: disabled || isLoading ? null : onTap,
+        child: isLoading
+            ? const CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              )
+            : Text(
+                '$title',
+                style: const TextStyle(color: Colors.white, fontSize: 18),
+              ),
       ),
     );
   }
