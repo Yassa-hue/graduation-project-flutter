@@ -19,8 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   bool rememberMe = false;
   String email = "";
   String password = "";
-  // TODO: https://github.com/Yassa-hue/graduation-project-flutter/issues/4
-  bool loading = false;
+  bool loading = false, inputDataIsCompleted = false;
   String error = "";
 
   @override
@@ -29,13 +28,14 @@ class _LoginPageState extends State<LoginPage> {
     final auth = AuthProvider.of(context)!;
     if (auth.currentUser != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-      Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const HomePage()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const HomePage()));
       });
     }
   }
 
   Future<void> login() async {
+    setState(() => loading = true);
     final auth = AuthProvider.of(context)!;
 
     try {
@@ -44,10 +44,6 @@ class _LoginPageState extends State<LoginPage> {
       final route = MaterialPageRoute(builder: (context) => const HomePage());
       Navigator.of(context).pushReplacement(route);
     } catch (e) {
-      // TODO: https://github.com/Yassa-hue/graduation-project-flutter/issues/5
-      print("########################################");
-      print(e);
-      print("########################################");
       setState(() => error = e.toString());
     }
     setState(() => loading = false);
@@ -96,7 +92,10 @@ class _LoginPageState extends State<LoginPage> {
                 prefex: Icons.email,
                 onChanged: (value) => {
                   setState(() {
+                    error = "";
                     email = value;
+
+                    inputDataIsCompleted = email.isNotEmpty && password.isNotEmpty;
                   })
                 },
               ),
@@ -107,7 +106,10 @@ class _LoginPageState extends State<LoginPage> {
                 suffex: Icons.visibility_off,
                 onChanged: (value) => {
                   setState(() {
+                    error = "";
                     password = value;
+
+                    inputDataIsCompleted = email.isNotEmpty && password.isNotEmpty;
                   })
                 },
               ),
@@ -154,7 +156,19 @@ class _LoginPageState extends State<LoginPage> {
               CustomButton(
                 onTap: () => login(),
                 title: "Login",
-              )
+                disabled: !inputDataIsCompleted,
+                isLoading: loading,
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Text(
+                error,
+                style: const TextStyle(
+                  color: Colors.red,
+                  fontSize: 16,
+                ),
+              ),
             ]),
           )),
     ));
