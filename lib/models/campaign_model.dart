@@ -42,8 +42,8 @@ class Campaign {
       'coverImageLink': coverImageLink,
       'title': title,
       'description': description,
-      'createdAt': DateTime.now().toIso8601String(),
       'organizationId': organizationId,
+      'createdAt': Timestamp.fromDate(DateTime.now())
     };
   }
 }
