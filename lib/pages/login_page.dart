@@ -23,7 +23,6 @@ class _LoginPageState extends State<LoginPage> {
   bool loading = false;
   String error = "";
 
-  // when the page opens, if the user logged in go to the homepage
   @override
   void initState() {
     super.initState();
