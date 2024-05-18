@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:graduationproject/components/custom_setting.dart';
 import 'package:graduationproject/components/custom_app_bar.dart';
 import 'package:graduationproject/components/custom_bottom_bar.dart';
+import 'package:graduationproject/pages/login_page.dart';
+import 'package:graduationproject/pages/user_form_page.dart';
+import 'package:graduationproject/utils/AuthProvider.dart';
 
 import 'package:graduationproject/utils/constants.dart';
 import 'package:graduationproject/utils/color_palette.dart';
@@ -15,6 +18,16 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
+  Future<void> logout () async {
+    final auth = AuthProvider.of(context)!;
+
+    await auth.logout();
+
+    // ignore: use_build_context_synchronously
+    Navigator.push(context,
+                   MaterialPageRoute(builder: (context) => const LoginPage()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +63,27 @@ class _SettingPageState extends State<SettingPage> {
                     ),
                     CustomSetting(
                       colr: PRIMARY_COLOR,
-                      text: "Edit Profile         ",
+                      text: "Edit Profile",
+                      next: Icons.navigate_next_sharp,
+                      onClick: () {
+
+                        final route = MaterialPageRoute(builder: (context) => 
+                          UserFormPage(currentUser:
+                            AuthProvider.of(context)!.currentUser,));
+   
+                        // ignore: use_build_context_synchronously
+                        Navigator.of(context).pushReplacement(route);
+                      },
+                    ),
+                    const Divider(
+                      endIndent: 15,
+                      indent: 15,
+                      color: Colors.grey,
+                      thickness: 1,
+                    ),
+                    CustomSetting(
+                      colr: PRIMARY_COLOR,
+                      text: "Notification",
                       next: Icons.navigate_next_sharp,
                     ),
                     const Divider(
@@ -61,7 +94,7 @@ class _SettingPageState extends State<SettingPage> {
                     ),
                     CustomSetting(
                       colr: PRIMARY_COLOR,
-                      text: "Notification        ",
+                      text: "Security",
                       next: Icons.navigate_next_sharp,
                     ),
                     const Divider(
@@ -72,7 +105,7 @@ class _SettingPageState extends State<SettingPage> {
                     ),
                     CustomSetting(
                       colr: PRIMARY_COLOR,
-                      text: "Security              ",
+                      text: "Language",
                       next: Icons.navigate_next_sharp,
                     ),
                     const Divider(
@@ -83,7 +116,7 @@ class _SettingPageState extends State<SettingPage> {
                     ),
                     CustomSetting(
                       colr: PRIMARY_COLOR,
-                      text: "Language           ",
+                      text: "Feedback",
                       next: Icons.navigate_next_sharp,
                     ),
                     const Divider(
@@ -94,18 +127,7 @@ class _SettingPageState extends State<SettingPage> {
                     ),
                     CustomSetting(
                       colr: PRIMARY_COLOR,
-                      text: "Feedback           ",
-                      next: Icons.navigate_next_sharp,
-                    ),
-                    const Divider(
-                      endIndent: 15,
-                      indent: 15,
-                      color: Colors.grey,
-                      thickness: 1,
-                    ),
-                    CustomSetting(
-                      colr: PRIMARY_COLOR,
-                      text: "Support              ",
+                      text: "Support",
                       next: Icons.navigate_next_sharp,
                     ),
                     const Divider(
@@ -127,7 +149,8 @@ class _SettingPageState extends State<SettingPage> {
                     ),
                     CustomSetting(
                       colr: Colors.red,
-                      text: "Logout     ",
+                      text: "Logout",
+                      onClick: logout,
                     ),
                     const SizedBox(
                       height: 20,
