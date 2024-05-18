@@ -7,7 +7,6 @@ import 'package:graduationproject/services/campaign_service.dart';
 
 import 'package:graduationproject/utils/color_palette.dart';
 import 'package:graduationproject/utils/constants.dart';
-import 'package:graduationproject/utils/images_paths.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
 
 import 'package:graduationproject/components/custom_app_bar.dart';
@@ -105,16 +104,6 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                // Center(
-                //   child: SizedBox(
-                //     height: 130,
-                //     width: 130,
-                //     child: Image.asset(
-                //       ImagesPaths.fourth,
-                //       fit: BoxFit.cover,
-                //     ),
-                //   ),
-                // ),
                 const SizedBox(
                   height: 20,
                 ),
