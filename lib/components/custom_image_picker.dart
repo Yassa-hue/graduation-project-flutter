@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CustomImagePicker extends StatefulWidget {
-  const CustomImagePicker({Key? key}) : super(key: key);
+  final Function(File)? onImageIsSelected;
+
+  const CustomImagePicker({Key? key, this.onImageIsSelected}) : super(key: key);
 
   @override
   _CustomImagePickerState createState() => _CustomImagePickerState();
@@ -20,6 +22,9 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
       setState(() {
         _image = pickedFile;
       });
+      if (widget.onImageIsSelected != null) {
+        widget.onImageIsSelected!(File(_image!.path));
+      }
     }
   }
 

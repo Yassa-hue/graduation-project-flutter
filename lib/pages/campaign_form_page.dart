@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:graduationproject/components/custom_image_picker.dart';
 import 'package:graduationproject/models/campaign_model.dart';
@@ -32,6 +34,7 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
       error = "";
 
   DateTime? campaignDate;
+  File? _imageFile;
 
   @override
   void initState() {
@@ -104,10 +107,13 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                const SizedBox(
-                  height: 20,
+                CustomImagePicker(
+                  onImageIsSelected: (imageFile) {
+                    setState(() {
+                      _imageFile = imageFile;
+                    });
+                  },
                 ),
-                const CustomImagePicker(),
                 const SizedBox(
                   height: 10,
                 ),
