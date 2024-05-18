@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduationproject/components/custom_image_picker.dart';
 import 'package:graduationproject/models/campaign_model.dart';
 import 'package:graduationproject/models/user_model.dart';
 import 'package:graduationproject/pages/profile_page.dart';
@@ -104,18 +105,34 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
                 const SizedBox(
                   height: 20,
                 ),
+                // Center(
+                //   child: SizedBox(
+                //     height: 130,
+                //     width: 130,
+                //     child: Image.asset(
+                //       ImagesPaths.fourth,
+                //       fit: BoxFit.cover,
+                //     ),
+                //   ),
+                // ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const CustomImagePicker(),
+                const SizedBox(
+                  height: 10,
+                ),
                 Center(
-                  child: SizedBox(
-                    height: 130,
-                    width: 130,
-                    child: Image.asset(
-                      ImagesPaths.fourth,
-                      fit: BoxFit.cover,
-                    ),
+                  child: Text(
+                    "Event Image",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                        color: Colors.grey[800]),
                   ),
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Text(
                   "Event Name",
