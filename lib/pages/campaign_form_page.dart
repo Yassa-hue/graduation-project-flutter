@@ -12,6 +12,7 @@ import 'package:graduationproject/utils/AuthProvider.dart';
 import 'package:graduationproject/components/custom_app_bar.dart';
 import 'package:graduationproject/components/custom_bottom_bar.dart';
 import 'package:graduationproject/components/custom_button.dart';
+import 'package:intl/intl.dart';
 
 class CampaignFormPage extends StatefulWidget {
   final Campaign? campaign;
@@ -26,12 +27,12 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
   String campaignName = '',
       campaignDetails = '',
       // TODO: Add Image Picker
-      campaignImage = "https://firebasestorage.googleapis.com/v0/b/graduation-project-d349a.appspot.com/o/camp1.jpg?alt=media&token=8a200b34-8429-42bb-9257-26a3a1e8a411",
+      campaignImage =
+          "https://firebasestorage.googleapis.com/v0/b/graduation-project-d349a.appspot.com/o/camp1.jpg?alt=media&token=8a200b34-8429-42bb-9257-26a3a1e8a411",
       error = "";
-  
-  // TODO: Add DateTime Picker
-  DateTime campaignDate = DateTime.now();
-    
+
+  DateTime? campaignDate;
+
   @override
   void initState() {
     super.initState();
@@ -67,8 +68,7 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
       Navigator.push(
           // ignore: use_build_context_synchronously
           context,
-          MaterialPageRoute(
-              builder: (context) => const ProfilePage()));
+          MaterialPageRoute(builder: (context) => const ProfilePage()));
     } catch (e) {
       setState(() {
         error = e.toString();
@@ -80,9 +80,12 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CustomBottomBar(currentPage: homePage),
-      appBar: AppBar(backgroundColor: Colors.white70, elevation: 0.0, actions: const [
-        CustomAppBar(),
-      ]),
+      appBar: AppBar(
+          backgroundColor: Colors.white70,
+          elevation: 0.0,
+          actions: const [
+            CustomAppBar(),
+          ]),
       body: Container(
           padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
           child: SingleChildScrollView(
@@ -153,16 +156,40 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
                 const SizedBox(
                   height: 8,
                 ),
-                TextFormField(
-                  keyboardType: TextInputType.datetime,
-                  cursorColor: PRIMARY_COLOR,
-                  decoration: InputDecoration(
-                    hintText: "Please Enter Event Date",
-                    hintStyle: const TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.grey),
-                    border: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(12)),
+                InkWell(
+                  onTap: () async {
+                    final pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: campaignDate,
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2101),
+                    );
+                    if (pickedDate != null && pickedDate != campaignDate) {
+                      setState(() {
+                        campaignDate = pickedDate;
+                      });
+                    }
+                  },
+                  child: InputDecorator(
+                    decoration: InputDecoration(
+                      hintText: "Please Enter Event Date",
+                      hintStyle: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.grey),
+                      border: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(12)),
+                    ),
+                    child: Text(
+                      campaignDate != null
+                          ? DateFormat('MMMM dd, yyyy').format(campaignDate!)
+                          : 'Please Enter Event Date',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: campaignDate != null
+                            ? Colors.grey[800]
+                            : Colors.grey,
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -200,8 +227,8 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
                   height: 15,
                 ),
                 CustomButton(
-                    title: "Save",
-                    onTap: () => saveCampaign(),
+                  title: "Save",
+                  onTap: () => saveCampaign(),
                 ),
                 const SizedBox(
                   height: 20,
