@@ -123,11 +123,12 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
           ]),
       body: DismissKeyboardOnTap(
         child: Container(
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const SizedBox(height: 20),
                   const Center(
                     child: Text(
                       "Donate Now ",
