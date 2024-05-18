@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduationproject/pages/signup_page.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
 import 'package:graduationproject/pages/home_page.dart';
 import 'package:graduationproject/pages/reset_password_page.dart';
@@ -59,10 +60,11 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
         body: DismissKeyboardOnTap(
       child: Container(
-          padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
-          child: SingleChildScrollView(
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Center(
                   child: Container(
                 padding: const EdgeInsets.only(top: 40),
@@ -95,7 +97,8 @@ class _LoginPageState extends State<LoginPage> {
                     error = "";
                     email = value;
 
-                    inputDataIsCompleted = email.isNotEmpty && password.isNotEmpty;
+                    inputDataIsCompleted =
+                        email.isNotEmpty && password.isNotEmpty;
                   })
                 },
               ),
@@ -109,7 +112,8 @@ class _LoginPageState extends State<LoginPage> {
                     error = "";
                     password = value;
 
-                    inputDataIsCompleted = email.isNotEmpty && password.isNotEmpty;
+                    inputDataIsCompleted =
+                        email.isNotEmpty && password.isNotEmpty;
                   })
                 },
               ),
@@ -169,8 +173,39 @@ class _LoginPageState extends State<LoginPage> {
                   fontSize: 16,
                 ),
               ),
-            ]),
-          )),
+              const SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Don't have an account? ",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignupPage()),
+                      );
+                    },
+                    child: const Text(
+                      'Sign up',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: PRIMARY_COLOR,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
     ));
   }
 }
