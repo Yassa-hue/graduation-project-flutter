@@ -32,10 +32,19 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
       campaignImage =
           "https://firebasestorage.googleapis.com/v0/b/graduation-project-d349a.appspot.com/o/camp1.jpg?alt=media&token=8a200b34-8429-42bb-9257-26a3a1e8a411",
       error = "";
-
+  
+  bool loading = false, inputDataIsCompleted = false;
+  
   DateTime? campaignDate;
   File? _imageFile;
 
+  void checkDataIsComplete() {
+    error = "";
+
+    inputDataIsCompleted = campaignName.isNotEmpty && campaignDetails.isNotEmpty
+      && campaignImage.isNotEmpty;
+  }
+    
   @override
   void initState() {
     super.initState();
@@ -49,6 +58,10 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
   }
 
   Future<void> saveCampaign() async {
+    setState(() {
+      loading = true;
+      error = "";
+    });
     // Add Campaign
     UserModel currentUser = AuthProvider.of(context)!.currentUser!;
 
@@ -77,6 +90,10 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
         error = e.toString();
       });
     }
+
+    setState(() {
+      loading = false;
+    });
   }
 
   @override
@@ -152,6 +169,8 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
                   onChanged: (value) => {
                     setState(() {
                       campaignName = value;
+
+                      checkDataIsComplete();
                     })
                   },
                 ),
@@ -231,6 +250,8 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
                     onChanged: (value) => {
                       setState(() {
                         campaignDetails = value;
+
+                        checkDataIsComplete();
                       })
                     },
                   ),
@@ -241,7 +262,23 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
                 CustomButton(
                   title: "Save",
                   onTap: () => saveCampaign(),
+                  isLoading: loading,
+                  disabled: !inputDataIsCompleted,
                 ),
+                error.isEmpty
+                    ? const SizedBox()
+                    : const SizedBox(
+                        height: 15,
+                      ),
+                (error.isNotEmpty)
+                ? Text(
+                    error,
+                    style: const TextStyle(
+                      color: Colors.red,
+                      fontSize: 16,
+                    ),
+                  )
+                : const SizedBox(),
                 const SizedBox(
                   height: 20,
                 )
