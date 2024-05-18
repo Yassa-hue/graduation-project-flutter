@@ -70,10 +70,9 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
       await DonationService().createDonation(newDonation);
 
       Navigator.push(
-        // ignore: use_build_context_synchronously
-        context,
-        MaterialPageRoute(
-            builder: (context) => const ProfilePage()));
+          // ignore: use_build_context_synchronously
+          context,
+          MaterialPageRoute(builder: (context) => const ProfilePage()));
     } catch (e) {
       // Handle the error here
       print('Error creating donation: $e');
@@ -124,11 +123,12 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
           ]),
       body: DismissKeyboardOnTap(
         child: Container(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const SizedBox(height: 20),
                   const Center(
                     child: Text(
                       "Donate Now ",
@@ -190,17 +190,17 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                     children: Periodicity.values
-                      .map((option) => selectableCard<Periodicity>(
-                        value: option,
-                        groupValue: _periodicity,
-                        label: option.toString().split('.').last,
-                        onChanged: (newValue) {
-                        setState(() {
-                          _periodicity = newValue;
-                        });
-                        },
-                      ))
-                      .toList(),
+                        .map((option) => selectableCard<Periodicity>(
+                              value: option,
+                              groupValue: _periodicity,
+                              label: option.toString().split('.').last,
+                              onChanged: (newValue) {
+                                setState(() {
+                                  _periodicity = newValue;
+                                });
+                              },
+                            ))
+                        .toList(),
                   ),
                   const SizedBox(height: 50),
                   CustomButton(
