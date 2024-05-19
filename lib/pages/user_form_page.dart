@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:graduationproject/components/custom_image_picker.dart';
 import 'package:graduationproject/models/user_model.dart';
 import 'package:graduationproject/pages/home_page.dart';
 import 'package:graduationproject/pages/login_page.dart';
@@ -40,6 +43,8 @@ class _UserFormPageState extends State<UserFormPage> {
       // TODO: Add the profile image
       profileImageUrl =
           "https://firebasestorage.googleapis.com/v0/b/graduation-project-d349a.appspot.com/o/profile.png?alt=media&token=7dc844d4-1c03-4918-860b-56fd78b032c6";
+
+  File? campaignImage;
 
   void checkInputDataIsComplete() {
     errorMsg = "";
@@ -143,11 +148,32 @@ class _UserFormPageState extends State<UserFormPage> {
                       fontSize: 25,
                       color: PRIMARY_COLOR),
                 ),
+                const SizedBox(height: 20),
+                CustomImagePicker(
+                  defaultImageLink: widget.currentUser?.profileImageUrl ?? '',
+                  onImageIsSelected: (imageFile) {
+                    setState(() {
+                      campaignImage = imageFile;
+
+                      checkInputDataIsComplete();
+                    });
+                  },
+                ),
+                const SizedBox(height: 10),
+                Center(
+                  child: Text(
+                    'Profile Photo',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                        color: Colors.grey[800]),
+                  ),
+                ),
                 const SizedBox(
                   height: 15,
                 ),
                 CustomField(
-                  text: "Create account",
+                  text: "User name",
                   hiinttext: "User name",
                   prefex: Icons.person,
                   value: username,
