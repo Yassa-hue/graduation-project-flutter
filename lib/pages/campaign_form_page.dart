@@ -28,22 +28,21 @@ class CampaignFormPage extends StatefulWidget {
 class _CampaignFormPageState extends State<CampaignFormPage> {
   String campaignName = '',
       campaignDetails = '',
-      // TODO: Add Image Picker
-      campaignImage =
-          "https://firebasestorage.googleapis.com/v0/b/graduation-project-d349a.appspot.com/o/camp1.jpg?alt=media&token=8a200b34-8429-42bb-9257-26a3a1e8a411",
       errorMsg = "";
+  String? campaignImageLink;
 
   bool loading = false, isInputDataComplete = false;
 
   DateTime? campaignDate;
-  File? _imageFile;
+  File? campaignImage;
 
   void checkDataIsComplete() {
     errorMsg = "";
 
     isInputDataComplete = campaignName.isNotEmpty &&
         campaignDetails.isNotEmpty &&
-        campaignImage.isNotEmpty;
+        campaignDate != null &&
+        (campaignImage != null || campaignImageLink != null);
   }
 
   @override
@@ -53,7 +52,8 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
       setState(() {
         campaignName = widget.campaign?.title ?? '';
         campaignDetails = widget.campaign?.description ?? '';
-        campaignImage = widget.campaign?.coverImageLink ?? '';
+        campaignImageLink = widget.campaign?.coverImageLink ?? '';
+        campaignDate = widget.campaign?.createdAt;
       });
     }
   }
@@ -63,7 +63,9 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
       loading = true;
       errorMsg = "";
     });
-    // Add Campaign
+    
+    campaignImageLink = await CampaignService().uploadImage(campaignImage!);
+
     UserModel currentUser = AuthProvider.of(context)!.currentUser!;
 
     try {
@@ -72,7 +74,7 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
         organizationId: currentUser.id,
         title: campaignName,
         description: campaignDetails,
-        coverImageLink: campaignImage,
+        coverImageLink: campaignImageLink!,
         createdAt: DateTime.now(),
       );
 
@@ -126,9 +128,12 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
                   height: 20,
                 ),
                 CustomImagePicker(
+                  defaultImageLink: campaignImageLink,
                   onImageIsSelected: (imageFile) {
                     setState(() {
-                      _imageFile = imageFile;
+                      campaignImage = imageFile;
+
+                      checkDataIsComplete();
                     });
                   },
                 ),
@@ -199,6 +204,8 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
                     if (pickedDate != null && pickedDate != campaignDate) {
                       setState(() {
                         campaignDate = pickedDate;
+
+                        checkDataIsComplete();
                       });
                     }
                   },
