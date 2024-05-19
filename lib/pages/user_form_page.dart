@@ -80,7 +80,6 @@ class _UserFormPageState extends State<UserFormPage> {
         });
 
         final route = MaterialPageRoute(builder: (context) => const HomePage());
-        // ignore: use_build_context_synchronously
         Navigator.of(context).pushReplacement(route);
       }
     } catch (e) {
