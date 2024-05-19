@@ -19,14 +19,14 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   bool agreeToTermsAndConditions = false;
-  bool loading = false, inputDataIsCompleted = false;
-  String error = "";
+  bool loading = false, isInputDataComplete = false;
+  String errorMsg = "";
   String username = "", email = "", password = "", confirmPassword = "";
 
   void checkInputDataIsComplete() {
-    error = "";
+    errorMsg = "";
 
-    inputDataIsCompleted = username.isNotEmpty &&
+    isInputDataComplete = username.isNotEmpty &&
         email.isNotEmpty &&
         password.isNotEmpty &&
         confirmPassword.isNotEmpty &&
@@ -37,7 +37,7 @@ class _SignupPageState extends State<SignupPage> {
     final auth = AuthProvider.of(context)!;
     setState(() {
       loading = true;
-      error = "";
+      errorMsg = "";
     });
 
     try {
@@ -54,7 +54,7 @@ class _SignupPageState extends State<SignupPage> {
       // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(route);
     } catch (e) {
-      setState(() => error = e.toString());
+      setState(() => errorMsg = e.toString());
     }
     setState(() => loading = false);
   }
@@ -180,22 +180,22 @@ class _SignupPageState extends State<SignupPage> {
                   title: "Sign in",
                   onTap: () => signup(),
                   isLoading: loading,
-                  disabled: !inputDataIsCompleted,
+                  disabled: !isInputDataComplete,
                 ),
-                error.isEmpty
-                ? const SizedBox()
-                : const SizedBox(
-                  height: 15,
-                ),
-                (error.isNotEmpty)
-                  ? Text(
-                      error,
-                      style: const TextStyle(
-                        color: Colors.red,
-                        fontSize: 16,
+                errorMsg.isEmpty
+                    ? const SizedBox()
+                    : const SizedBox(
+                        height: 15,
                       ),
-                    )
-                  : const SizedBox(),
+                (errorMsg.isNotEmpty)
+                    ? Text(
+                        errorMsg,
+                        style: const TextStyle(
+                          color: Colors.red,
+                          fontSize: 16,
+                        ),
+                      )
+                    : const SizedBox(),
                 const SizedBox(
                   height: 15,
                 ),

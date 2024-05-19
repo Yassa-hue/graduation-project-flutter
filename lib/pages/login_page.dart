@@ -20,8 +20,8 @@ class _LoginPageState extends State<LoginPage> {
   bool rememberMe = false;
   String email = "";
   String password = "";
-  bool loading = false, inputDataIsCompleted = false;
-  String error = "";
+  bool loading = false, isInputDataComplete = false;
+  String errorMsg = "";
 
   @override
   void initState() {
@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
       final route = MaterialPageRoute(builder: (context) => const HomePage());
       Navigator.of(context).pushReplacement(route);
     } catch (e) {
-      setState(() => error = e.toString());
+      setState(() => errorMsg = e.toString());
     }
     setState(() => loading = false);
   }
@@ -94,10 +94,10 @@ class _LoginPageState extends State<LoginPage> {
                 prefex: Icons.email,
                 onChanged: (value) => {
                   setState(() {
-                    error = "";
+                    errorMsg = "";
                     email = value;
 
-                    inputDataIsCompleted =
+                    isInputDataComplete =
                         email.isNotEmpty && password.isNotEmpty;
                   })
                 },
@@ -109,10 +109,10 @@ class _LoginPageState extends State<LoginPage> {
                 suffex: Icons.visibility_off,
                 onChanged: (value) => {
                   setState(() {
-                    error = "";
+                    errorMsg = "";
                     password = value;
 
-                    inputDataIsCompleted =
+                    isInputDataComplete =
                         email.isNotEmpty && password.isNotEmpty;
                   })
                 },
@@ -160,14 +160,14 @@ class _LoginPageState extends State<LoginPage> {
               CustomButton(
                 onTap: () => login(),
                 title: "Login",
-                disabled: !inputDataIsCompleted,
+                disabled: !isInputDataComplete,
                 isLoading: loading,
               ),
               const SizedBox(
                 height: 15,
               ),
               Text(
-                error,
+                errorMsg,
                 style: const TextStyle(
                   color: Colors.red,
                   fontSize: 16,

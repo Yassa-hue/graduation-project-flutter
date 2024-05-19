@@ -34,8 +34,8 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
   Campaign? _selectedCampaign;
   List<Campaign> _campaigns = [];
 
-  bool loading = false, inputDataIsCompleted = false;
-  String error = "";
+  bool loading = false, isInputDataComplete = false;
+  String errorMsg = "";
 
   @override
   void initState() {
@@ -48,7 +48,7 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
       });
     } catch (e) {
       setState(() {
-        error = e.toString();
+        errorMsg = e.toString();
       });
     }
   }
@@ -62,7 +62,7 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
   Future<void> makeDonation() async {
     setState(() {
       loading = true;
-      error = "";
+      errorMsg = "";
     });
 
     var currentUser = AuthProvider.of(context)!.currentUser;
@@ -84,7 +84,7 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
           MaterialPageRoute(builder: (context) => const ProfilePage()));
     } catch (e) {
       setState(() {
-        error = e.toString();
+        errorMsg = e.toString();
       });
     }
 
@@ -126,9 +126,9 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
   }
 
   void checkInputData() {
-    error = "";
+    errorMsg = "";
 
-    inputDataIsCompleted = _selectedAmount != null && _selectedCampaign != null;
+    isInputDataComplete = _selectedAmount != null && _selectedCampaign != null;
   }
 
   @override
@@ -233,22 +233,22 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
                     title: "Confirm",
                     onTap: () => makeDonation(),
                     isLoading: loading,
-                    disabled: !inputDataIsCompleted,
+                    disabled: !isInputDataComplete,
                   ),
-                  error.isEmpty
-                  ? const SizedBox()
-                  : const SizedBox(
-                      height: 15,
-                    ),
-                  (error.isNotEmpty)
-                  ? Text(
-                      error,
-                      style: const TextStyle(
-                        color: Colors.red,
-                        fontSize: 16,
-                      ),
-                    )
-                  : const SizedBox(),
+                  errorMsg.isEmpty
+                      ? const SizedBox()
+                      : const SizedBox(
+                          height: 15,
+                        ),
+                  (errorMsg.isNotEmpty)
+                      ? Text(
+                          errorMsg,
+                          style: const TextStyle(
+                            color: Colors.red,
+                            fontSize: 16,
+                          ),
+                        )
+                      : const SizedBox(),
                   const SizedBox(height: 50),
                 ],
               ),

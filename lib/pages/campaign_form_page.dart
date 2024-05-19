@@ -31,20 +31,21 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
       // TODO: Add Image Picker
       campaignImage =
           "https://firebasestorage.googleapis.com/v0/b/graduation-project-d349a.appspot.com/o/camp1.jpg?alt=media&token=8a200b34-8429-42bb-9257-26a3a1e8a411",
-      error = "";
-  
-  bool loading = false, inputDataIsCompleted = false;
-  
+      errorMsg = "";
+
+  bool loading = false, isInputDataComplete = false;
+
   DateTime? campaignDate;
   File? _imageFile;
 
   void checkDataIsComplete() {
-    error = "";
+    errorMsg = "";
 
-    inputDataIsCompleted = campaignName.isNotEmpty && campaignDetails.isNotEmpty
-      && campaignImage.isNotEmpty;
+    isInputDataComplete = campaignName.isNotEmpty &&
+        campaignDetails.isNotEmpty &&
+        campaignImage.isNotEmpty;
   }
-    
+
   @override
   void initState() {
     super.initState();
@@ -60,7 +61,7 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
   Future<void> saveCampaign() async {
     setState(() {
       loading = true;
-      error = "";
+      errorMsg = "";
     });
     // Add Campaign
     UserModel currentUser = AuthProvider.of(context)!.currentUser!;
@@ -87,7 +88,7 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
           MaterialPageRoute(builder: (context) => const ProfilePage()));
     } catch (e) {
       setState(() {
-        error = e.toString();
+        errorMsg = e.toString();
       });
     }
 
@@ -263,22 +264,22 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
                   title: "Save",
                   onTap: () => saveCampaign(),
                   isLoading: loading,
-                  disabled: !inputDataIsCompleted,
+                  disabled: !isInputDataComplete,
                 ),
-                error.isEmpty
+                errorMsg.isEmpty
                     ? const SizedBox()
                     : const SizedBox(
                         height: 15,
                       ),
-                (error.isNotEmpty)
-                ? Text(
-                    error,
-                    style: const TextStyle(
-                      color: Colors.red,
-                      fontSize: 16,
-                    ),
-                  )
-                : const SizedBox(),
+                (errorMsg.isNotEmpty)
+                    ? Text(
+                        errorMsg,
+                        style: const TextStyle(
+                          color: Colors.red,
+                          fontSize: 16,
+                        ),
+                      )
+                    : const SizedBox(),
                 const SizedBox(
                   height: 20,
                 )
