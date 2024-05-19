@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:graduationproject/pages/signup_page.dart';
+import 'package:graduationproject/pages/user_form_page.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
 import 'package:graduationproject/pages/home_page.dart';
 import 'package:graduationproject/pages/reset_password_page.dart';
@@ -188,7 +188,7 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const SignupPage()),
+                            builder: (context) => const UserFormPage()),
                       );
                     },
                     child: const Text(

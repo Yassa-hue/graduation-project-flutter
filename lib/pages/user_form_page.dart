@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:graduationproject/models/user_model.dart';
 import 'package:graduationproject/pages/home_page.dart';
 import 'package:graduationproject/pages/login_page.dart';
+import 'package:graduationproject/pages/profile_page.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
 
 import 'package:graduationproject/utils/images_paths.dart';
@@ -10,14 +12,16 @@ import 'package:graduationproject/components/custom_button.dart';
 import 'package:graduationproject/components/custom_field.dart';
 import 'package:graduationproject/components/dismiss_keyboard_on_tap.dart';
 
-class SignupPage extends StatefulWidget {
-  const SignupPage({super.key});
+class UserFormPage extends StatefulWidget {
+  final UserModel? currentUser;
+
+  const UserFormPage({Key? key, this.currentUser}) : super(key: key);
 
   @override
-  State<SignupPage> createState() => _SignupPageState();
+  State<UserFormPage> createState() => _UserFormPageState();
 }
 
-class _SignupPageState extends State<SignupPage> {
+class _UserFormPageState extends State<UserFormPage> {
   bool agreeToTermsAndConditions = false;
   bool loading = false, isInputDataComplete = false;
   String errorMsg = "";
@@ -33,6 +37,19 @@ class _SignupPageState extends State<SignupPage> {
         agreeToTermsAndConditions;
   }
 
+  @override
+  void initState() {
+    super.initState();
+    if (widget.currentUser != null) {
+      setState(() {
+        username = widget.currentUser!.name;
+        email = widget.currentUser!.email;
+        password = widget.currentUser!.password;
+        confirmPassword = widget.currentUser!.password;
+      });
+    }
+  }
+
   Future<void> signup() async {
     final auth = AuthProvider.of(context)!;
     setState(() {
@@ -45,14 +62,27 @@ class _SignupPageState extends State<SignupPage> {
         throw "Passwords do not match";
       }
 
-      await auth.signup({
-        "name": username,
-        "email": email,
-        "password": password,
-      });
-      final route = MaterialPageRoute(builder: (context) => const HomePage());
-      // ignore: use_build_context_synchronously
-      Navigator.of(context).pushReplacement(route);
+      if (widget.currentUser != null) {
+        await auth.updateUser({
+          "name": username,
+          "email": email,
+          "password": password,
+        });
+
+        final route = MaterialPageRoute(builder: (context) => const ProfilePage());
+        // ignore: use_build_context_synchronously
+        Navigator.of(context).pushReplacement(route);
+      } else {
+        await auth.signup({
+          "name": username,
+          "email": email,
+          "password": password,
+        });
+
+        final route = MaterialPageRoute(builder: (context) => const HomePage());
+        // ignore: use_build_context_synchronously
+        Navigator.of(context).pushReplacement(route);
+      }
     } catch (e) {
       setState(() => errorMsg = e.toString());
     }
@@ -84,9 +114,9 @@ class _SignupPageState extends State<SignupPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                const Text(
-                  'Create account',
-                  style: TextStyle(
+                Text(
+                  (widget.currentUser == null ? 'Create account' : 'Update account'),
+                  style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 25,
                       color: PRIMARY_COLOR),
@@ -98,6 +128,7 @@ class _SignupPageState extends State<SignupPage> {
                   text: "Create account",
                   hiinttext: "User name",
                   prefex: Icons.person,
+                  value: username,
                   onChanged: (value) => {
                     setState(() {
                       username = value;
@@ -107,8 +138,9 @@ class _SignupPageState extends State<SignupPage> {
                 ),
                 CustomField(
                   text: "Email",
-                  hiinttext: "ys198@mail.com",
+                  hiinttext: "sample@mail.com",
                   prefex: Icons.email,
+                  value: email,
                   onChanged: (value) => {
                     setState(() {
                       email = value;
@@ -177,7 +209,7 @@ class _SignupPageState extends State<SignupPage> {
                   height: 15,
                 ),
                 CustomButton(
-                  title: "Sign in",
+                  title: (widget.currentUser == null) ? "Sign in" : "Confirm",
                   onTap: () => signup(),
                   isLoading: loading,
                   disabled: !isInputDataComplete,
@@ -199,6 +231,7 @@ class _SignupPageState extends State<SignupPage> {
                 const SizedBox(
                   height: 15,
                 ),
+                (widget.currentUser == null) ?
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -224,7 +257,7 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                     ),
                   ],
-                ),
+                ) : const SizedBox(),
                 const SizedBox(
                   height: 15,
                 ),

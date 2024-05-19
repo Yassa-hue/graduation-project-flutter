@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:graduationproject/components/custom_bottom_bar.dart';
-import 'package:graduationproject/pages/login_page.dart';
 import 'package:graduationproject/components/profile_page/activity_list.dart';
 import 'package:graduationproject/components/profile_page/user_details.dart';
 import 'package:graduationproject/models/campaign_model.dart';
@@ -29,16 +28,6 @@ class _ProfilePageState extends State<ProfilePage> {
       currentUser = AuthProvider.of(context)!.currentUser;
       activities = _getActivitiesForUser(currentUser);
     });
-  }
-
-  Future<void> logout () async {
-    final auth = AuthProvider.of(context)!;
-
-    await auth.logout();
-
-    // ignore: use_build_context_synchronously
-    Navigator.push(context,
-                   MaterialPageRoute(builder: (context) => const LoginPage()));
   }
 
   List<dynamic> _getActivitiesForUser(UserModel? user) {
@@ -146,13 +135,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       )
                     : const CircularProgressIndicator(),
               )),
-              const SizedBox(height: 15),
-              Center(
-                child: ElevatedButton(
-                  onPressed: () => logout(),
-                  child: const Text('Logout'),
-                )
-              ),
               const SizedBox(height: 25),
               UserDetails(name: currentUser!.name, email: currentUser!.email),
               const SizedBox(height: 40),
