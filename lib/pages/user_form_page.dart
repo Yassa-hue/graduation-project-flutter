@@ -40,6 +40,8 @@ class _UserFormPageState extends State<UserFormPage> {
 
   File? campaignImage;
 
+  File? campaignImage;
+
   void checkInputDataIsComplete() {
     errorMsg = "";
 
