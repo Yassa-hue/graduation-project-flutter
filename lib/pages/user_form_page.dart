@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:graduationproject/components/custom_image_picker.dart';
 import 'package:graduationproject/models/user_model.dart';
 import 'package:graduationproject/pages/home_page.dart';
 import 'package:graduationproject/pages/login_page.dart';
@@ -26,6 +29,8 @@ class _UserFormPageState extends State<UserFormPage> {
   bool loading = false, isInputDataComplete = false;
   String errorMsg = "";
   String username = "", email = "", password = "", confirmPassword = "";
+
+  File? campaignImage;
 
   void checkInputDataIsComplete() {
     errorMsg = "";
@@ -69,7 +74,8 @@ class _UserFormPageState extends State<UserFormPage> {
           "password": password,
         });
 
-        final route = MaterialPageRoute(builder: (context) => const ProfilePage());
+        final route =
+            MaterialPageRoute(builder: (context) => const ProfilePage());
         // ignore: use_build_context_synchronously
         Navigator.of(context).pushReplacement(route);
       } else {
@@ -115,17 +121,40 @@ class _UserFormPageState extends State<UserFormPage> {
                   height: 20,
                 ),
                 Text(
-                  (widget.currentUser == null ? 'Create account' : 'Update account'),
+                  (widget.currentUser == null
+                      ? 'Create account'
+                      : 'Update account'),
                   style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 25,
                       color: PRIMARY_COLOR),
                 ),
+                const SizedBox(height: 20),
+                CustomImagePicker(
+                  defaultImageLink: widget.currentUser?.profileImageUrl ?? '',
+                  onImageIsSelected: (imageFile) {
+                    setState(() {
+                      campaignImage = imageFile;
+
+                      checkInputDataIsComplete();
+                    });
+                  },
+                ),
+                const SizedBox(height: 10),
+                Center(
+                  child: Text(
+                    'Profile Photo',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                        color: Colors.grey[800]),
+                  ),
+                ),
                 const SizedBox(
                   height: 15,
                 ),
                 CustomField(
-                  text: "Create account",
+                  text: "User name",
                   hiinttext: "User name",
                   prefex: Icons.person,
                   value: username,
@@ -231,33 +260,34 @@ class _UserFormPageState extends State<UserFormPage> {
                 const SizedBox(
                   height: 15,
                 ),
-                (widget.currentUser == null) ?
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "Already have an account? ",
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const LoginPage()),
-                        );
-                      },
-                      child: const Text(
-                        'Log in',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: PRIMARY_COLOR,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ) : const SizedBox(),
+                (widget.currentUser == null)
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Already have an account? ",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginPage()),
+                              );
+                            },
+                            child: const Text(
+                              'Log in',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: PRIMARY_COLOR,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    : const SizedBox(),
                 const SizedBox(
                   height: 15,
                 ),
