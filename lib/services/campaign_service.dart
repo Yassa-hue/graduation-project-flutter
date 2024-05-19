@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:graduationproject/models/campaign_model.dart';
 
 class CampaignService {
@@ -46,5 +49,14 @@ class CampaignService {
         .docs
         .map((doc) => Campaign.fromJson(doc.data() as Map<String, dynamic>))
         .toList();
+  }
+
+  Future<String> uploadImage(File image) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference ref = FirebaseStorage.instance.ref().child(fileName);
+    
+    await ref.putFile(image);
+    
+    return await ref.getDownloadURL();
   }
 }
