@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:graduationproject/components/custom_image_picker.dart';
 import 'package:graduationproject/models/campaign_model.dart';
 import 'package:graduationproject/models/user_model.dart';
 import 'package:graduationproject/pages/profile_page.dart';
@@ -6,7 +9,6 @@ import 'package:graduationproject/services/campaign_service.dart';
 
 import 'package:graduationproject/utils/color_palette.dart';
 import 'package:graduationproject/utils/constants.dart';
-import 'package:graduationproject/utils/images_paths.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
 
 import 'package:graduationproject/components/custom_app_bar.dart';
@@ -32,6 +34,7 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
       error = "";
 
   DateTime? campaignDate;
+  File? _imageFile;
 
   @override
   void initState() {
@@ -104,18 +107,27 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                Center(
-                  child: SizedBox(
-                    height: 130,
-                    width: 130,
-                    child: Image.asset(
-                      ImagesPaths.fourth,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                CustomImagePicker(
+                  onImageIsSelected: (imageFile) {
+                    setState(() {
+                      _imageFile = imageFile;
+                    });
+                  },
                 ),
                 const SizedBox(
                   height: 10,
+                ),
+                Center(
+                  child: Text(
+                    "Event Image",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                        color: Colors.grey[800]),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
                 Text(
                   "Event Name",
