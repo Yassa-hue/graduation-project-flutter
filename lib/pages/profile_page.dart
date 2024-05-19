@@ -10,7 +10,6 @@ import 'package:graduationproject/utils/AuthProvider.dart';
 import 'package:graduationproject/utils/constants.dart';
 import 'package:graduationproject/components/custom_app_bar.dart';
 import 'package:graduationproject/models/user_model.dart';
-import 'package:graduationproject/utils/AuthProvider.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});

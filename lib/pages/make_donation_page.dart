@@ -34,6 +34,9 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
   Campaign? _selectedCampaign;
   List<Campaign> _campaigns = [];
 
+  bool loading = false, isInputDataComplete = false;
+  String errorMsg = "";
+
   @override
   void initState() {
     super.initState();
@@ -44,8 +47,9 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
         });
       });
     } catch (e) {
-      // Handle the error here
-      print('Error fetching campaigns: $e');
+      setState(() {
+        errorMsg = e.toString();
+      });
     }
   }
 
@@ -56,6 +60,11 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
   }
 
   Future<void> makeDonation() async {
+    setState(() {
+      loading = true;
+      errorMsg = "";
+    });
+
     var currentUser = AuthProvider.of(context)!.currentUser;
 
     Donation newDonation = Donation(
@@ -74,9 +83,14 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
           context,
           MaterialPageRoute(builder: (context) => const ProfilePage()));
     } catch (e) {
-      // Handle the error here
-      print('Error creating donation: $e');
+      setState(() {
+        errorMsg = e.toString();
+      });
     }
+
+    setState(() {
+      loading = false;
+    });
   }
 
   Widget selectableCard<T>(
@@ -109,6 +123,12 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
         ),
       ),
     );
+  }
+
+  void checkInputData() {
+    errorMsg = "";
+
+    isInputDataComplete = _selectedAmount != null && _selectedCampaign != null;
   }
 
   @override
@@ -152,6 +172,8 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
                               onChanged: (newValue) {
                                 setState(() {
                                   _selectedAmount = newValue;
+
+                                  checkInputData();
                                 });
                               },
                             ))
@@ -163,6 +185,8 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
                       controller: _amountController,
                       onChanged: (value) => setState(() {
                         _selectedAmount = int.tryParse(value);
+
+                        checkInputData();
                       }),
                       keyboardType: TextInputType.number,
                       decoration: const InputDecoration(
@@ -197,6 +221,8 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
                               onChanged: (newValue) {
                                 setState(() {
                                   _periodicity = newValue;
+
+                                  checkInputData();
                                 });
                               },
                             ))
@@ -206,7 +232,23 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
                   CustomButton(
                     title: "Confirm",
                     onTap: () => makeDonation(),
+                    isLoading: loading,
+                    disabled: !isInputDataComplete,
                   ),
+                  errorMsg.isEmpty
+                      ? const SizedBox()
+                      : const SizedBox(
+                          height: 15,
+                        ),
+                  (errorMsg.isNotEmpty)
+                      ? Text(
+                          errorMsg,
+                          style: const TextStyle(
+                            color: Colors.red,
+                            fontSize: 16,
+                          ),
+                        )
+                      : const SizedBox(),
                   const SizedBox(height: 50),
                 ],
               ),
@@ -225,6 +267,8 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
       onChanged: (Campaign? newValue) {
         setState(() {
           _selectedCampaign = newValue;
+
+          checkInputData();
         });
       },
       items: _campaigns.map<DropdownMenuItem<Campaign>>((Campaign campaign) {

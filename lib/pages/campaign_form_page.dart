@@ -31,10 +31,20 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
       // TODO: Add Image Picker
       campaignImage =
           "https://firebasestorage.googleapis.com/v0/b/graduation-project-d349a.appspot.com/o/camp1.jpg?alt=media&token=8a200b34-8429-42bb-9257-26a3a1e8a411",
-      error = "";
+      errorMsg = "";
+
+  bool loading = false, isInputDataComplete = false;
 
   DateTime? campaignDate;
   File? _imageFile;
+
+  void checkDataIsComplete() {
+    errorMsg = "";
+
+    isInputDataComplete = campaignName.isNotEmpty &&
+        campaignDetails.isNotEmpty &&
+        campaignImage.isNotEmpty;
+  }
 
   @override
   void initState() {
@@ -49,6 +59,10 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
   }
 
   Future<void> saveCampaign() async {
+    setState(() {
+      loading = true;
+      errorMsg = "";
+    });
     // Add Campaign
     UserModel currentUser = AuthProvider.of(context)!.currentUser!;
 
@@ -74,9 +88,13 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
           MaterialPageRoute(builder: (context) => const ProfilePage()));
     } catch (e) {
       setState(() {
-        error = e.toString();
+        errorMsg = e.toString();
       });
     }
+
+    setState(() {
+      loading = false;
+    });
   }
 
   @override
@@ -152,6 +170,8 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
                   onChanged: (value) => {
                     setState(() {
                       campaignName = value;
+
+                      checkDataIsComplete();
                     })
                   },
                 ),
@@ -231,6 +251,8 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
                     onChanged: (value) => {
                       setState(() {
                         campaignDetails = value;
+
+                        checkDataIsComplete();
                       })
                     },
                   ),
@@ -241,7 +263,23 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
                 CustomButton(
                   title: "Save",
                   onTap: () => saveCampaign(),
+                  isLoading: loading,
+                  disabled: !isInputDataComplete,
                 ),
+                errorMsg.isEmpty
+                    ? const SizedBox()
+                    : const SizedBox(
+                        height: 15,
+                      ),
+                (errorMsg.isNotEmpty)
+                    ? Text(
+                        errorMsg,
+                        style: const TextStyle(
+                          color: Colors.red,
+                          fontSize: 16,
+                        ),
+                      )
+                    : const SizedBox(),
                 const SizedBox(
                   height: 20,
                 )

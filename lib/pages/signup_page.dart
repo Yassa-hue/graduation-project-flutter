@@ -17,18 +17,27 @@ class SignupPage extends StatefulWidget {
   State<SignupPage> createState() => _SignupPageState();
 }
 
-// TODO: Add loading animation and error messages
 class _SignupPageState extends State<SignupPage> {
   bool agreeToTermsAndConditions = false;
-  bool loading = false;
-  String error = "";
+  bool loading = false, isInputDataComplete = false;
+  String errorMsg = "";
   String username = "", email = "", password = "", confirmPassword = "";
+
+  void checkInputDataIsComplete() {
+    errorMsg = "";
+
+    isInputDataComplete = username.isNotEmpty &&
+        email.isNotEmpty &&
+        password.isNotEmpty &&
+        confirmPassword.isNotEmpty &&
+        agreeToTermsAndConditions;
+  }
 
   Future<void> signup() async {
     final auth = AuthProvider.of(context)!;
     setState(() {
       loading = true;
-      error = "";
+      errorMsg = "";
     });
 
     try {
@@ -45,7 +54,7 @@ class _SignupPageState extends State<SignupPage> {
       // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(route);
     } catch (e) {
-      setState(() => error = e.toString());
+      setState(() => errorMsg = e.toString());
     }
     setState(() => loading = false);
   }
@@ -92,6 +101,7 @@ class _SignupPageState extends State<SignupPage> {
                   onChanged: (value) => {
                     setState(() {
                       username = value;
+                      checkInputDataIsComplete();
                     })
                   },
                 ),
@@ -102,6 +112,8 @@ class _SignupPageState extends State<SignupPage> {
                   onChanged: (value) => {
                     setState(() {
                       email = value;
+
+                      checkInputDataIsComplete();
                     })
                   },
                 ),
@@ -113,6 +125,8 @@ class _SignupPageState extends State<SignupPage> {
                   onChanged: (value) => {
                     setState(() {
                       password = value;
+
+                      checkInputDataIsComplete();
                     })
                   },
                 ),
@@ -124,6 +138,8 @@ class _SignupPageState extends State<SignupPage> {
                   onChanged: (value) => {
                     setState(() {
                       confirmPassword = value;
+
+                      checkInputDataIsComplete();
                     })
                   },
                 ),
@@ -134,6 +150,8 @@ class _SignupPageState extends State<SignupPage> {
                       onChanged: (val) {
                         setState(() {
                           agreeToTermsAndConditions = val!;
+
+                          checkInputDataIsComplete();
                         });
                       },
                       side: const BorderSide(
@@ -159,10 +177,25 @@ class _SignupPageState extends State<SignupPage> {
                   height: 15,
                 ),
                 CustomButton(
-                  // TODO: Add disabled behavior
                   title: "Sign in",
                   onTap: () => signup(),
+                  isLoading: loading,
+                  disabled: !isInputDataComplete,
                 ),
+                errorMsg.isEmpty
+                    ? const SizedBox()
+                    : const SizedBox(
+                        height: 15,
+                      ),
+                (errorMsg.isNotEmpty)
+                    ? Text(
+                        errorMsg,
+                        style: const TextStyle(
+                          color: Colors.red,
+                          fontSize: 16,
+                        ),
+                      )
+                    : const SizedBox(),
                 const SizedBox(
                   height: 15,
                 ),
