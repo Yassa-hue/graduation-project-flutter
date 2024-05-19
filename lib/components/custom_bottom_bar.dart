@@ -31,34 +31,34 @@ var volunteerConfigs = [
   BarIconConfig(
     name: "Profile",
     icon: Icons.person,
-    page: (BuildContext context) => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const ProfilePage())),
+    page: (BuildContext context) => Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const ProfilePage())),
   ),
   BarIconConfig(
     name: "Volunteering Categories",
     icon: Icons.campaign,
-    page: (BuildContext context) => Navigator.of(context).pushReplacement(
+    page: (BuildContext context) => Navigator.of(context).push(
         MaterialPageRoute(
             builder: (context) => const VolunteeringCategoriesPage())),
   ),
   BarIconConfig(
     name: "Home",
     icon: Icons.home,
-    page: (BuildContext context) => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const HomePage())),
+    page: (BuildContext context) => Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const HomePage())),
   ),
   BarIconConfig(
     name: "Apply for Volunteering",
     icon: Icons.stars_rounded,
-    page: (BuildContext context) => Navigator.of(context).pushReplacement(
+    page: (BuildContext context) => Navigator.of(context).push(
         MaterialPageRoute(
             builder: (context) => const ApplyForVolunteeringPage())),
   ),
   BarIconConfig(
     name: "Settings",
     icon: Icons.settings,
-    page: (BuildContext context) => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const SettingPage())),
+    page: (BuildContext context) => Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const SettingPage())),
   ),
 ];
 
@@ -66,32 +66,32 @@ var donorConfigs = [
   BarIconConfig(
     name: "Profile",
     icon: Icons.person,
-    page: (BuildContext context) => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const ProfilePage())),
+    page: (BuildContext context) => Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const ProfilePage())),
   ),
   BarIconConfig(
     name: "Donation Categories",
     icon: Icons.campaign,
-    page: (BuildContext context) => Navigator.of(context).pushReplacement(
+    page: (BuildContext context) => Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => const DonationCategories())),
   ),
   BarIconConfig(
     name: "Home",
     icon: Icons.home,
-    page: (BuildContext context) => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const HomePage())),
+    page: (BuildContext context) => Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const HomePage())),
   ),
   BarIconConfig(
     name: "Make Donation",
     icon: Icons.money_rounded,
-    page: (BuildContext context) => Navigator.of(context).pushReplacement(
+    page: (BuildContext context) => Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => const MakeDonationPage())),
   ),
   BarIconConfig(
     name: "Settings",
     icon: Icons.settings,
-    page: (BuildContext context) => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const SettingPage())),
+    page: (BuildContext context) => Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const SettingPage())),
   ),
 ];
 
@@ -99,32 +99,32 @@ var organizationConfigs = [
   BarIconConfig(
     name: "Profile",
     icon: Icons.person,
-    page: (BuildContext context) => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const ProfilePage())),
+    page: (BuildContext context) => Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const ProfilePage())),
   ),
   BarIconConfig(
     name: "New Campaign",
     icon: Icons.add,
-    page: (BuildContext context) => Navigator.of(context).pushReplacement(
+    page: (BuildContext context) => Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => const CampaignFormPage())),
   ),
   BarIconConfig(
     name: "Home",
     icon: Icons.home,
-    page: (BuildContext context) => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const HomePage())),
+    page: (BuildContext context) => Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const HomePage())),
   ),
   BarIconConfig(
     name: "Dashboard",
     icon: Icons.stars_rounded,
-    page: (BuildContext context) => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const DashboardPage())),
+    page: (BuildContext context) => Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const DashboardPage())),
   ),
   BarIconConfig(
     name: "Settings",
     icon: Icons.settings,
-    page: (BuildContext context) => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const SettingPage())),
+    page: (BuildContext context) => Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const SettingPage())),
   ),
 ];
 
