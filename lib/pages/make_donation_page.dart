@@ -4,15 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:graduationproject/components/custom_app_bar.dart';
-import 'package:graduationproject/components/custom_bottom_bar.dart';
 import 'package:graduationproject/components/custom_button.dart';
 import 'package:graduationproject/models/campaign_model.dart';
 import 'package:graduationproject/models/donation_model.dart';
 import 'package:graduationproject/pages/profile_page.dart';
 import 'package:graduationproject/services/campaign_service.dart';
 import 'package:graduationproject/services/donation_service.dart';
-
-import 'package:graduationproject/utils/constants.dart';
 import 'package:graduationproject/utils/color_palette.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
 import 'package:graduationproject/components/dismiss_keyboard_on_tap.dart';
@@ -134,7 +131,6 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CustomBottomBar(currentPage: donationPage),
       appBar: AppBar(
           backgroundColor: Colors.white70,
           elevation: 0.0,

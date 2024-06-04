@@ -8,11 +8,9 @@ import 'package:graduationproject/pages/profile_page.dart';
 import 'package:graduationproject/services/campaign_service.dart';
 
 import 'package:graduationproject/utils/color_palette.dart';
-import 'package:graduationproject/utils/constants.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
 
 import 'package:graduationproject/components/custom_app_bar.dart';
-import 'package:graduationproject/components/custom_bottom_bar.dart';
 import 'package:graduationproject/components/custom_button.dart';
 import 'package:intl/intl.dart';
 
@@ -102,7 +100,6 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CustomBottomBar(currentPage: homePage),
       appBar: AppBar(
           backgroundColor: Colors.white70,
           elevation: 0.0,

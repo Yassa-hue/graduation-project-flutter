@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:graduationproject/components/custom_setting.dart';
 import 'package:graduationproject/components/custom_app_bar.dart';
-import 'package:graduationproject/components/custom_bottom_bar.dart';
 import 'package:graduationproject/pages/login_page.dart';
 import 'package:graduationproject/pages/user_form_page.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
-
-import 'package:graduationproject/utils/constants.dart';
 import 'package:graduationproject/utils/color_palette.dart';
 
 class SettingPage extends StatefulWidget {
@@ -31,7 +28,6 @@ class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CustomBottomBar(currentPage: settingsPage),
       appBar: AppBar(backgroundColor: Colors.white70, elevation: 0.0, actions: const [
         CustomAppBar(),
       ]),

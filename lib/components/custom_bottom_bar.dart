@@ -1,140 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:graduationproject/models/user_model.dart';
-import 'package:graduationproject/pages/apply_for_volunteering_page.dart';
-
-import 'package:graduationproject/pages/dashboard_page.dart';
-import 'package:graduationproject/pages/donation_categories.dart';
-import 'package:graduationproject/pages/home_page.dart';
-import 'package:graduationproject/pages/make_donation_page.dart';
-import 'package:graduationproject/pages/campaign_form_page.dart';
-import 'package:graduationproject/pages/profile_page.dart';
-import 'package:graduationproject/pages/settings_page.dart';
-import 'package:graduationproject/pages/volunteering_categories_page.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
-
 import 'package:graduationproject/utils/color_palette.dart';
-import 'package:graduationproject/utils/constants.dart';
+import 'package:graduationproject/utils/custom_bottom_bar_configs.dart';
 
-class BarIconConfig {
-  final String name;
-  final IconData icon;
-  final Function page;
-
-  BarIconConfig({
-    required this.name,
-    required this.icon,
-    required this.page,
-  });
-}
-
-var volunteerConfigs = [
-  BarIconConfig(
-    name: "Profile",
-    icon: Icons.person,
-    page: (BuildContext context) => Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const ProfilePage())),
-  ),
-  BarIconConfig(
-    name: "Volunteering Categories",
-    icon: Icons.campaign,
-    page: (BuildContext context) => Navigator.of(context).push(
-        MaterialPageRoute(
-            builder: (context) => const VolunteeringCategoriesPage())),
-  ),
-  BarIconConfig(
-    name: "Home",
-    icon: Icons.home,
-    page: (BuildContext context) => Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const HomePage())),
-  ),
-  BarIconConfig(
-    name: "Apply for Volunteering",
-    icon: Icons.stars_rounded,
-    page: (BuildContext context) => Navigator.of(context).push(
-        MaterialPageRoute(
-            builder: (context) => const ApplyForVolunteeringPage())),
-  ),
-  BarIconConfig(
-    name: "Settings",
-    icon: Icons.settings,
-    page: (BuildContext context) => Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const SettingPage())),
-  ),
-];
-
-var donorConfigs = [
-  BarIconConfig(
-    name: "Profile",
-    icon: Icons.person,
-    page: (BuildContext context) => Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const ProfilePage())),
-  ),
-  BarIconConfig(
-    name: "Donation Categories",
-    icon: Icons.campaign,
-    page: (BuildContext context) => Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => const DonationCategories())),
-  ),
-  BarIconConfig(
-    name: "Home",
-    icon: Icons.home,
-    page: (BuildContext context) => Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const HomePage())),
-  ),
-  BarIconConfig(
-    name: "Make Donation",
-    icon: Icons.money_rounded,
-    page: (BuildContext context) => Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => const MakeDonationPage())),
-  ),
-  BarIconConfig(
-    name: "Settings",
-    icon: Icons.settings,
-    page: (BuildContext context) => Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const SettingPage())),
-  ),
-];
-
-var organizationConfigs = [
-  BarIconConfig(
-    name: "Profile",
-    icon: Icons.person,
-    page: (BuildContext context) => Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const ProfilePage())),
-  ),
-  BarIconConfig(
-    name: "New Campaign",
-    icon: Icons.add,
-    page: (BuildContext context) => Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => const CampaignFormPage())),
-  ),
-  BarIconConfig(
-    name: "Home",
-    icon: Icons.home,
-    page: (BuildContext context) => Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const HomePage())),
-  ),
-  BarIconConfig(
-    name: "Dashboard",
-    icon: Icons.stars_rounded,
-    page: (BuildContext context) => Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const DashboardPage())),
-  ),
-  BarIconConfig(
-    name: "Settings",
-    icon: Icons.settings,
-    page: (BuildContext context) => Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const SettingPage())),
-  ),
-];
-
-// ignore: must_be_immutable
 class CustomBottomBar extends StatefulWidget {
-  int currentPage = homePage;
+  final PageController pageController;
+  final int currentPage;
 
   CustomBottomBar({
     Key? key,
     required this.currentPage,
+    required this.pageController,
   }) : super(key: key);
 
   @override
@@ -169,10 +46,10 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       unselectedItemColor: Colors.white,
-      onTap: (value) {
-        configs[value].page(context);
+      onTap: (index) {
+        widget.pageController.jumpToPage(index);
       },
-      currentIndex: widget.currentPage, // Set the currentIndex to currentPage
+      currentIndex: widget.currentPage,
       items: List.generate(
         configs.length,
         (index) => BottomNavigationBarItem(
