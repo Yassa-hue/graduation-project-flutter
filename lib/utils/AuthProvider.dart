@@ -77,6 +77,7 @@ class _AuthProviderState extends State<AuthProvider> {
     }
 
     final userRef = firestore.collection('users').doc();
+    userData['id'] = userRef.id;
     await userRef.set(userData);
     await prefs.setString('user_id', userRef.id);
     setState(() {

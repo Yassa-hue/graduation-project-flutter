@@ -25,7 +25,15 @@ class _UserFormPageState extends State<UserFormPage> {
   bool agreeToTermsAndConditions = false;
   bool loading = false, isInputDataComplete = false;
   String errorMsg = "";
-  String username = "", email = "", password = "", confirmPassword = "";
+  String username = "",
+      email = "",
+      password = "",
+      confirmPassword = "",
+      // TODO: Add a dropdown menu to choose the role
+      userRole = "volunteer",
+      // TODO: Add the profile image
+      profileImageUrl =
+          "https://firebasestorage.googleapis.com/v0/b/graduation-project-d349a.appspot.com/o/profile.png?alt=media&token=7dc844d4-1c03-4918-860b-56fd78b032c6";
 
   void checkInputDataIsComplete() {
     errorMsg = "";
@@ -34,7 +42,9 @@ class _UserFormPageState extends State<UserFormPage> {
         email.isNotEmpty &&
         password.isNotEmpty &&
         confirmPassword.isNotEmpty &&
-        agreeToTermsAndConditions;
+        agreeToTermsAndConditions &&
+        userRole.isNotEmpty &&
+        profileImageUrl.isNotEmpty;
   }
 
   @override
@@ -46,6 +56,8 @@ class _UserFormPageState extends State<UserFormPage> {
         email = widget.currentUser!.email;
         password = widget.currentUser!.password;
         confirmPassword = widget.currentUser!.password;
+        userRole = widget.currentUser!.role.toString();
+        profileImageUrl = widget.currentUser!.profileImageUrl;
       });
     }
   }
@@ -69,7 +81,8 @@ class _UserFormPageState extends State<UserFormPage> {
           "password": password,
         });
 
-        final route = MaterialPageRoute(builder: (context) => const ProfilePage());
+        final route =
+            MaterialPageRoute(builder: (context) => const ProfilePage());
         // ignore: use_build_context_synchronously
         Navigator.of(context).pushReplacement(route);
       } else {
@@ -77,6 +90,8 @@ class _UserFormPageState extends State<UserFormPage> {
           "name": username,
           "email": email,
           "password": password,
+          "role": userRole,
+          "profileImageUrl": profileImageUrl,
         });
 
         final route = MaterialPageRoute(builder: (context) => const HomePage());
@@ -114,7 +129,9 @@ class _UserFormPageState extends State<UserFormPage> {
                   height: 20,
                 ),
                 Text(
-                  (widget.currentUser == null ? 'Create account' : 'Update account'),
+                  (widget.currentUser == null
+                      ? 'Create account'
+                      : 'Update account'),
                   style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 25,
@@ -230,33 +247,34 @@ class _UserFormPageState extends State<UserFormPage> {
                 const SizedBox(
                   height: 15,
                 ),
-                (widget.currentUser == null) ?
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "Already have an account? ",
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const LoginPage()),
-                        );
-                      },
-                      child: const Text(
-                        'Log in',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: PRIMARY_COLOR,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ) : const SizedBox(),
+                (widget.currentUser == null)
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Already have an account? ",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginPage()),
+                              );
+                            },
+                            child: const Text(
+                              'Log in',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: PRIMARY_COLOR,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    : const SizedBox(),
                 const SizedBox(
                   height: 15,
                 ),
