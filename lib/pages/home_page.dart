@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:graduationproject/components/custom_app_bar.dart';
-import 'package:graduationproject/components/custom_bottom_bar.dart';
 import 'package:graduationproject/pages/make_donation_page.dart';
 
 import 'package:graduationproject/utils/color_palette.dart';
@@ -22,7 +21,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CustomBottomBar(currentPage: homePage),
       appBar: AppBar(
           backgroundColor: Colors.white70,
           elevation: 0.0,

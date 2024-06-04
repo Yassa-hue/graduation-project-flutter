@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:graduationproject/components/custom_bottom_bar.dart';
 import 'package:graduationproject/components/profile_page/activity_list.dart';
 import 'package:graduationproject/components/profile_page/user_details.dart';
 import 'package:graduationproject/models/campaign_model.dart';
 import 'package:graduationproject/models/donation_model.dart';
 import 'package:graduationproject/models/volunteering_activity_model.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
-import 'package:graduationproject/utils/constants.dart';
 import 'package:graduationproject/components/custom_app_bar.dart';
 import 'package:graduationproject/models/user_model.dart';
 
@@ -103,7 +101,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CustomBottomBar(currentPage: profilePage),
       appBar: AppBar(
           backgroundColor: Colors.white70,
           elevation: 0.0,
