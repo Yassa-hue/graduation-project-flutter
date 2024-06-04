@@ -55,7 +55,7 @@ class VolunteeringActivityModelService {
         ).toList();
   }
 
-  Future<List<VolunteeringActivityModel>> getVolunteeringActivitiesByUser(String userId) async {
+  Future<List<VolunteeringActivityModel>> getVolunteeringActivitiesByVolunteer(String userId) async {
     QuerySnapshot snapshot = await _volunteeringActivitiesCollection
         .where('userId', isEqualTo: userId).get();
     
