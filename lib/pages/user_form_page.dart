@@ -162,7 +162,7 @@ class _UserFormPageState extends State<UserFormPage> {
                 const SizedBox(height: 10),
                 Center(
                   child: Text(
-                    'Profile Photo',
+                    'Pick a profile photo',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 17,
