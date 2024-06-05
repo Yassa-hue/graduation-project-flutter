@@ -13,7 +13,6 @@ class DonationService {
     final String donationId = docRef.id;
     await docRef.update({'id': donationId});
 
-    // send a notification to the target campaign
     NotificationModel notification = NotificationModel(
       title: 'New Donation',
       body:
