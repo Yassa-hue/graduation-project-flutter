@@ -11,6 +11,13 @@ import 'package:graduationproject/utils/color_palette.dart';
 import 'package:graduationproject/components/custom_button.dart';
 import 'package:graduationproject/components/custom_field.dart';
 import 'package:graduationproject/components/dismiss_keyboard_on_tap.dart';
+import 'package:graduationproject/components/custom_dopdown_menu.dart';
+
+List<DropdownItemData> dropdownItemsData = [
+  DropdownItemData(icon: Icons.favorite, title: 'donor'),
+  DropdownItemData(icon: Icons.volunteer_activism, title: 'volunteer'),
+  DropdownItemData(icon: Icons.business, title: 'organization'),
+];
 
 class UserFormPage extends StatefulWidget {
   final UserModel? currentUser;
@@ -29,8 +36,7 @@ class _UserFormPageState extends State<UserFormPage> {
       email = "",
       password = "",
       confirmPassword = "",
-      // TODO: Add a dropdown menu to choose the role
-      userRole = "volunteer",
+      userRole = "donor",
       // TODO: Add the profile image
       profileImageUrl =
           "https://firebasestorage.googleapis.com/v0/b/graduation-project-d349a.appspot.com/o/profile.png?alt=media&token=7dc844d4-1c03-4918-860b-56fd78b032c6";
@@ -189,6 +195,17 @@ class _UserFormPageState extends State<UserFormPage> {
 
                       checkInputDataIsComplete();
                     })
+                  },
+                ),
+                CustomDropdown(
+                  title: "User Role",
+                  items: dropdownItemsData,
+                  selectedValue: userRole,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      userRole = newValue!;
+                      checkInputDataIsComplete();
+                    });
                   },
                 ),
                 Row(
