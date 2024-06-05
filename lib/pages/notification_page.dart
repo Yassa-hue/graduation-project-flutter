@@ -19,10 +19,6 @@ class _NotificationPageState extends State<NotificationPage> {
     super.initState();
     setState(() {
       userId = AuthProvider.of(context)!.currentUser!.id;
-
-      print("#################################");
-      print(userId);
-      print("#################################");
     });
   }
 
