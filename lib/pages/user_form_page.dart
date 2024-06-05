@@ -38,12 +38,10 @@ class _UserFormPageState extends State<UserFormPage> {
       email = "",
       password = "",
       confirmPassword = "",
-      userRole = "donor",
-      // TODO: Add the profile image
-      profileImageUrl =
-          "https://firebasestorage.googleapis.com/v0/b/graduation-project-d349a.appspot.com/o/profile.png?alt=media&token=7dc844d4-1c03-4918-860b-56fd78b032c6";
+      userRole = "donor";
+  String? profileImageUrl;
 
-  File? userProfileImage;
+  File? profileImage;
 
   void checkInputDataIsComplete() {
     errorMsg = "";
@@ -54,7 +52,7 @@ class _UserFormPageState extends State<UserFormPage> {
         confirmPassword.isNotEmpty &&
         agreeToTermsAndConditions &&
         userRole.isNotEmpty &&
-        profileImageUrl.isNotEmpty;
+        (profileImage != null || profileImageUrl != null);
   }
 
   @override
@@ -73,11 +71,14 @@ class _UserFormPageState extends State<UserFormPage> {
   }
 
   Future<void> signup() async {
-    final auth = AuthProvider.of(context)!;
     setState(() {
       loading = true;
       errorMsg = "";
     });
+
+    final auth = AuthProvider.of(context)!;
+
+    profileImageUrl = await auth.uploadImage(profileImage!);
 
     try {
       if (password != confirmPassword) {
@@ -89,6 +90,7 @@ class _UserFormPageState extends State<UserFormPage> {
           "name": username,
           "email": email,
           "password": password,
+          "profileImageUrl": profileImageUrl,
         });
 
         final route =
@@ -139,10 +141,10 @@ class _UserFormPageState extends State<UserFormPage> {
                 ),
                 const SizedBox(height: 20),
                 CustomImagePicker(
-                  defaultImageLink: widget.currentUser?.profileImageUrl ?? '',
+                  defaultImageLink: profileImageUrl,
                   onImageIsSelected: (imageFile) {
                     setState(() {
-                      userProfileImage = imageFile;
+                      profileImage = imageFile;
 
                       checkInputDataIsComplete();
                     });
@@ -212,17 +214,18 @@ class _UserFormPageState extends State<UserFormPage> {
                     })
                   },
                 ),
-                CustomDropdown(
-                  title: "User Role",
-                  items: dropdownItemsData,
-                  selectedValue: userRole,
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      userRole = newValue!;
-                      checkInputDataIsComplete();
-                    });
-                  },
-                ),
+                if (widget.currentUser == null) 
+                  CustomDropdown(
+                    title: "User Role",
+                    items: dropdownItemsData,
+                    selectedValue: userRole,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        userRole = newValue!;
+                        checkInputDataIsComplete();
+                      });
+                    },
+                  ),
                 Row(
                   children: [
                     Checkbox(
