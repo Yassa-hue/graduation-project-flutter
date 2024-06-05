@@ -1,5 +1,6 @@
 import 'package:graduationproject/models/notification_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:graduationproject/models/user_model.dart';
 
 class NotificationService {
   final CollectionReference _colectionReference = FirebaseFirestore.instance.collection('notifications');
@@ -30,12 +31,23 @@ class NotificationService {
     await _colectionReference.doc(id).delete();
   }
 
-  Future<List<NotificationModel>> getNotificationsByUser(String userId) async {
+  Future<List<NotificationModel>>? getNotificationsByUser(String userId) async {
     QuerySnapshot snapshot = await _colectionReference.where('userId', isEqualTo: userId).get();
     
     return snapshot
         .docs
         .map((doc) => NotificationModel.fromJson(doc.data() as Map<String, dynamic>))
         .toList();
+  }
+
+  Future<void> sendNotificationToUsersByType(NotificationModel notification, UserRole userRole) async {
+    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('users').where('role', isEqualTo: userRole).get();
+    
+    List<String> userIds = snapshot.docs.map((doc) => doc.id).toList();
+    
+    for (String userId in userIds) {
+      notification.userId = userId;
+      await createNotification(notification);
+    }
   }
 }
