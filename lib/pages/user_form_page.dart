@@ -260,7 +260,7 @@ class _UserFormPageState extends State<UserFormPage> {
                   height: 15,
                 ),
                 CustomButton(
-                  title: (widget.currentUser == null) ? "Sign in" : "Confirm",
+                  title: (widget.currentUser == null) ? "Sign up" : "Confirm",
                   onTap: () => signup(),
                   isLoading: loading,
                   disabled: !isInputDataComplete,
