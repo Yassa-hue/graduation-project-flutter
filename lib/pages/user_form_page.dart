@@ -142,6 +142,27 @@ class _UserFormPageState extends State<UserFormPage> {
                       fontSize: 25,
                       color: PRIMARY_COLOR),
                 ),
+                const SizedBox(height: 20),
+                CustomImagePicker(
+                  defaultImageLink: widget.currentUser?.profileImageUrl ?? '',
+                  onImageIsSelected: (imageFile) {
+                    setState(() {
+                      userImage = imageFile;
+
+                      checkInputDataIsComplete();
+                    });
+                  },
+                ),
+                const SizedBox(height: 10),
+                Center(
+                  child: Text(
+                    'Pick a profile photo',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                        color: Colors.grey[800]),
+                  ),
+                ),
                 const SizedBox(
                   height: 15,
                 ),
@@ -195,27 +216,6 @@ class _UserFormPageState extends State<UserFormPage> {
                       checkInputDataIsComplete();
                     })
                   },
-                ),
-                const SizedBox(height: 20),
-                CustomImagePicker(
-                  defaultImageLink: widget.currentUser?.profileImageUrl ?? '',
-                  onImageIsSelected: (imageFile) {
-                    setState(() {
-                      userImage = imageFile;
-
-                      checkInputDataIsComplete();
-                    });
-                  },
-                ),
-                const SizedBox(height: 10),
-                Center(
-                  child: Text(
-                    'Profile Photo',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 17,
-                        color: Colors.grey[800]),
-                  ),
                 ),
                 Row(
                   children: [
