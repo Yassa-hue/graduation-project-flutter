@@ -8,7 +8,6 @@ import 'package:graduationproject/pages/login_page.dart';
 import 'package:graduationproject/pages/profile_page.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
 
-import 'package:graduationproject/utils/images_paths.dart';
 import 'package:graduationproject/utils/color_palette.dart';
 
 import 'package:graduationproject/components/custom_button.dart';
@@ -119,17 +118,7 @@ class _UserFormPageState extends State<UserFormPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Center(
-                  child: Container(
-                    padding: const EdgeInsets.only(top: 40),
-                    height: 250,
-                    child: Image.asset(
-                      ImagesPaths.undraw,
-                      width: 210,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
+                SafeArea(child: Container()),
                 const SizedBox(
                   height: 20,
                 ),
