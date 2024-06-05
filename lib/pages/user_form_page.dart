@@ -43,7 +43,7 @@ class _UserFormPageState extends State<UserFormPage> {
       profileImageUrl =
           "https://firebasestorage.googleapis.com/v0/b/graduation-project-d349a.appspot.com/o/profile.png?alt=media&token=7dc844d4-1c03-4918-860b-56fd78b032c6";
 
-  File? userImage;
+  File? userProfileImage;
 
   void checkInputDataIsComplete() {
     errorMsg = "";
@@ -142,7 +142,7 @@ class _UserFormPageState extends State<UserFormPage> {
                   defaultImageLink: widget.currentUser?.profileImageUrl ?? '',
                   onImageIsSelected: (imageFile) {
                     setState(() {
-                      userImage = imageFile;
+                      userProfileImage = imageFile;
 
                       checkInputDataIsComplete();
                     });
