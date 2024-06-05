@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:graduationproject/components/signup_user_role_dopdown.dart';
 import 'package:graduationproject/models/user_model.dart';
 import 'package:graduationproject/pages/home_page.dart';
 import 'package:graduationproject/pages/login_page.dart';
@@ -12,6 +11,13 @@ import 'package:graduationproject/utils/color_palette.dart';
 import 'package:graduationproject/components/custom_button.dart';
 import 'package:graduationproject/components/custom_field.dart';
 import 'package:graduationproject/components/dismiss_keyboard_on_tap.dart';
+import 'package:graduationproject/components/custom_dopdown_menu.dart';
+
+List<DropdownItemData> dropdownItemsData = [
+  DropdownItemData(icon: Icons.favorite, title: 'donor'),
+  DropdownItemData(icon: Icons.volunteer_activism, title: 'volunteer'),
+  DropdownItemData(icon: Icons.business, title: 'organization'),
+];
 
 class UserFormPage extends StatefulWidget {
   final UserModel? currentUser;
@@ -165,15 +171,6 @@ class _UserFormPageState extends State<UserFormPage> {
                     })
                   },
                 ),
-                CustomDropdown(
-                  selectedRole: userRole,
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      userRole = newValue!;
-                      checkInputDataIsComplete();
-                    });
-                  },
-                ),
                 CustomField(
                   text: "Password",
                   hiinttext: "Password",
@@ -198,6 +195,17 @@ class _UserFormPageState extends State<UserFormPage> {
 
                       checkInputDataIsComplete();
                     })
+                  },
+                ),
+                CustomDropdown(
+                  title: "User Role",
+                  items: dropdownItemsData,
+                  selectedValue: userRole,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      userRole = newValue!;
+                      checkInputDataIsComplete();
+                    });
                   },
                 ),
                 Row(
