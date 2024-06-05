@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:graduationproject/components/custom_image_picker.dart';
 import 'package:graduationproject/models/user_model.dart';
-import 'package:graduationproject/pages/home_page.dart';
 import 'package:graduationproject/pages/login_page.dart';
+import 'package:graduationproject/pages/page_manager.dart';
 import 'package:graduationproject/pages/profile_page.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
 
@@ -106,7 +106,7 @@ class _UserFormPageState extends State<UserFormPage> {
           "profileImageUrl": profileImageUrl,
         });
 
-        final route = MaterialPageRoute(builder: (context) => const HomePage());
+        final route = MaterialPageRoute(builder: (context) => MainPage());
         Navigator.of(context).pushReplacement(route);
       }
     } catch (e) {
