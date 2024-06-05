@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -116,6 +119,15 @@ class _AuthProviderState extends State<AuthProvider> {
     });
     await prefs.clear();
     updateFcmToken();
+  }
+
+  Future<String> uploadImage(File image) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference ref = FirebaseStorage.instance.ref().child(fileName);
+    
+    await ref.putFile(image);
+    
+    return await ref.getDownloadURL();
   }
 
   @override
