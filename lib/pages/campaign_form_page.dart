@@ -24,9 +24,7 @@ class CampaignFormPage extends StatefulWidget {
 }
 
 class _CampaignFormPageState extends State<CampaignFormPage> {
-  String campaignName = '',
-      campaignDetails = '',
-      errorMsg = "";
+  String campaignName = '', campaignDetails = '', errorMsg = "";
   String? campaignImageLink;
 
   bool loading = false, isInputDataComplete = false;
@@ -61,7 +59,7 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
       loading = true;
       errorMsg = "";
     });
-    
+
     campaignImageLink = await CampaignService().uploadImage(campaignImage!);
 
     UserModel currentUser = AuthProvider.of(context)!.currentUser!;

@@ -165,7 +165,7 @@ class _UserFormPageState extends State<UserFormPage> {
                 ),
                 CustomField(
                   text: "User name",
-                  hiinttext: "User name",
+                  hintText: "User name",
                   prefex: Icons.person,
                   value: username,
                   onChanged: (value) => {
@@ -177,7 +177,7 @@ class _UserFormPageState extends State<UserFormPage> {
                 ),
                 CustomField(
                   text: "Email",
-                  hiinttext: "sample@mail.com",
+                  hintText: "sample@mail.com",
                   prefex: Icons.email,
                   value: email,
                   onChanged: (value) => {
@@ -190,9 +190,9 @@ class _UserFormPageState extends State<UserFormPage> {
                 ),
                 CustomField(
                   text: "Password",
-                  hiinttext: "Password",
+                  hintText: "Password",
                   prefex: Icons.lock_person,
-                  suffex: Icons.visibility_off,
+                  typePassword: true,
                   onChanged: (value) => {
                     setState(() {
                       password = value;
@@ -203,9 +203,9 @@ class _UserFormPageState extends State<UserFormPage> {
                 ),
                 CustomField(
                   text: "Confirm Password",
-                  hiinttext: "Confirm Password",
+                  hintText: "Confirm Password",
+                  typePassword: true,
                   prefex: Icons.lock_person,
-                  suffex: Icons.visibility_off,
                   onChanged: (value) => {
                     setState(() {
                       confirmPassword = value;
@@ -214,7 +214,7 @@ class _UserFormPageState extends State<UserFormPage> {
                     })
                   },
                 ),
-                if (widget.currentUser == null) 
+                if (widget.currentUser == null)
                   CustomDropdown(
                     title: "User Role",
                     items: dropdownItemsData,
