@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:graduationproject/components/custom_app_bar.dart';
-import 'package:graduationproject/pages/make_donation_page.dart';
+import 'package:graduationproject/pages/page_manager.dart';
 
 import 'package:graduationproject/utils/color_palette.dart';
 import 'package:graduationproject/utils/constants.dart';
@@ -162,7 +162,9 @@ class _HomePageState extends State<HomePage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const MakeDonationPage()));
+                            builder: (context) => MainPage(
+                                  currentPage: donationPage,
+                                )));
                   },
                   color: Colors.black,
                   child: const Text(

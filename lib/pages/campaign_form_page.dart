@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:graduationproject/components/custom_image_picker.dart';
 import 'package:graduationproject/models/campaign_model.dart';
 import 'package:graduationproject/models/user_model.dart';
-import 'package:graduationproject/pages/profile_page.dart';
+import 'package:graduationproject/pages/page_manager.dart';
 import 'package:graduationproject/services/campaign_service.dart';
 
 import 'package:graduationproject/utils/color_palette.dart';
@@ -12,6 +12,7 @@ import 'package:graduationproject/utils/AuthProvider.dart';
 
 import 'package:graduationproject/components/custom_app_bar.dart';
 import 'package:graduationproject/components/custom_button.dart';
+import 'package:graduationproject/utils/constants.dart';
 import 'package:intl/intl.dart';
 
 class CampaignFormPage extends StatefulWidget {
@@ -83,7 +84,7 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
       Navigator.push(
           // ignore: use_build_context_synchronously
           context,
-          MaterialPageRoute(builder: (context) => const ProfilePage()));
+          MaterialPageRoute(builder: (context) => MainPage(currentPage: profilePage,)));
     } catch (e) {
       setState(() {
         errorMsg = e.toString();

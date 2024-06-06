@@ -7,12 +7,13 @@ import 'package:graduationproject/components/custom_app_bar.dart';
 import 'package:graduationproject/components/custom_button.dart';
 import 'package:graduationproject/models/campaign_model.dart';
 import 'package:graduationproject/models/donation_model.dart';
-import 'package:graduationproject/pages/profile_page.dart';
+import 'package:graduationproject/pages/page_manager.dart';
 import 'package:graduationproject/services/campaign_service.dart';
 import 'package:graduationproject/services/donation_service.dart';
 import 'package:graduationproject/utils/color_palette.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
 import 'package:graduationproject/components/dismiss_keyboard_on_tap.dart';
+import 'package:graduationproject/utils/constants.dart';
 
 class MakeDonationPage extends StatefulWidget {
   const MakeDonationPage({super.key});
@@ -78,7 +79,7 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
       Navigator.push(
           // ignore: use_build_context_synchronously
           context,
-          MaterialPageRoute(builder: (context) => const ProfilePage()));
+          MaterialPageRoute(builder: (context) => MainPage(currentPage: profilePage,)));
     } catch (e) {
       setState(() {
         errorMsg = e.toString();
