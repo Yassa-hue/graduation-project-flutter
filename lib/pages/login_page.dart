@@ -90,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               CustomField(
                 text: "Email",
-                hiinttext: "ys198@mail.com",
+                hintText: "sample@mail.com",
                 prefex: Icons.email,
                 onChanged: (value) => {
                   setState(() {
@@ -104,9 +104,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
               CustomField(
                 text: "Password",
-                hiinttext: "********",
+                hintText: "********",
                 prefex: Icons.lock_person,
-                suffex: Icons.visibility_off,
+                typePassword: true,
                 onChanged: (value) => {
                   setState(() {
                     errorMsg = "";
