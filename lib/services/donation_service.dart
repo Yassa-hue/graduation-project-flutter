@@ -19,7 +19,13 @@ class DonationService {
           'A new donation has been made to your campaign: ${donation.amount}\$',
       userId: donation.receivingOrganizationId,
     );
+    await NotificationService().createNotification(notification);
 
+    notification = NotificationModel(
+      title: 'New Donation',
+      body: 'Thank you for your donation: ${donation.amount}\$',
+      userId: donation.donorId,
+    );
     await NotificationService().createNotification(notification);
   }
 
