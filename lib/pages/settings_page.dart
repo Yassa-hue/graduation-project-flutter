@@ -21,8 +21,11 @@ class _SettingPageState extends State<SettingPage> {
     await auth.logout();
 
     // ignore: use_build_context_synchronously
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const LoginPage()));
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const LoginPage()),
+      (Route<dynamic> route) => false,
+    );
   }
 
   @override
