@@ -5,6 +5,10 @@ import 'package:graduationproject/models/user_model.dart';
 import 'package:graduationproject/utils/custom_bottom_bar_configs.dart';
 
 class MainPage extends StatefulWidget {
+  final int currentPage;
+
+  MainPage({required this.currentPage});
+
   @override
   _MainPageState createState() => _MainPageState();
 }
@@ -35,8 +39,7 @@ class _MainPageState extends State<MainPage> {
         break;
     }
 
-    // Set the default page to HomePage
-    _currentPage = _configs.indexWhere((config) => config.name == "Home");
+    _currentPage = widget.currentPage;
     _pageController = PageController(initialPage: _currentPage);
   }
 

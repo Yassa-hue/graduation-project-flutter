@@ -4,6 +4,7 @@ import 'package:graduationproject/pages/user_form_page.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
 import 'package:graduationproject/pages/reset_password_page.dart';
 import 'package:graduationproject/components/dismiss_keyboard_on_tap.dart';
+import 'package:graduationproject/utils/constants.dart';
 import '../../../utils/images_paths.dart';
 import '../components/custom_button.dart';
 import '../components/custom_field.dart';
@@ -30,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
     if (auth.currentUser != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MainPage()));
+            context, MaterialPageRoute(builder: (context) => MainPage(currentPage: homePage,)));
       });
     }
   }
@@ -42,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
     try {
       await auth.login(email, password);
 
-      final route = MaterialPageRoute(builder: (context) => MainPage());
+      final route = MaterialPageRoute(builder: (context) => MainPage(currentPage: homePage,));
       Navigator.of(context).pushReplacement(route);
     } catch (e) {
       setState(() => errorMsg = e.toString());
