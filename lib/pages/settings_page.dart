@@ -15,22 +15,25 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
-  Future<void> logout () async {
+  Future<void> logout() async {
     final auth = AuthProvider.of(context)!;
 
     await auth.logout();
 
     // ignore: use_build_context_synchronously
-    Navigator.push(context,
-                   MaterialPageRoute(builder: (context) => const LoginPage()));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const LoginPage()));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.white70, elevation: 0.0, actions: const [
-        CustomAppBar(),
-      ]),
+      appBar: AppBar(
+          backgroundColor: Colors.white70,
+          elevation: 0.0,
+          actions: const [
+            CustomAppBar(),
+          ]),
       body: Container(
         padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
         child: SingleChildScrollView(
@@ -38,7 +41,7 @@ class _SettingPageState extends State<SettingPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text(
-                "Setting",
+                "Settings",
                 style: TextStyle(
                     color: PRIMARY_COLOR,
                     fontSize: 25,
@@ -62,13 +65,14 @@ class _SettingPageState extends State<SettingPage> {
                       text: "Edit Profile",
                       next: Icons.navigate_next_sharp,
                       onClick: () {
+                        final route = MaterialPageRoute(
+                            builder: (context) => UserFormPage(
+                                  currentUser:
+                                      AuthProvider.of(context)!.currentUser,
+                                ));
 
-                        final route = MaterialPageRoute(builder: (context) => 
-                          UserFormPage(currentUser:
-                            AuthProvider.of(context)!.currentUser,));
-   
                         // ignore: use_build_context_synchronously
-                        Navigator.of(context).pushReplacement(route);
+                        Navigator.of(context).push(route);
                       },
                     ),
                     const Divider(
