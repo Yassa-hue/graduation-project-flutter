@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:graduationproject/models/donation_model.dart';
+import 'package:graduationproject/models/notification_model.dart';
+import 'package:graduationproject/services/notification_service.dart';
 
 class DonationService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -10,12 +12,27 @@ class DonationService {
 
     final String donationId = docRef.id;
     await docRef.update({'id': donationId});
+
+    NotificationModel notification = NotificationModel(
+      title: 'New Donation',
+      body:
+          'A new donation has been made to your campaign: ${donation.amount}\$',
+      userId: donation.receivingOrganizationId,
+    );
+    await NotificationService().createNotification(notification);
+
+    notification = NotificationModel(
+      title: 'New Donation',
+      body: 'Thank you for your donation: ${donation.amount}\$',
+      userId: donation.donorId,
+    );
+    await NotificationService().createNotification(notification);
   }
 
   Future<Donation?> getDonationById(String donationId) async {
     final DocumentSnapshot doc =
-          await _firestore.collection('donations').doc(donationId).get();
-      return Donation.fromJson(doc.data() as Map<String, dynamic>);
+        await _firestore.collection('donations').doc(donationId).get();
+    return Donation.fromJson(doc.data() as Map<String, dynamic>);
   }
 
   Future<void> updateDonation(Donation donation) async {

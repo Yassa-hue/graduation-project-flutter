@@ -3,16 +3,33 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:graduationproject/models/campaign_model.dart';
+import 'package:graduationproject/models/notification_model.dart';
+import 'package:graduationproject/models/user_model.dart';
+import 'package:graduationproject/services/notification_service.dart';
 
 class CampaignService {
-  final CollectionReference _colectionReference = FirebaseFirestore.instance.collection('campaigns');
+  final CollectionReference _colectionReference =
+      FirebaseFirestore.instance.collection('campaigns');
 
   Future<Campaign> createCampaign(Campaign campaign) async {
     DocumentReference docRef = await _colectionReference.add(campaign.toJson());
     String id = docRef.id;
     await docRef.update({'id': id});
-    
+
     campaign.id = id;
+
+    NotificationModel notification = NotificationModel(
+      title: 'New Campaign',
+      body: 'A new campaign has been created: ${campaign.title}',
+      userId: '',
+    );
+
+    await NotificationService()
+        .sendNotificationToUsersByType(notification, UserRole.donor);
+
+    await NotificationService()
+        .sendNotificationToUsersByType(notification, UserRole.volunteer);
+
     return campaign;
   }
 
@@ -33,20 +50,24 @@ class CampaignService {
     await _colectionReference.doc(id).delete();
   }
 
-  Future<List<Campaign>> getCampaignsByOrganization(String organizationId) async {
-    QuerySnapshot snapshot = await _colectionReference.where('organizationId', isEqualTo: organizationId).get();
-    
-    return snapshot
-        .docs
+  Future<List<Campaign>> getCampaignsByOrganization(
+      String organizationId) async {
+    QuerySnapshot snapshot = await _colectionReference
+        .where('organizationId', isEqualTo: organizationId)
+        .get();
+
+    return snapshot.docs
         .map((doc) => Campaign.fromJson(doc.data() as Map<String, dynamic>))
         .toList();
   }
 
   Future<List<Campaign>> getLatestCampaigns() async {
-    QuerySnapshot snapshot = await _colectionReference.orderBy('createdAt', descending: true).limit(3).get();
-    
-    return snapshot
-        .docs
+    QuerySnapshot snapshot = await _colectionReference
+        .orderBy('createdAt', descending: true)
+        .limit(3)
+        .get();
+
+    return snapshot.docs
         .map((doc) => Campaign.fromJson(doc.data() as Map<String, dynamic>))
         .toList();
   }
@@ -54,9 +75,9 @@ class CampaignService {
   Future<String> uploadImage(File image) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     Reference ref = FirebaseStorage.instance.ref().child(fileName);
-    
+
     await ref.putFile(image);
-    
+
     return await ref.getDownloadURL();
   }
 }

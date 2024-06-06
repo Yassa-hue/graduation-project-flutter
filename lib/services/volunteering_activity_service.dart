@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:graduationproject/models/notification_model.dart';
 import 'package:graduationproject/models/volunteering_activity_model.dart';
+import 'package:graduationproject/services/notification_service.dart';
 
 class VolunteeringActivityModelService {
   final CollectionReference _volunteeringActivitiesCollection =
@@ -19,6 +21,14 @@ class VolunteeringActivityModelService {
     await _volunteeringActivitiesCollection
         .doc(activity.id)
         .set(activity.toMap());
+    
+    NotificationModel notification = NotificationModel(
+      title: 'New Volunteering Activity',
+      body: 'A new volunteer has requested to join your organization',
+      userId: activity.organizationId,
+    );
+
+    await NotificationService().createNotification(notification);
   }
 
   Future<void> updateVolunteeringActivity(VolunteeringActivityModel activity) async {
