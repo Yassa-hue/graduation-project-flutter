@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:graduationproject/components/custom_app_bar.dart';
+<<<<<<< HEAD
 import 'package:graduationproject/pages/page_manager.dart';
+=======
+import 'package:graduationproject/models/user_model.dart';
+import 'package:graduationproject/pages/make_donation_page.dart';
+import 'package:graduationproject/pages/page_manager.dart';
+import 'package:graduationproject/utils/AuthProvider.dart';
+>>>>>>> 55bb009 (fix the action button)
 
 import 'package:graduationproject/utils/color_palette.dart';
 import 'package:graduationproject/utils/constants.dart';
@@ -18,6 +25,46 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  // TODO: Fix the routing when the routing PR is merged.
+  void onActionButtonPressed() {
+    switch (AuthProvider.of(context)?.currentUser!.role) {
+      case UserRole.donor:
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => MainPage()));
+        });
+      case UserRole.organization:
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => MainPage()));
+        });
+      case UserRole.volunteer:
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => MainPage()));
+        });
+      default:
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => MainPage()));
+        });
+    }
+  }
+
+  String getActionButtonMsg() {
+    switch (AuthProvider.of(context)?.currentUser!.role) {
+      case UserRole.donor:
+        return "Make Donation >";
+      case UserRole.organization:
+        return "Create Campaign >";
+      case UserRole.volunteer:
+        return "Volunteer >";
+      default:
+        return "Make Donation";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -167,8 +214,8 @@ class _HomePageState extends State<HomePage> {
                                 )));
                   },
                   color: Colors.black,
-                  child: const Text(
-                    "Donate Now  >",
+                  child: Text(
+                    getActionButtonMsg(),
                     style: TextStyle(color: Colors.white, fontSize: 22),
                   ),
                 ),
