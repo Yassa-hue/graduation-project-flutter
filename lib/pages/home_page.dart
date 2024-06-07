@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:graduationproject/components/custom_app_bar.dart';
 import 'package:graduationproject/pages/campaign_details_page.dart';
+import 'package:graduationproject/pages/campaigns_feed_page.dart';
 import 'package:graduationproject/pages/page_manager.dart';
 import 'package:graduationproject/models/user_model.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
@@ -146,12 +147,32 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 15,
               ),
-              Text(
-                "Latest Campaigns",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey[700],
-                    fontSize: 15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Latest Campaigns",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey[700],
+                        fontSize: 15),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CampaignsFeedPage()));
+                    },
+                    child: Text(
+                      "See All",
+                      style: TextStyle(
+                        color: Colors.grey[700],
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 3,
@@ -199,7 +220,8 @@ class _HomePageState extends State<HomePage> {
                                     child: Container(
                                       padding: const EdgeInsets.all(8),
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             campaigns[index].title,
