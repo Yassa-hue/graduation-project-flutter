@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:graduationproject/components/custom_app_bar.dart';
 import 'package:graduationproject/components/custom_button.dart';
+import 'package:graduationproject/components/custom_field.dart';
 import 'package:graduationproject/components/dismiss_keyboard_on_tap.dart';
 import 'package:graduationproject/models/campaign_model.dart';
 import 'package:graduationproject/models/volunteering_activity_model.dart';
@@ -106,7 +107,7 @@ class _ApplyForVolunteeringPageState extends State<ApplyForVolunteeringPage> {
   Widget buildDropdownMenu() {
     return DropdownButtonFormField<Campaign>(
       decoration: const InputDecoration(
-        labelText: 'Choose the event to donate to',
+        labelText: 'Choose the campaign to volunteer to',
         border: OutlineInputBorder(),
       ),
       value: _selectedCampaign,
@@ -153,14 +154,21 @@ class _ApplyForVolunteeringPageState extends State<ApplyForVolunteeringPage> {
                       ),
                     ),
                     const SizedBox(height: 60),
-                    buildDropdownMenu(),
-                    const SizedBox(height: 30),
-                    const Text(
-                      "Is this donation periodic?",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    CustomField(
+                      text: "Role",
+                      hintText: "Teach children coding",
+                      prefex: Icons.work,
+                      onChanged: (value) => {
+                        setState(() {
+                          errorMsg = "";
+                          role = value;
+
+                          checkInputData();
+                        })
+                      },
                     ),
                     const SizedBox(height: 20),
+                    buildDropdownMenu(),
                     const SizedBox(height: 30),
                     Center(
                       child: TextField(
@@ -172,7 +180,7 @@ class _ApplyForVolunteeringPageState extends State<ApplyForVolunteeringPage> {
                         }),
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
-                          labelText: "Other Amount: ",
+                          labelText: "How many hours: ",
                           prefixText: "Hours: ",
                           border: OutlineInputBorder(),
                         ),

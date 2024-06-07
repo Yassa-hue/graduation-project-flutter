@@ -18,9 +18,9 @@ class VolunteeringActivityService {
   }
 
   Future<void> addVolunteeringActivity(VolunteeringActivityModel activity) async {
-    await _volunteeringActivitiesCollection
-        .doc(activity.id)
-        .set(activity.toMap());
+    DocumentReference docRef = await _volunteeringActivitiesCollection.add(activity.toMap());
+    String docId = docRef.id;
+    await docRef.update({'id': docId});
     
     NotificationModel notification = NotificationModel(
       title: 'New Volunteering Activity',
