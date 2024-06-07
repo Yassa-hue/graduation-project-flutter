@@ -50,6 +50,14 @@ class CampaignService {
     await _colectionReference.doc(id).delete();
   }
 
+  Future<List<Campaign>> getCampaigns() async {
+    QuerySnapshot snapshot = await _colectionReference.orderBy('createdAt').get();
+
+    return snapshot.docs
+        .map((doc) => Campaign.fromJson(doc.data() as Map<String, dynamic>))
+        .toList();
+  }
+
   Future<List<Campaign>> getCampaignsByOrganization(
       String organizationId) async {
     QuerySnapshot snapshot = await _colectionReference
