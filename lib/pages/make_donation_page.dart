@@ -16,7 +16,9 @@ import 'package:graduationproject/components/dismiss_keyboard_on_tap.dart';
 import 'package:graduationproject/utils/constants.dart';
 
 class MakeDonationPage extends StatefulWidget {
-  const MakeDonationPage({super.key});
+  final Campaign? selectedCampaign;
+
+  const MakeDonationPage({Key? key, this.selectedCampaign}) : super(key: key);
 
   @override
   State<MakeDonationPage> createState() => _MakeDonationPageState();
@@ -42,6 +44,11 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
       CampaignService().getLatestCampaigns().then((data) {
         setState(() {
           _campaigns = data;
+
+          String selectedCampaignId = widget.selectedCampaign?.id ?? "";
+          _selectedCampaign = _campaigns.firstWhere(
+              (campaign) => campaign.id == selectedCampaignId,
+              orElse: () => data.first);
         });
       });
     } catch (e) {
@@ -79,7 +86,10 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
       Navigator.push(
           // ignore: use_build_context_synchronously
           context,
-          MaterialPageRoute(builder: (context) => MainPage(currentPage: profilePage,)));
+          MaterialPageRoute(
+              builder: (context) => MainPage(
+                    currentPage: profilePage,
+                  )));
     } catch (e) {
       setState(() {
         errorMsg = e.toString();
