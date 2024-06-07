@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:graduationproject/components/custom_app_bar.dart';
-<<<<<<< HEAD
 import 'package:graduationproject/pages/page_manager.dart';
-=======
 import 'package:graduationproject/models/user_model.dart';
-import 'package:graduationproject/pages/make_donation_page.dart';
-import 'package:graduationproject/pages/page_manager.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
->>>>>>> 55bb009 (fix the action button)
 
 import 'package:graduationproject/utils/color_palette.dart';
 import 'package:graduationproject/utils/constants.dart';
@@ -25,31 +20,30 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-  // TODO: Fix the routing when the routing PR is merged.
   void onActionButtonPressed() {
+    int togoPageId = 0;
+
     switch (AuthProvider.of(context)?.currentUser!.role) {
       case UserRole.donor:
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => MainPage()));
-        });
+        togoPageId = donationPage;
+        break;
       case UserRole.organization:
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => MainPage()));
-        });
+        togoPageId = campainPage;
+        break;
       case UserRole.volunteer:
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => MainPage()));
-        });
+        // TODO: Fix this when creating the volunteer pages
+        togoPageId = campainPage;
+        break;
       default:
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => MainPage()));
-        });
+        togoPageId = homePage;
     }
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MainPage(
+                  currentPage: togoPageId,
+                )));
   }
 
   String getActionButtonMsg() {
@@ -195,7 +189,8 @@ class _HomePageState extends State<HomePage> {
                                   child: Container(
                                     padding: const EdgeInsets.all(8),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           campaigns[index].title,
@@ -238,14 +233,7 @@ class _HomePageState extends State<HomePage> {
                 height: 100,
                 width: double.infinity,
                 child: MaterialButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MainPage(
-                                  currentPage: donationPage,
-                                )));
-                  },
+                  onPressed: onActionButtonPressed,
                   color: Colors.black,
                   child: Text(
                     getActionButtonMsg(),
