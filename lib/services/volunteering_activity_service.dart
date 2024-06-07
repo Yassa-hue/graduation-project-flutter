@@ -3,7 +3,7 @@ import 'package:graduationproject/models/notification_model.dart';
 import 'package:graduationproject/models/volunteering_activity_model.dart';
 import 'package:graduationproject/services/notification_service.dart';
 
-class VolunteeringActivityModelService {
+class VolunteeringActivityService {
   final CollectionReference _volunteeringActivitiesCollection =
       FirebaseFirestore.instance.collection('volunteering_activities');
 
