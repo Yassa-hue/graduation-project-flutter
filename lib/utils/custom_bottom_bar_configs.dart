@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:graduationproject/pages/apply_for_volunteering_page.dart';
+import 'package:graduationproject/pages/campaigns_feed_page.dart';
 import 'package:graduationproject/pages/dashboard_page.dart';
-import 'package:graduationproject/pages/donation_categories.dart';
 import 'package:graduationproject/pages/home_page.dart';
 import 'package:graduationproject/pages/make_donation_page.dart';
 import 'package:graduationproject/pages/campaign_form_page.dart';
 import 'package:graduationproject/pages/profile_page.dart';
 import 'package:graduationproject/pages/settings_page.dart';
-import 'package:graduationproject/pages/volunteering_categories_page.dart';
 
 class BarIconConfig {
   final String name;
@@ -28,9 +27,9 @@ var volunteerConfigs = [
     page: ProfilePage(),
   ),
   BarIconConfig(
-    name: "Volunteering Categories",
-    icon: Icons.campaign,
-    page: VolunteeringCategoriesPage(),
+    name: "Campaigns Feed",
+    icon: Icons.search,
+    page: CampaignsFeedPage(),
   ),
   BarIconConfig(
     name: "Home",
@@ -56,9 +55,9 @@ var donorConfigs = [
     page: ProfilePage(),
   ),
   BarIconConfig(
-    name: "Donation Categories",
-    icon: Icons.campaign,
-    page: DonationCategories(),
+    name: "Campaigns Feed",
+    icon: Icons.search,
+    page: CampaignsFeedPage(),
   ),
   BarIconConfig(
     name: "Home",
