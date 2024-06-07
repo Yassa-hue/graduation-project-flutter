@@ -32,20 +32,20 @@ class _ProfilePageState extends State<ProfilePage> {
   Future<List<dynamic>> _getActivitiesForUser(UserModel? user) async {
     if (user == null) return [];
 
-    switch (user.role) {
-      case UserRole.donor:
-        try {
+    try {
+      switch (user.role) {
+        case UserRole.donor:
           return await DonationService().getDonationsByDonor(user.id);
-        } catch (error) {
+        case UserRole.volunteer:
+          return await VolunteeringActivityService()
+              .getVolunteeringActivitiesByVolunteer(user.id);
+        case UserRole.organization:
+          return await CampaignService().getCampaignsByOrganization(user.id);
+        default:
           return [];
-        }
-      case UserRole.volunteer:
-        return await VolunteeringActivityService()
-            .getVolunteeringActivitiesByVolunteer(user.id);
-      case UserRole.organization:
-        return await CampaignService().getCampaignsByOrganization(user.id);
-      default:
-        return [];
+      }
+    } catch (error) {
+      return [];
     }
   }
 
