@@ -32,8 +32,7 @@ class _HomePageState extends State<HomePage> {
         togoPageId = campainPage;
         break;
       case UserRole.volunteer:
-        // TODO: Fix this when creating the volunteer pages
-        togoPageId = campainPage;
+        togoPageId = volunteeringPage;
         break;
       default:
         togoPageId = homePage;

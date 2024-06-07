@@ -40,7 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
           return [];
         }
       case UserRole.volunteer:
-        return await VolunteeringActivityModelService()
+        return await VolunteeringActivityService()
             .getVolunteeringActivitiesByVolunteer(user.id);
       case UserRole.organization:
         return await CampaignService().getCampaignsByOrganization(user.id);
