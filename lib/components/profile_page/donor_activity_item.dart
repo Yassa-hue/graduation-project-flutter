@@ -1,11 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:graduationproject/models/campaign_model.dart';
 import 'package:graduationproject/models/donation_model.dart';
+import 'package:graduationproject/services/campaign_service.dart';
 import 'package:graduationproject/utils/color_palette.dart';
+import 'package:graduationproject/utils/utils_method.dart';
 
-class DonorActivityItem extends StatelessWidget {
+class DonorActivityItem extends StatefulWidget {
   final Donation donation;
 
   const DonorActivityItem({required this.donation, Key? key}) : super(key: key);
+
+  @override
+  State<DonorActivityItem> createState() => _DonorActivityItemState();
+}
+
+class _DonorActivityItemState extends State<DonorActivityItem> {
+  String organizationName = "";
+
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(Duration.zero, () async {
+      final Campaign organization = await CampaignService()
+          .getCampaignById(widget.donation.receivingCampaignId);
+      organizationName = organization.title;
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,25 +40,25 @@ class DonorActivityItem extends StatelessWidget {
       ),
       child: ExpansionTile(
         title: Text(
-          "Donation: \$${donation.amount}",
+          "Donation: \$${widget.donation.amount}",
           style: const TextStyle(
             color: PRIMARY_COLOR,
             fontWeight: FontWeight.bold,
           ),
         ),
         subtitle: Text(
-          "Organization ID: ${donation.receivingOrganizationId}",
+          "Campaign: ${organizationName}",
           style: TextStyle(color: PRIMARY_COLOR.withOpacity(0.7)),
         ),
         iconColor: PRIMARY_COLOR,
         children: [
           ListTile(
             title: Text(
-              "Periodicity: ${donation.periodicity.toString().split('.').last}",
+              "Periodicity: ${widget.donation.periodicity.toString().split('.').last}",
               style: const TextStyle(color: PRIMARY_COLOR),
             ),
             subtitle: Text(
-              "Date: ${donation.createdAt.toLocal()}",
+              "Date: ${formateDate(widget.donation.createdAt.toLocal())}",
               style: TextStyle(color: Colors.grey[600]),
             ),
           ),

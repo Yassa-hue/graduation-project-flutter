@@ -73,7 +73,7 @@ class VolunteeringActivityService {
   Future<List<VolunteeringActivityModel>> getVolunteeringActivitiesByVolunteer(
       String userId) async {
     QuerySnapshot snapshot = await _volunteeringActivitiesCollection
-        .where('userId', isEqualTo: userId)
+        .where('volunteerId', isEqualTo: userId)
         .get();
 
     return snapshot.docs

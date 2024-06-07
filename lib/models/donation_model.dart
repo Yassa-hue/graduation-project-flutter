@@ -5,11 +5,12 @@ enum Periodicity {
   monthly,
   annually,
 }
+
 class Donation {
   final String? id;
   final String donorId;
   final double amount;
-  final String receivingOrganizationId;
+  final String receivingCampaignId;
   final Periodicity periodicity;
   final DateTime createdAt;
 
@@ -17,7 +18,7 @@ class Donation {
     this.id,
     required this.donorId,
     required this.amount,
-    required this.receivingOrganizationId,
+    required this.receivingCampaignId,
     required this.periodicity,
     required this.createdAt,
   });
@@ -27,9 +28,9 @@ class Donation {
       id: json['id'],
       donorId: json['donorId'],
       amount: json['amount'],
-      receivingOrganizationId: json['receivingOrganizationId'],
-      periodicity: Periodicity.values.firstWhere((e) => e.toString() == '${json['periodicity']}'),
-      createdAt: DateTime.parse(json['created_at']),
+      receivingCampaignId: json['receivingCampaignId'],
+      periodicity: _parsePeriodicity(json["periodicity"]),
+      createdAt: (json["createdAt"] as Timestamp).toDate(),
     );
   }
 
@@ -38,10 +39,22 @@ class Donation {
       'id': id,
       'donorId': donorId,
       'amount': amount,
-      'receivingOrganizationId': receivingOrganizationId,
+      'receivingCampaignId': receivingCampaignId,
       'periodicity': periodicity.toString().split('.').last,
       'createdAt': Timestamp.fromDate(DateTime.now()),
     };
   }
-}
 
+  static Periodicity _parsePeriodicity(String periodicity) {
+    switch (periodicity) {
+      case 'weekly':
+        return Periodicity.weekly;
+      case 'monthly':
+        return Periodicity.monthly;
+      case 'annually':
+        return Periodicity.annually;
+      default:
+        throw ArgumentError('Invalid periodicity: $periodicity');
+    }
+  }
+}

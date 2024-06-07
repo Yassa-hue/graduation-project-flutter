@@ -17,7 +17,7 @@ class DonationService {
       title: 'New Donation',
       body:
           'A new donation has been made to your campaign: ${donation.amount}\$',
-      userId: donation.receivingOrganizationId,
+      userId: donation.receivingCampaignId,
     );
     await NotificationService().createNotification(notification);
 
