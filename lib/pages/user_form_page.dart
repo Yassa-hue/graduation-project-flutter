@@ -5,7 +5,6 @@ import 'package:graduationproject/components/custom_image_picker.dart';
 import 'package:graduationproject/models/user_model.dart';
 import 'package:graduationproject/pages/login_page.dart';
 import 'package:graduationproject/pages/page_manager.dart';
-import 'package:graduationproject/pages/profile_page.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
 
 import 'package:graduationproject/utils/color_palette.dart';
@@ -14,6 +13,7 @@ import 'package:graduationproject/components/custom_button.dart';
 import 'package:graduationproject/components/custom_field.dart';
 import 'package:graduationproject/components/dismiss_keyboard_on_tap.dart';
 import 'package:graduationproject/components/custom_dopdown_menu.dart';
+import 'package:graduationproject/utils/constants.dart';
 
 List<DropdownItemData> dropdownItemsData = [
   DropdownItemData(icon: Icons.favorite, title: 'donor'),
@@ -94,7 +94,7 @@ class _UserFormPageState extends State<UserFormPage> {
         });
 
         final route =
-            MaterialPageRoute(builder: (context) => const ProfilePage());
+            MaterialPageRoute(builder: (context) => MainPage(currentPage: profilePage,));
         // ignore: use_build_context_synchronously
         Navigator.of(context).pushReplacement(route);
       } else {
@@ -106,7 +106,7 @@ class _UserFormPageState extends State<UserFormPage> {
           "profileImageUrl": profileImageUrl,
         });
 
-        final route = MaterialPageRoute(builder: (context) => MainPage());
+        final route = MaterialPageRoute(builder: (context) => MainPage(currentPage: homePage,));
         Navigator.of(context).pushReplacement(route);
       }
     } catch (e) {
