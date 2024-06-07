@@ -76,6 +76,7 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
       donorId: currentUser!.id,
       amount: _selectedAmount!.toDouble(),
       receivingCampaignId: _selectedCampaign!.id,
+      receivingOrganizationId: _selectedCampaign!.organizationId,
       periodicity: _periodicity,
       createdAt: DateTime.now(),
     );

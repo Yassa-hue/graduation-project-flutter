@@ -11,6 +11,7 @@ class Donation {
   final String donorId;
   final double amount;
   final String receivingCampaignId;
+  final String receivingOrganizationId;
   final Periodicity periodicity;
   final DateTime createdAt;
 
@@ -19,6 +20,7 @@ class Donation {
     required this.donorId,
     required this.amount,
     required this.receivingCampaignId,
+    required this.receivingOrganizationId,
     required this.periodicity,
     required this.createdAt,
   });
@@ -29,6 +31,7 @@ class Donation {
       donorId: json['donorId'],
       amount: json['amount'],
       receivingCampaignId: json['receivingCampaignId'],
+      receivingOrganizationId: json['receivingOrganizationId'],
       periodicity: _parsePeriodicity(json["periodicity"]),
       createdAt: (json["createdAt"] as Timestamp).toDate(),
     );
@@ -40,6 +43,7 @@ class Donation {
       'donorId': donorId,
       'amount': amount,
       'receivingCampaignId': receivingCampaignId,
+      'receivingOrganizationId': receivingOrganizationId,
       'periodicity': periodicity.toString().split('.').last,
       'createdAt': Timestamp.fromDate(DateTime.now()),
     };
