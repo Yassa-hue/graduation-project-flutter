@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graduationproject/components/custom_app_bar.dart';
 import 'package:graduationproject/models/campaign_model.dart';
 import 'package:graduationproject/models/user_model.dart';
+import 'package:graduationproject/pages/apply_for_volunteering_page.dart';
 import 'package:graduationproject/pages/campaign_form_page.dart';
 import 'package:graduationproject/pages/make_donation_page.dart';
 import 'package:graduationproject/pages/page_manager.dart';
@@ -42,7 +43,12 @@ class _CampaignDetailsPageState extends State<CampaignDetailsPage> {
                     )));
         break;
       case UserRole.volunteer:
-        // TODO: Fix this when creating the volunteer pages
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ApplyForVolunteeringPage(
+                      campaign: widget.campaign,
+                    )));
         break;
       default:
         Navigator.push(

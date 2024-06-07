@@ -15,4 +15,5 @@ const int homePage = 2;
 const int donationPage = 3;
 const int settingsPage = 4;
 const int campainsFeedPage = 1;
+const int volunteeringPage = 3;
 
