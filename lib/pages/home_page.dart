@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:graduationproject/components/custom_app_bar.dart';
+import 'package:graduationproject/pages/campaign_details_page.dart';
 import 'package:graduationproject/pages/page_manager.dart';
 import 'package:graduationproject/models/user_model.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
@@ -167,52 +168,61 @@ class _HomePageState extends State<HomePage> {
                         scrollDirection: Axis.horizontal,
                         itemCount: campaigns.length,
                         itemBuilder: (context, index) {
-                          return Container(
-                            width: 300,
-                            height: 130,
-                            padding: const EdgeInsets.fromLTRB(0, 8, 10, 10),
-                            child: Stack(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.network(
-                                    campaigns[index].coverImageLink,
-                                    width: 300,
-                                    height: 130,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 0,
-                                  left: 0,
-                                  right: 0,
-                                  child: Container(
-                                    padding: const EdgeInsets.all(8),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          campaigns[index].title,
-                                          style: TextStyle(
-                                            color: Colors.grey[800],
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                        SizedBox(height: 4),
-                                        Text(
-                                          campaigns[index].description,
-                                          style: TextStyle(
-                                            color: Colors.grey[600],
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                      ],
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => CampaignDetailsPage(
+                                            campaign: campaigns[index],
+                                          )));
+                            },
+                            child: Container(
+                              width: 300,
+                              height: 130,
+                              padding: const EdgeInsets.fromLTRB(0, 8, 10, 10),
+                              child: Stack(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.network(
+                                      campaigns[index].coverImageLink,
+                                      width: 300,
+                                      height: 130,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
-                                ),
-                              ],
+                                  Positioned(
+                                    bottom: 0,
+                                    left: 0,
+                                    right: 0,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(8),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            campaigns[index].title,
+                                            style: TextStyle(
+                                              color: Colors.grey[800],
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                          SizedBox(height: 4),
+                                          Text(
+                                            campaigns[index].description,
+                                            style: TextStyle(
+                                              color: Colors.grey[600],
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           );
                         },
