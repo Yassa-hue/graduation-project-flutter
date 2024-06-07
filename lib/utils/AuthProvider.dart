@@ -130,6 +130,16 @@ class _AuthProviderState extends State<AuthProvider> {
     return await ref.getDownloadURL();
   }
 
+  Future<UserModel> getUserById(String userId) {
+    return firestore.collection('users').doc(userId).get().then((doc) {
+      if (doc.exists) {
+        return UserModel.fromJson(doc.data()!);
+      } else {
+        throw "User not found";
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return initialized ? widget.child : Container();

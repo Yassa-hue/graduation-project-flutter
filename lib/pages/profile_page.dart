@@ -73,46 +73,49 @@ class _ProfilePageState extends State<ProfilePage> {
           ]),
       body: Container(
         padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
-        child: currentUser == null ? 
-          const CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-          ) :
-          SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                    child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(150)),
-                      border: Border.all(color: Colors.grey)),
-                  height: 150,
-                  width: 150,
-                  child: currentUser != null
-                      ? ClipRRect(
-                          borderRadius: BorderRadius.circular(150),
-                          child: Image.network(
-                            currentUser!.profileImageUrl,
-                            width: 100,
-                            height: 100,
-                            fit: BoxFit.cover,
-                          ),
-                        )
-                      : const CircularProgressIndicator(),
-                )),
-                const SizedBox(height: 25),
-                UserDetails(name: currentUser!.name, email: currentUser!.email),
-                const SizedBox(height: 40),
-                Text(
-                  _getActivitiesTitle(currentUser!.role),
-                  style:
-                      const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        child: currentUser == null
+            ? const CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              )
+            : SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                        child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(150)),
+                          border: Border.all(color: Colors.grey)),
+                      height: 150,
+                      width: 150,
+                      child: currentUser != null
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(150),
+                              child: Image.network(
+                                currentUser!.profileImageUrl,
+                                width: 100,
+                                height: 100,
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                          : const CircularProgressIndicator(),
+                    )),
+                    const SizedBox(height: 25),
+                    UserDetails(
+                        name: currentUser!.name, email: currentUser!.email),
+                    const SizedBox(height: 40),
+                    Text(
+                      _getActivitiesTitle(currentUser!.role),
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 10),
+                    ActivityList(
+                        role: currentUser!.role, activities: activities),
+                  ],
                 ),
-                const SizedBox(height: 10),
-                ActivityList(role: currentUser!.role, activities: activities),
-              ],
-            ),
-          ),
+              ),
       ),
     );
   }
