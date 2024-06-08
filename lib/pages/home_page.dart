@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:graduationproject/components/custom_app_bar.dart';
 import 'package:graduationproject/pages/campaign_details_page.dart';
+import 'package:graduationproject/pages/campaigns_feed_page.dart';
 import 'package:graduationproject/pages/page_manager.dart';
 import 'package:graduationproject/models/user_model.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
@@ -157,10 +158,21 @@ class _HomePageState extends State<HomePage> {
                   ),
                   TextButton(
                     onPressed: () {
+                      if (AuthProvider.of(context)?.currentUser!.role ==
+                          UserRole.organization) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CampaignsFeedPage()));
+                        return;
+                      }
+
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MainPage(currentPage: campainsFeedPage,)));
+                              builder: (context) => MainPage(
+                                    currentPage: campainsFeedPage,
+                                  )));
                     },
                     child: Text(
                       "See All",
