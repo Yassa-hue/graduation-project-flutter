@@ -51,6 +51,8 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
         campaignDetails = widget.campaign?.description ?? '';
         campaignImageLink = widget.campaign?.coverImageLink ?? '';
         campaignDate = widget.campaign?.createdAt;
+
+        checkDataIsComplete();
       });
     }
   }
@@ -84,7 +86,10 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
       Navigator.push(
           // ignore: use_build_context_synchronously
           context,
-          MaterialPageRoute(builder: (context) => MainPage(currentPage: profilePage,)));
+          MaterialPageRoute(
+              builder: (context) => MainPage(
+                    currentPage: profilePage,
+                  )));
     } catch (e) {
       setState(() {
         errorMsg = e.toString();
@@ -111,9 +116,11 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Center(
+                Center(
                   child: Text(
-                    "New Event",
+                    (widget.campaign == null
+                        ? "New Campaign"
+                        : "Edit Campaign"),
                     style: TextStyle(
                         color: PRIMARY_COLOR,
                         fontSize: 25,
@@ -159,6 +166,7 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
                   height: 8,
                 ),
                 TextFormField(
+                  initialValue: campaignName,
                   cursorColor: PRIMARY_COLOR,
                   decoration: InputDecoration(
                     hintText: "Please Enter Event Name",
@@ -245,8 +253,8 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
                   height: 200,
                   width: double.infinity,
                   child: TextField(
-                    decoration: const InputDecoration(
-                      hintText: "Please Write Event Details",
+                    decoration: InputDecoration(
+                      hintText: campaignDetails.isEmpty ? "Please Write Event Details" : campaignDetails,
                       hintStyle: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.grey),
                       border: OutlineInputBorder(borderSide: BorderSide.none),
@@ -254,7 +262,6 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
                     onChanged: (value) => {
                       setState(() {
                         campaignDetails = value;
-
                         checkDataIsComplete();
                       })
                     },
