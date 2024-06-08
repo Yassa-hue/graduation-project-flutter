@@ -41,7 +41,7 @@ class _MakeDonationPageState extends State<MakeDonationPage> {
   void initState() {
     super.initState();
     try {
-      CampaignService().getLatestCampaigns().then((data) {
+      CampaignService().getCampaigns().then((data) {
         setState(() {
           _campaigns = data;
 

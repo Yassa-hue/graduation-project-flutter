@@ -37,7 +37,7 @@ class _ApplyForVolunteeringPageState extends State<ApplyForVolunteeringPage> {
   void initState() {
     super.initState();
     try {
-      CampaignService().getLatestCampaigns().then((data) {
+      CampaignService().getCampaigns().then((data) {
         setState(() {
           _campaigns = data;
 
