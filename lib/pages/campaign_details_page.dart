@@ -10,6 +10,7 @@ import 'package:graduationproject/utils/AuthProvider.dart';
 import 'package:graduationproject/utils/color_palette.dart';
 import 'package:graduationproject/utils/constants.dart';
 import 'package:graduationproject/utils/utils_method.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CampaignDetailsPage extends StatefulWidget {
   final Campaign campaign;
@@ -23,6 +24,26 @@ class CampaignDetailsPage extends StatefulWidget {
 
 class _CampaignDetailsPageState extends State<CampaignDetailsPage> {
   UserModel? currentUser;
+  String? organizerName;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      currentUser = AuthProvider.of(context)?.currentUser;
+    });
+    fetchOrganizerName();
+  }
+
+  Future<void> fetchOrganizerName() async {
+    DocumentSnapshot organizerSnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(widget.campaign.organizationId)
+        .get();
+    setState(() {
+      organizerName = organizerSnapshot['name'];
+    });
+  }
 
   void onActionButtonPressed() {
     switch (currentUser!.role) {
@@ -74,71 +95,93 @@ class _CampaignDetailsPageState extends State<CampaignDetailsPage> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    setState(() {
-      currentUser = AuthProvider.of(context)?.currentUser;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.white70,
-          elevation: 0.0,
-          actions: const [
-            CustomAppBar(),
-          ]),
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        title: Text(
+          'Campaign Details',
+          style: TextStyle(color: Colors.black),
+        ),
+        iconTheme: IconThemeData(color: Colors.black),
+        actions: const [CustomAppBar()],
+      ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.network(
-              widget.campaign.coverImageLink,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.network(
+                widget.campaign.coverImageLink,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: 300,
+              ),
+              SizedBox(height: 16),
+              Text(
+                widget.campaign.title,
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: PRIMARY_COLOR,
+                ),
+              ),
+              SizedBox(height: 8),
+              Text(
+                widget.campaign.description,
+                style: TextStyle(fontSize: 16, color: SECONDARY_COLOR),
+              ),
+              SizedBox(height: 16),
+              Row(
                 children: [
-                  Text(
-                    widget.campaign.title,
-                    style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: PRIMARY_COLOR),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    widget.campaign.description,
-                    style: TextStyle(fontSize: 16, color: SECONDARY_COLOR),
-                  ),
-                  SizedBox(height: 8),
+                  Icon(Icons.calendar_today, color: SECONDARY_COLOR),
+                  SizedBox(width: 8),
                   Text(
                     'Date: ${formateDate(widget.campaign.createdAt)}',
                     style: TextStyle(fontSize: 16, color: SECONDARY_COLOR),
                   ),
-                  if (currentUser != null &&
-                      (currentUser!.role == UserRole.organization ||
-                          currentUser!.id == widget.campaign.organizationId))
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-                      height: 100,
-                      width: double.infinity,
-                      child: MaterialButton(
-                        onPressed: onActionButtonPressed,
-                        color: Colors.black,
-                        child: Text(
-                          getActionButtonMsg(),
-                          style: TextStyle(color: Colors.white, fontSize: 22),
-                        ),
-                      ),
-                    ),
                 ],
               ),
-            ),
-          ],
+              SizedBox(height: 16),
+              organizerName != null
+                  ? Row(
+                      children: [
+                        Icon(Icons.person, color: SECONDARY_COLOR),
+                        SizedBox(width: 8),
+                        Text(
+                          'Organizer: $organizerName',
+                          style:
+                              TextStyle(fontSize: 16, color: SECONDARY_COLOR),
+                        ),
+                      ],
+                    )
+                  : CircularProgressIndicator(),
+              SizedBox(height: 16),
+              if (currentUser != null &&
+                  (currentUser!.role == UserRole.organization ||
+                      currentUser!.id == widget.campaign.organizationId))
+                Center(
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    child: MaterialButton(
+                      height: 60,
+                      onPressed: onActionButtonPressed,
+                      color: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Text(
+                        getActionButtonMsg(),
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );
