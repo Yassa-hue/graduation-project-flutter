@@ -66,6 +66,9 @@ class _UserFormPageState extends State<UserFormPage> {
         confirmPassword = widget.currentUser!.password;
         userRole = widget.currentUser!.role.toString();
         profileImageUrl = widget.currentUser!.profileImageUrl;
+        agreeToTermsAndConditions = true;
+
+        checkInputDataIsComplete();
       });
     }
   }
@@ -78,7 +81,8 @@ class _UserFormPageState extends State<UserFormPage> {
 
     final auth = AuthProvider.of(context)!;
 
-    profileImageUrl = await auth.uploadImage(profileImage!);
+    if (profileImage != null)
+      profileImageUrl = await auth.uploadImage(profileImage!);
 
     try {
       if (password != confirmPassword) {
@@ -93,8 +97,10 @@ class _UserFormPageState extends State<UserFormPage> {
           "profileImageUrl": profileImageUrl,
         });
 
-        final route =
-            MaterialPageRoute(builder: (context) => MainPage(currentPage: profilePage,));
+        final route = MaterialPageRoute(
+            builder: (context) => MainPage(
+                  currentPage: profilePage,
+                ));
         // ignore: use_build_context_synchronously
         Navigator.of(context).pushReplacement(route);
       } else {
@@ -106,7 +112,10 @@ class _UserFormPageState extends State<UserFormPage> {
           "profileImageUrl": profileImageUrl,
         });
 
-        final route = MaterialPageRoute(builder: (context) => MainPage(currentPage: homePage,));
+        final route = MaterialPageRoute(
+            builder: (context) => MainPage(
+                  currentPage: homePage,
+                ));
         Navigator.of(context).pushReplacement(route);
       }
     } catch (e) {
@@ -226,36 +235,36 @@ class _UserFormPageState extends State<UserFormPage> {
                       });
                     },
                   ),
-                Row(
-                  children: [
-                    Checkbox(
-                      value: agreeToTermsAndConditions,
-                      onChanged: (val) {
-                        setState(() {
-                          agreeToTermsAndConditions = val!;
-
-                          checkInputDataIsComplete();
-                        });
-                      },
-                      side: const BorderSide(
-                          color: PRIMARY_COLOR,
-                          style: BorderStyle.solid,
-                          width: 2),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5)),
-                    ),
-                    const Text(
-                      "I agree to the ",
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                    ),
-                    const Text(
-                      'terms & conditions',
-                      style: TextStyle(
-                          color: PRIMARY_COLOR, fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
+                if (widget.currentUser == null)
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: agreeToTermsAndConditions,
+                        onChanged: (val) {
+                          setState(() {
+                            agreeToTermsAndConditions = val!;
+                            checkInputDataIsComplete();
+                          });
+                        },
+                        side: const BorderSide(
+                            color: PRIMARY_COLOR,
+                            style: BorderStyle.solid,
+                            width: 2),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5)),
+                      ),
+                      const Text(
+                        "I agree to the ",
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
+                      const Text(
+                        'terms & conditions',
+                        style: TextStyle(
+                            color: PRIMARY_COLOR, fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
                 const SizedBox(
                   height: 15,
                 ),
