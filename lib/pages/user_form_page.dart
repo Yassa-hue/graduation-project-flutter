@@ -141,7 +141,7 @@ class _UserFormPageState extends State<UserFormPage> {
                 ),
                 const SizedBox(height: 20),
                 CustomImagePicker(
-                  defaultImageLink: profileImageUrl,
+                  defaultImageUrl: profileImageUrl,
                   onImageIsSelected: (imageFile) {
                     setState(() {
                       profileImage = imageFile;

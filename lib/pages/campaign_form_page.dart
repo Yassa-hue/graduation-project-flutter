@@ -124,7 +124,7 @@ class _CampaignFormPageState extends State<CampaignFormPage> {
                   height: 20,
                 ),
                 CustomImagePicker(
-                  defaultImageLink: campaignImageLink,
+                  defaultImageUrl: campaignImageLink,
                   onImageIsSelected: (imageFile) {
                     setState(() {
                       campaignImage = imageFile;
