@@ -28,11 +28,9 @@ class SplashScreen extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               height: 400,
-              child: Center(
-                child: Image.asset(
-                  imagePath,
-                  fit: BoxFit.cover,
-                ),
+              child: Image.asset(
+                imagePath,
+                fit: BoxFit.cover,
               ),
             ),
             const SizedBox(height: 30),
