@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:graduationproject/pages/splash_screens.dart';
+import 'package:graduationproject/pages/intro_screen.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
 
 Future<void> main() async {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Graduation Project App',
       debugShowCheckedModeBanner: false,
-      home: SplashScreens(),
+      home: IntroScreen(),
     );
   }
 }

@@ -40,7 +40,7 @@ class _SplashScreensState extends State<SplashScreens> {
             onNext: () => _onNextPage(0),
           ),
           SplashScreen(
-            imagePath: ImagesPaths.introo,
+            imagePath: ImagesPaths.splash2,
             title: "Unite for a Cause",
             description: "Your skills and time can make a world of difference.",
             currentIndex: 1,
