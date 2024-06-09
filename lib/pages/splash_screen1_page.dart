@@ -32,9 +32,9 @@ class _Splash1State extends State<Splash1> {
   Widget build(BuildContext context) {
     return SplashScreen(
       imagePath: ImagesPaths.splash1,
-      title: "Be a Part of Change",
+      title: "Empower Communities",
       description:
-          "Connects you with organizations and individuals in need of your assistance.",
+          "Join hands with organizations to create lasting change in society.",
       currentIndex: 0,
       onNext: () {
         Navigator.pushReplacement(

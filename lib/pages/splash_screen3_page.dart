@@ -10,9 +10,8 @@ class Splash3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return SplashScreen(
       imagePath: ImagesPaths.splash3,
-      title: "Be a Part of Change",
-      description:
-          "Through volunteering and helping, you contribute to improving the lives of others and the development of your community.",
+      title: "Transform Lives",
+      description: "Every effort counts towards building a better community.",
       currentIndex: 2,
       onNext: () {
         Navigator.pushReplacement(
