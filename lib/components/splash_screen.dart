@@ -56,6 +56,7 @@ class SplashScreen extends StatelessWidget {
             const SizedBox(height: 40),
             Center(
               child: FloatingActionButton(
+                heroTag: 'fab$currentIndex', // Unique hero tag
                 backgroundColor: PRIMARY_COLOR,
                 onPressed: onNext,
                 child: const Icon(
