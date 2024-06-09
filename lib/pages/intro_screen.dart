@@ -2,9 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:graduationproject/pages/splash_screens.dart';
 import 'package:graduationproject/utils/color_palette.dart';
 import 'package:graduationproject/utils/images_paths.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class IntroScreen extends StatelessWidget {
   const IntroScreen({Key? key}) : super(key: key);
+
+  Future<void> _onGetStarted(BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('introShown', true);
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => SplashScreens()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,12 +64,7 @@ class IntroScreen extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
               ),
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => SplashScreens()),
-                );
-              },
+              onPressed: () => _onGetStarted(context),
               child: const Text(
                 "Get Started",
                 style: TextStyle(
