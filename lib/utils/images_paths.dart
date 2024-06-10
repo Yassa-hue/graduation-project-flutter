@@ -10,8 +10,9 @@ class ImagesPaths {
   static const String code = '$path/code.png';
   static const String fourth = '$path/code.png';
   static const String splash3 = '$path/splash3.png';
+  static const String splash2 = '$path/splash2.png';
   static const String splash1 = '$path/splash1.png';
-  static const String introo = '$path/introo.png';
+  static const String introo = '$path/intro.png';
   static const String about = '$path/about us.jpg';
   static const String clothes = '$path/clothes.jpg';
   static const String food = '$path/food.jpg';
