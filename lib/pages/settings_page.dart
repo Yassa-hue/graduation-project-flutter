@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:graduationproject/components/custom_setting.dart';
 import 'package:graduationproject/components/custom_app_bar.dart';
 import 'package:graduationproject/pages/login_page.dart';
+import 'package:graduationproject/pages/privacy_policy_page.dart';
 import 'package:graduationproject/pages/user_form_page.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
 import 'package:graduationproject/utils/color_palette.dart';
@@ -32,7 +33,7 @@ class _SettingPageState extends State<SettingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Settings"),
+          title: Text("Settings"),
           backgroundColor: Colors.white70,
           elevation: 0.0,
           actions: const [
@@ -135,8 +136,14 @@ class _SettingPageState extends State<SettingPage> {
                     ),
                     CustomSetting(
                       colr: PRIMARY_COLOR,
-                      text: "Privacy & Policy",
+                      text: "Privacy Policy",
                       next: Icons.navigate_next_sharp,
+                      onClick: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => PrivacyPolicyPage()),
+                        );
+                      },
                     ),
                     const Divider(
                       endIndent: 15,
