@@ -64,7 +64,7 @@ class _VolunteerActivityItemState extends State<VolunteerActivityItem> {
               style: const TextStyle(color: PRIMARY_COLOR),
             ),
             subtitle: Text(
-              "Organization ID: ${organizationName}",
+              "Organization name: ${organizationName}",
               style: TextStyle(color: Colors.grey[600]),
             ),
           ),
