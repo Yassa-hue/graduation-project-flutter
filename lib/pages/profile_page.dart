@@ -52,11 +52,11 @@ class _ProfilePageState extends State<ProfilePage> {
   String _getActivitiesTitle(UserRole? role) {
     switch (role) {
       case UserRole.donor:
-        return "Your Donations";
+        return "My Donations";
       case UserRole.volunteer:
-        return "Your Volunteering Activities";
+        return "My Volunteering Activities";
       case UserRole.organization:
-        return "Your Campaigns";
+        return "My Campaigns";
       default:
         return "Activities";
     }
@@ -66,6 +66,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          title: Text("My Profile"),
           backgroundColor: Colors.white70,
           elevation: 0.0,
           actions: const [
@@ -102,8 +103,12 @@ class _ProfilePageState extends State<ProfilePage> {
                           : const CircularProgressIndicator(),
                     )),
                     const SizedBox(height: 25),
-                    UserDetails(
-                        name: currentUser!.name, email: currentUser!.email),
+                    Center(
+                      child: UserDetails(
+                        name: currentUser!.name,
+                        email: currentUser!.email,
+                      ),
+                    ),
                     const SizedBox(height: 40),
                     Text(
                       _getActivitiesTitle(currentUser!.role),

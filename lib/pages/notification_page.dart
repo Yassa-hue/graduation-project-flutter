@@ -44,7 +44,6 @@ class _NotificationPageState extends State<NotificationPage> {
             } else {
               List<NotificationModel> notifications = snapshot.data!;
               return DismissibleList(
-                title: "Notifications",
                 items: notifications,
                 itemBuilder: (context, index, item) {
                   return Card(

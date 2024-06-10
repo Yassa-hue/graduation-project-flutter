@@ -4,13 +4,13 @@ class DismissibleList<T> extends StatelessWidget {
   final List<T> items;
   final Widget Function(BuildContext context, int index, T item) itemBuilder;
   final void Function(int index, T item)? onDismissed;
-  final String title;
+  final String? title;
   final void Function()? onAddClicked;
   final void Function(int index, T item)? onItemClicked;
 
   const DismissibleList({
     Key? key,
-    required this.title,
+    this.title,
     required this.items,
     required this.itemBuilder,
     this.onDismissed,
@@ -22,10 +22,11 @@ class DismissibleList<T> extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          "$title:",
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
+        if (title != null)
+          Text(
+            "$title:",
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
         onAddClicked != null
             ? IconButton(
                 icon: Icon(
