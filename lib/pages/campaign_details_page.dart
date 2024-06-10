@@ -160,7 +160,7 @@ class _CampaignDetailsPageState extends State<CampaignDetailsPage> {
                   : CircularProgressIndicator(),
               SizedBox(height: 16),
               if (currentUser != null &&
-                  (currentUser!.role == UserRole.organization ||
+                  (currentUser!.role != UserRole.organization ||
                       currentUser!.id == widget.campaign.organizationId))
                 Center(
                   child: Container(
