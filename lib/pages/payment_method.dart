@@ -4,6 +4,7 @@ import 'package:graduationproject/components/custom_app_bar.dart';
 import 'package:graduationproject/components/custom_button.dart';
 import 'package:graduationproject/models/donation_model.dart';
 import 'package:graduationproject/pages/page_manager.dart';
+import 'package:graduationproject/services/donation_service.dart';
 import 'package:graduationproject/utils/color_palette.dart';
 import 'package:graduationproject/utils/constants.dart';
 import 'package:graduationproject/utils/images_paths.dart';
@@ -19,14 +20,33 @@ class PaymentPage extends StatefulWidget {
 }
 
 class _PaymentMethodState extends State<PaymentPage> {
+  PaymentMethod _paymentMethod = PaymentMethod.visa;
+  bool loading = false;
+  String errorMsg = "";
+
   Future<void> makeDonation() async {
-    Navigator.push(
-          // ignore: use_build_context_synchronously
+    setState(() {
+      loading = true;
+      errorMsg = "";
+    });
+
+    try {
+      await DonationService().createDonation(widget.newDonation);
+      Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => MainPage(
                     currentPage: profilePage,
                   )));
+    } catch (e) {
+      setState(() {
+        errorMsg = e.toString();
+      });
+    }
+
+    setState(() {
+      loading = false;
+    });
   }
 
   @override
@@ -95,13 +115,31 @@ class _PaymentMethodState extends State<PaymentPage> {
             const SizedBox(
               height: 50,
             ),
-            CustomPayment(text: "Credit Card", img: ImagesPaths.visa),
+            CustomPayment(
+                text: "Credit Card",
+                img: ImagesPaths.visa,
+                paymentMethod: PaymentMethod.visa,
+                groupValue: _paymentMethod,
+                onChanged: (value) {
+                  setState(() {
+                    _paymentMethod = value!;
+                    errorMsg = "";
+                  });
+                }),
             SizedBox(
               height: 18,
             ),
             CustomPayment(
               text: "Credit Card",
               img: ImagesPaths.meza,
+              paymentMethod: PaymentMethod.meza,
+              groupValue: _paymentMethod,
+              onChanged: (value) {
+                setState(() {
+                  _paymentMethod = value!;
+                  errorMsg = "";
+                });
+              },
             ),
             SizedBox(
               height: 18,
@@ -109,6 +147,14 @@ class _PaymentMethodState extends State<PaymentPage> {
             CustomPayment(
               text: "Smart Wallet",
               img: ImagesPaths.smart_wallet,
+              paymentMethod: PaymentMethod.smartWallet,
+              groupValue: _paymentMethod,
+              onChanged: (value) {
+                setState(() {
+                  _paymentMethod = value!;
+                  errorMsg = "";
+                });
+              },
             ),
             SizedBox(
               height: 18,
@@ -119,11 +165,38 @@ class _PaymentMethodState extends State<PaymentPage> {
             CustomPayment(
               text: "Vodafone Cash",
               img: ImagesPaths.vodafone_cash,
+              paymentMethod: PaymentMethod.vodafoneCash,
+              groupValue: _paymentMethod,
+              onChanged: (value) {
+                setState(() {
+                  _paymentMethod = value!;
+                  errorMsg = "";
+                });
+              },
             ),
             SizedBox(
               height: 40,
             ),
-            CustomButton(title: "Confirm Payment"),
+            (errorMsg.isNotEmpty)
+                ? Text(
+                    errorMsg,
+                    style: const TextStyle(
+                      color: Colors.red,
+                      fontSize: 16,
+                    ),
+                  )
+                : const SizedBox(),
+            errorMsg.isEmpty
+                ? const SizedBox()
+                : const SizedBox(
+                    height: 15,
+                  ),
+            CustomButton(
+                title: "Confirm Payment",
+                isLoading: loading,
+                onTap: () {
+                  makeDonation();
+                }),
           ]),
         ),
       ),

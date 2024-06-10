@@ -17,3 +17,9 @@ const int settingsPage = 4;
 const int campainsFeedPage = 1;
 const int volunteeringPage = 3;
 
+enum PaymentMethod {
+  visa,
+  meza,
+  smartWallet,
+  vodafoneCash,
+}
