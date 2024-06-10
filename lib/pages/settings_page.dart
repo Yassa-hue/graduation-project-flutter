@@ -7,6 +7,7 @@ import 'package:graduationproject/pages/language_setting_overlay.dart';
 import 'package:graduationproject/pages/login_page.dart';
 import 'package:graduationproject/pages/notification_page.dart';
 import 'package:graduationproject/pages/privacy_policy_page.dart';
+import 'package:graduationproject/pages/support_page.dart';
 import 'package:graduationproject/pages/user_form_page.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
 import 'package:graduationproject/utils/color_palette.dart';
@@ -120,6 +121,12 @@ class _SettingPageState extends State<SettingPage> {
                       colr: PRIMARY_COLOR,
                       text: "Support",
                       next: Icons.navigate_next_sharp,
+                      onClick: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => SupportPage()),
+                        );
+                      },
                     ),
                     const Divider(
                       endIndent: 15,
