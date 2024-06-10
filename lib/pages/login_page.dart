@@ -30,8 +30,14 @@ class _LoginPageState extends State<LoginPage> {
     final auth = AuthProvider.of(context)!;
     if (auth.currentUser != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MainPage(currentPage: homePage,)));
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MainPage(
+              currentPage: homePage,
+            ),
+          ),
+        );
       });
     }
   }
@@ -43,7 +49,10 @@ class _LoginPageState extends State<LoginPage> {
     try {
       await auth.login(email, password);
 
-      final route = MaterialPageRoute(builder: (context) => MainPage(currentPage: homePage,));
+      final route = MaterialPageRoute(
+          builder: (context) => MainPage(
+                currentPage: homePage,
+              ));
       Navigator.of(context).pushReplacement(route);
     } catch (e) {
       setState(() => errorMsg = e.toString());
