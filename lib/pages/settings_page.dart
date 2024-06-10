@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:graduationproject/components/custom_setting.dart';
 import 'package:graduationproject/components/custom_app_bar.dart';
+import 'package:graduationproject/pages/language_setting_overlay.dart';
 import 'package:graduationproject/pages/login_page.dart';
 import 'package:graduationproject/pages/privacy_policy_page.dart';
 import 'package:graduationproject/pages/user_form_page.dart';
@@ -105,6 +106,9 @@ class _SettingPageState extends State<SettingPage> {
                       colr: PRIMARY_COLOR,
                       text: "Language",
                       next: Icons.navigate_next_sharp,
+                      onClick: () {
+                        showLanguageSettingOvelay(context);
+                      },
                     ),
                     const Divider(
                       endIndent: 15,
