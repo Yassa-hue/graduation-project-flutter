@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:graduationproject/components/custom_image_picker.dart';
+import 'package:graduationproject/pages/terms_and_conditions_overlay.dart';
 import 'package:graduationproject/models/user_model.dart';
 import 'package:graduationproject/pages/login_page.dart';
 import 'package:graduationproject/pages/page_manager.dart';
@@ -258,11 +259,17 @@ class _UserFormPageState extends State<UserFormPage> {
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold),
                       ),
-                      const Text(
-                        'terms & conditions',
-                        style: TextStyle(
-                            color: PRIMARY_COLOR, fontWeight: FontWeight.bold),
-                      )
+                      GestureDetector(
+                        onTap: () {
+                          showTermsAndConditions(context);
+                        },
+                        child: const Text(
+                          'terms & conditions',
+                          style: TextStyle(
+                              color: PRIMARY_COLOR,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
                     ],
                   ),
                 const SizedBox(
