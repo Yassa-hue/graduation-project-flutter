@@ -4,6 +4,7 @@ import 'package:graduationproject/pages/intro_screen.dart';
 import 'package:graduationproject/pages/loading_splash_screen.dart';
 import 'package:graduationproject/pages/login_page.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
+import 'package:graduationproject/utils/color_palette.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
@@ -57,6 +58,14 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Graduation Project App',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(
+            iconTheme: IconThemeData(color: PRIMARY_COLOR),
+            titleTextStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: PRIMARY_COLOR)),
+      ),
       home: _introShown ? LoginPage() : IntroScreen(),
     );
   }

@@ -60,10 +60,27 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  String getPageTitle() {
+    switch (AuthProvider.of(context)?.currentUser!.role) {
+      case UserRole.donor:
+        return "Donor Home Page";
+      case UserRole.organization:
+        return "Organization Home Page";
+      case UserRole.volunteer:
+        return "Volunteer Home Page";
+      default:
+        return "Home Page";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          title: Text(
+            getPageTitle(),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          ),
           backgroundColor: Colors.white70,
           elevation: 0.0,
           actions: const [

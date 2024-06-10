@@ -32,6 +32,7 @@ class _SettingPageState extends State<SettingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text("Settings"),
           backgroundColor: Colors.white70,
           elevation: 0.0,
           actions: const [
@@ -43,13 +44,6 @@ class _SettingPageState extends State<SettingPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text(
-                "Settings",
-                style: TextStyle(
-                    color: PRIMARY_COLOR,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold),
-              ),
               const SizedBox(
                 height: 20,
               ),

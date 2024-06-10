@@ -102,9 +102,7 @@ class _CampaignDetailsPageState extends State<CampaignDetailsPage> {
         elevation: 0.0,
         title: Text(
           'Campaign Details',
-          style: TextStyle(color: Colors.black),
         ),
-        iconTheme: IconThemeData(color: Colors.black),
         actions: const [CustomAppBar()],
       ),
       body: SingleChildScrollView(

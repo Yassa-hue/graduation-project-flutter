@@ -16,6 +16,7 @@ class _CampaignsFeedPageState extends State<CampaignsFeedPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+            title: Text("Your Feed"),
             backgroundColor: Colors.white70,
             elevation: 0.0,
             actions: const [
@@ -23,16 +24,6 @@ class _CampaignsFeedPageState extends State<CampaignsFeedPage> {
             ]),
         body: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Your Feed',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
             Expanded(
               child: FutureBuilder<List<Campaign>>(
                 future: CampaignService().getCampaigns(),
