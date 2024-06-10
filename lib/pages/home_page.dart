@@ -205,7 +205,7 @@ class _HomePageState extends State<HomePage> {
                 height: 3,
               ),
               SizedBox(
-                height: 200,
+                height: 210,
                 child: FutureBuilder<List<Campaign>>(
                   future: CampaignService().getLatestCampaigns(),
                   builder: (context, snapshot) {
