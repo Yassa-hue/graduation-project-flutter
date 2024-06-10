@@ -26,4 +26,8 @@ class ImagesPaths {
   static const String camp2 = '$path/camp2.jpg';
   static const String camp3 = '$path/camp3.jpg';
   static const String profile = '$path/profile.png';
+  static const String visa = '$path/visa.jpg';
+  static const String smart_wallet = '$path/smart_wallet.jpg';
+  static const String vodafone_cash = '$path/vodafone_cash.jpg';
+  static const String meza = '$path/meza.jpg';
 }
