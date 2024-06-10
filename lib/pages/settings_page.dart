@@ -104,33 +104,11 @@ class _SettingPageState extends State<SettingPage> {
                     ),
                     CustomSetting(
                       colr: PRIMARY_COLOR,
-                      text: "Security",
-                      next: Icons.navigate_next_sharp,
-                    ),
-                    const Divider(
-                      endIndent: 15,
-                      indent: 15,
-                      color: Colors.grey,
-                      thickness: 1,
-                    ),
-                    CustomSetting(
-                      colr: PRIMARY_COLOR,
                       text: "Language",
                       next: Icons.navigate_next_sharp,
                       onClick: () {
                         showLanguageSettingOvelay(context);
                       },
-                    ),
-                    const Divider(
-                      endIndent: 15,
-                      indent: 15,
-                      color: Colors.grey,
-                      thickness: 1,
-                    ),
-                    CustomSetting(
-                      colr: PRIMARY_COLOR,
-                      text: "Feedback",
-                      next: Icons.navigate_next_sharp,
                     ),
                     const Divider(
                       endIndent: 15,
