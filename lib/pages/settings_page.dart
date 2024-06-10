@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:graduationproject/components/custom_setting.dart';
 import 'package:graduationproject/components/custom_app_bar.dart';
+import 'package:graduationproject/components/notification_setting.dart';
 import 'package:graduationproject/pages/language_setting_overlay.dart';
 import 'package:graduationproject/pages/login_page.dart';
+import 'package:graduationproject/pages/notification_page.dart';
 import 'package:graduationproject/pages/privacy_policy_page.dart';
 import 'package:graduationproject/pages/user_form_page.dart';
 import 'package:graduationproject/utils/AuthProvider.dart';
@@ -80,10 +82,19 @@ class _SettingPageState extends State<SettingPage> {
                       color: Colors.grey,
                       thickness: 1,
                     ),
-                    CustomSetting(
-                      colr: PRIMARY_COLOR,
-                      text: "Notification",
-                      next: Icons.navigate_next_sharp,
+                    NotificationSetting(
+                      text: "Notifications",
+                      initialValue: true,
+                      onChanged: (bool value) {
+                        // Handle notification toggle logic here
+                        print("Notifications: $value");
+                      },
+                      onClick: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => NotificationPage()),
+                        );
+                      },
                     ),
                     const Divider(
                       endIndent: 15,
